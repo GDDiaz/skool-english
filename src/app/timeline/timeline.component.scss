@@ -189,3 +189,62 @@ Horizontal Timeline page
 .cd-horizontal-timeline .m-t-40 {
     margin-top: 40px!important;
 }
+
+.half-with {
+  width: 50% !important;
+}
+
+.bg-skool-red {
+  background-color: #EC4E55;
+  li {
+    background-color: #C13A40;
+    color: #fff;
+  }
+
+  ol {
+    counter-reset: list;
+    list-style: none;
+  }
+
+  ol li {
+    counter-increment: list;
+    margin-bottom: 10px;
+    border: 0px solid #000;
+    border-radius: 25px 25px 25px 25px;
+    margin-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    .theme-progress {
+      padding: 5px;
+      float: right;
+    }
+  }
+
+  ol li::before {
+    content: counter(list);
+    background: #fff;
+    font-family: Arial, sans-serif;
+    color: #EC4E55;
+    font-size: 13px;
+    text-align: center;
+    border-radius: 50%;
+    width: 2.2em;
+    height: 2.2em;
+    line-height: 2.3em;
+    display: inline-block;
+    margin-right: 1em;
+    margin-left: -7px;
+  }
+  .progress {
+    background-color: #C13A40;
+    height: 0.4rem;
+    margin-left: 40px;
+    .progress-bar {
+      background-color: #fff;
+    }
+  }
+
+}
+
+
