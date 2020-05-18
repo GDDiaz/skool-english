@@ -71,9 +71,9 @@ export class TimelineComponent implements OnInit {
         ]
       },
       {
-        name: 'Lenguage',
+        name: 'Language',
         icon: 'translate.svg',
-        type: 'lenguage',
+        type: 'language',
         percentage: 0,
         themes: [
           {
