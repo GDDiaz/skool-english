@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://blog-l.iis/api'
+  apiUrl: 'http://backend-skool.iis/api'
 };
 
 /*

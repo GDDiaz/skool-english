@@ -37,7 +37,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    return this.http.post<any>(`${environment.apiUrl}/auth/logout`, null)
+    return this.http.get<any>(`${environment.apiUrl}/auth/logout`)
           .pipe(map(responseUser => {
               // remove user from local storage to log user out
               localStorage.removeItem('currentUser');
