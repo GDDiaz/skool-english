@@ -9,6 +9,11 @@ const routes: Routes = [
       import('./student-module/student.module').then(m => m.StudentModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'courses', loadChildren: () =>
+      import('./admin-module/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard]
+  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: LoginComponent },
     // otherwise redirect to student

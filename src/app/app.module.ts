@@ -7,6 +7,7 @@ import { SharedUiModule } from './shared-ui-module/shared-ui.module';
 import { CommonModule } from '@angular/common';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent
@@ -16,7 +17,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     HttpClientModule,
     AppRoutingModule,
     SharedUiModule,
-    CommonModule,
+    CommonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
