@@ -10,7 +10,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'courses', loadChildren: () =>
+    path: 'admin', loadChildren: () =>
       import('./admin-module/admin.module').then(m => m.AdminModule),
     canActivate: [AuthGuard]
   },

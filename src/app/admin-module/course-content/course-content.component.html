@@ -1,0 +1,73 @@
+<div class="row">
+
+   <!--Little Profile widget-->
+   <div class="col-lg-5 col-xlg-4">
+    <div class="card">
+        <div class="card-body little-profile text-center">
+            <h3 class="m-b-0">Unidades</h3>
+        </div>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let unit of unitsArray; let i = index" [ngClass]="{'bg-light' : i%2 == 0}">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5 class="m-b-0 font-medium">{{unit.name}}</h5>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ul class="feeds">
+              <li *ngFor="let item of unit.resources">
+                <div class="bg-primary-red">
+                  <i *ngIf="item.type === 'video'" class="fa fa-video"></i>
+                </div>
+                <ng-container *ngIf="item.type === 'video'">{{item.video_title}}</ng-container>
+                <span class="text-muted">Just Now</span>
+              </li>
+            </ul>
+
+            <section>
+              <div class="example-button-row">
+                <div class="example-flex-container">
+                  <button (click)="newVideo(unit.id)" matTooltip="Vídeo" mat-icon-button  color="primary" aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon>videocam</mat-icon>
+                  </button>
+                  <button (click)="newContent(unit.id)" matTooltip="Contenido"  mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                    <mat-icon>article</mat-icon>
+                  </button>
+                  <button (click)="newQuiz(unit.id)" matTooltip="Quiz" mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
+                    <mat-icon>fact_check</mat-icon>
+                  </button>
+                  <button (click)="newObjective(unit.id)" matTooltip="Objetivos" mat-icon-button color="primary" aria-label="Example icon button with a heart icon">
+                    <mat-icon>my_location</mat-icon>
+                  </button>
+                  <button (click)="newActivity(unit.id)" matTooltip="Actividades" mat-icon-button color="primary" aria-label="Example icon button with a heart icon">
+                    <mat-icon>wb_incandescent</mat-icon>
+                  </button>
+
+                </div>
+              </div>
+            </section>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <div class="card-body text-center">
+              <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Crear unidad</button>
+        </div>
+    </div>
+</div>
+<!--Little Profile widget-->
+
+  <div class="col-lg-7 col-xlg-8">
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex no-block">
+                <ng-container *ngIf="showUnitForm">
+                  <app-unit-form class="col-md-12" [courseId]="courseId" (unit)="createdUnit($event)"></app-unit-form>
+                </ng-container>
+
+                <ng-container *ngIf="showVideoForm">
+                  <app-unit-video-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (resource)="createdVideo($event)"></app-unit-video-form>
+                </ng-container>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

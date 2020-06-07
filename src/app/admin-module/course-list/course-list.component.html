@@ -1,1 +1,24 @@
-<p>course-list works!</p>
+<section class="float-right">
+  <div class="example-button-row">
+    <div class="example-flex-container">
+      <div class="example-button-container">
+        <a [routerLink]="['/admin/courses/new']" [routerLinkActive]="'active'"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+          <mat-icon>add</mat-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+  <div class="list-group col-md-12" *ngIf="courses !== undefined">
+    <a  *ngFor="let course of courses"  [routerLink]="['/admin/course/content', course.id]" class="list-group-item list-group-item-action flex-column align-items-start ">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{course.name}}</h5>
+        <small><i class="fa fa-clock"></i> {{ course.created_at }}</small>
+      </div>
+      <p class="mb-1"><i class="fa fa-user"></i> {{ course.author }}</p>
+      <small>{{ course.slug }}</small>
+    </a>
+  </div>
+</div>

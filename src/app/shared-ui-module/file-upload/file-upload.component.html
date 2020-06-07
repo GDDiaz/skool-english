@@ -1,0 +1,101 @@
+<div class="col-md-12">
+
+  <h4 mat-dialog-title class="card-title">Carga de archivos</h4>
+  <div mat-dialog-content>
+    <ngfFormData
+      [files]      = "files"
+      postName     = "file"
+      [(FormData)] = "sendableFormData"
+    ></ngfFormData>
+
+    <ngfUploadStatus
+      [(percent)] = "progress"
+      [httpEvent] = "httpEvent"
+    ></ngfUploadStatus>
+
+ {{data.accept}}
+
+    <div class="dropify-wrapper"
+        ngfDrop
+        multiple         = "{{data.multiple}}"
+        selectable       = "1"
+        [(validDrag)]    = "validComboDrag"
+        [(files)]        = "files"
+        accept           = "{{data.accept}}"
+        maxSize        = "{{data.maxSize}}"
+        [(lastInvalids)] = "lastInvalids"
+        [(dragFiles)]    = "dragFiles"
+        (filesChange) = "fileChange()"
+        [fileDropDisabled] = "fileDropDisabled"
+    >
+      <div class="dropify-message">
+        <span class="file-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+        <p>Drag and drop a file here or click</p>
+        <div class="dropify-loader"></div>
+      </div>
+    </div>
+
+
+    <div style="margin-bottom: 40px">
+      <h5>{{ files.length }}  Archivos</h5>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Tamaño</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of files;let i=index">
+            <td>
+              <i *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0" class="fa fa-file-image"></i>
+              <i *ngIf="['video/mp4'].indexOf(item.type)>=0" class="fa fa-file-video"></i>
+              <i *ngIf="['audio/mpeg','audio/mp4'].indexOf(item.type)>=0" class="fa fa-file-audio"></i>
+              <strong>{{ item.name }}</strong>
+            </td>
+            <td nowrap>
+              {{ item.type }}
+            </td>
+            <td nowrap>
+              {{ item.size/1024/1024 | number:'.2' }} MB
+            </td>
+            <td nowrap>
+              <button type="button"
+                class="btn btn-danger btn-xs"
+                (click)="files.splice(i,1)"
+              >
+                <span class="fa fa-trash"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <div>
+          Progreso:
+          <div class="progress" style="">
+            <div class="progress-bar"
+              role="progressbar"
+              [ngStyle]="{ 'width': progress + '%' }"
+            ></div>
+          </div>
+        </div>
+
+        <ng-container *ngIf="progress==100">
+          <i class="fa fa-ok"></i>
+          &nbsp;Carga completa
+        </ng-container>
+
+      </div>
+    </div>
+
+  <div mat-dialog-actions>
+    <button class="btn btn-default" mat-button (click)="onNoClick()">Cancelar</button>
+    <button class="btn btn-primary" (click)="uploadFiles()" cdkFocusInitial>Subir archivo</button>
+  </div>
+</div>
+
+

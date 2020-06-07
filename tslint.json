@@ -85,6 +85,16 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true
   },
+  "variable-name": {
+    "enabled": false,
+    "options": [
+      "ban-keywords",
+      "check-format",
+      "allow-leading-underscore",
+      "allow-pascal-case",
+      "allow-"
+    ]
+  },
   "rulesDirectory": [
     "codelyzer"
   ]

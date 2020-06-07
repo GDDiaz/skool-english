@@ -1,1 +1,34 @@
-<p>course-form works!</p>
+<div class="row">
+  <div class="col-md-6">
+    <h4>
+      Información Agregue información básica sobre el curso y el nombre del autor.
+    </h4>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body collapse show">
+
+        <h3 class="card-title">Nuevo curso</h3>
+        <form [formGroup]="courseForm">
+          <div class="form-group">
+            <label class="control-label" for="name">Título del curso Siempre puedes cambiar esto más tarde</label>
+            <input id="name" type="text" formControlName="name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="name">Author</label>
+            <input id="name" type="text" formControlName="author" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="name">Video de introducción (puedes agregarlo despues)</label>
+            <input id="name" type="text" formControlName="video_url" class="form-control" required>
+          </div>
+
+          <div class="text-center">
+            <button style="width: 70%" class="btn btn-primary " type="submit" [disabled]="!courseForm.valid" (click)="onSubmit()">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

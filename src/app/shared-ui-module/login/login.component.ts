@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/authentication.service';
+import { User2 } from '../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -51,8 +52,13 @@ onSubmit() {
   this.authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-          data => {
-              this.router.navigate([this.returnUrl]);
+          (data: User2) => {
+            if ( this.returnUrl === '/') {
+              if (data.user.type === 1 ) {
+                this.returnUrl = '/admin/courses';
+              }
+            }
+            this.router.navigate([this.returnUrl]);
           },
           error => {
               this.loading = false;

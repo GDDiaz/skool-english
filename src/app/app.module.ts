@@ -7,7 +7,9 @@ import { SharedUiModule } from './shared-ui-module/shared-ui.module';
 import { CommonModule } from '@angular/common';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
-import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +19,10 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     AppRoutingModule,
     SharedUiModule,
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

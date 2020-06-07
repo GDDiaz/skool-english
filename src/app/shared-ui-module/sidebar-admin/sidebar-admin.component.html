@@ -1,0 +1,14 @@
+ <!-- Sidebar -->
+ <div class="bg-admin-skool border-right" id="sidebar-wrapper">
+  <div class="sidebar-heading">
+    <a class="mx-auto"[routerLink]="['/admin']" >
+      <img src="assets/logo/SkooL Centro Educativo 2017-02.png" class="rounded-circle">
+  </a>
+  </div>
+  <div class="list-group list-group-flush">
+    <a [routerLink]="['/admin/courses']" [routerLinkActive]="'active'" class="list-group-item list-group-item-action"> <i class="fa fa-address-card"></i> Cursos</a>
+    <a [routerLink]="['/teacher']" [routerLinkActive]="'active'" class="list-group-item list-group-item-action"><i class="fas fa-chalkboard-teacher"></i> Profesores</a>
+  </div>
+</div>
+<!-- /#sidebar-wrapper -->
+

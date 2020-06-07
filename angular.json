@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "skool"
+    }
+  },
+  "defaultProject": "skool",
+  "cli": {
+    "analytics": false
+  }
 }

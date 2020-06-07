@@ -5,6 +5,7 @@ export class User {
   firstName: string;
   lastName: string;
   token: string;
+  type: any;
 }
 
 export class User2 {
