@@ -26,16 +26,13 @@ export class UnitFormComponent implements OnInit {
     const values = this.form.value;
     // tslint:disable-next-line:no-string-literal
     values['course_id'] = this.courseId;
-    // tslint:disable-next-line:no-string-literal
-    values['id'] = Math.random();
-    // tslint:disable-next-line:no-string-literal
-    values['resources'] = [];
-
     // TODO: backend service
     this.unit.emit(values);
-    /*this.courseService.newUnit(values).subscribe(r => {
+    this.courseService.newUnit(values).subscribe(r => {
+      // tslint:disable-next-line:no-string-literal
+      r['slides'] = [];
       this.unit.emit(r);
-    });*/
+    });
   }
 
 }

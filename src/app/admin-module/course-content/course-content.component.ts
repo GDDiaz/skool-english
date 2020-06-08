@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-course-content',
@@ -7,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-content.component.scss']
 })
 export class CourseContentComponent implements OnInit {
-
   courseId;
   currentUnitId;
   showUnitForm = false;
@@ -17,12 +17,20 @@ export class CourseContentComponent implements OnInit {
   showObjectiveForm = false;
   showActivityForm = false;
   units = new Map<string, any>();
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private courseService: CoursesService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: any) => {
-        if (params.id) {
-          this.courseId = params.id;
+        if (params.params.id) {
+          this.courseId = params.params.id;
+          this.courseService.getUnitsByCourse(this.courseId).subscribe(response => {
+            if (response.length > 0) {
+              for (const unit of response) {
+                // tslint:disable-next-line:no-string-literal
+                this.units.set(unit['id'], unit);
+              }
+            }
+          });
         }
     });
   }
@@ -54,7 +62,7 @@ export class CourseContentComponent implements OnInit {
 
   createdVideo(event) {
     const unit = this.units.get(this.currentUnitId);
-    unit.resources.push(event);
+    unit.slides.push(event);
     this.units.set(this.currentUnitId, unit);
     this.hiddenAllForms();
   }

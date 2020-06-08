@@ -26,21 +26,16 @@ export class UnitVideoFormComponent implements OnInit {
 
   onSubmit() {
     this.disableButton = true;
-    const values = this.form.value;
-    // tslint:disable-next-line:no-string-literal
-    values['course_id'] = this.courseId;
-    // tslint:disable-next-line:no-string-literal
-    values['unit_id'] = this.unitId;
-    // tslint:disable-next-line:no-string-literal
-    values['id'] = Math.random();
-    // tslint:disable-next-line:no-string-literal
-    values['type'] = 'video';
+    const data = {
+      course_id: this.courseId,
+      unit_id: this.unitId,
+      type: 'video',
+      content: JSON.stringify(this.form.value)
+    };
 
-    // TODO: backend service
-    this.resource.emit(values);
-    /*this.courseService.newUnit(values).subscribe(r => {
-      this.unit.emit(r);
-    });*/
+    this.courseService.newSlide(data).subscribe(r => {
+      this.resource.emit(r);
+    });
   }
 
 }
