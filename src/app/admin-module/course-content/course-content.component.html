@@ -66,6 +66,10 @@
                 <ng-container *ngIf="showVideoForm">
                   <app-unit-video-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (resource)="createdVideo($event)"></app-unit-video-form>
                 </ng-container>
+
+                <ng-container *ngIf="showQuizForm">
+                  <app-test-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (test)="createdVideo($event)"></app-test-form>
+                </ng-container>
               </div>
           </div>
       </div>

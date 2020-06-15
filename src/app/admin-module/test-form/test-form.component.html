@@ -1,1 +1,128 @@
-<p>test-form works!</p>
+
+    <h3 class="card-title">Nuevo Quíz</h3>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label class="control-label" for="title">Título del Quíz</label>
+        <input name="unit_quiz[name]" id="title" type="text" formControlName="name" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="type-question">Tipo de pregunta</label>
+        <select  formControlName="typeQuestion" [(ngModel)]="typeQuestionSelected" class="form-control" id="type-question">
+          <option [value]="item" *ngFor="let item of typesQuestions">{{item}}</option>
+        </select>
+      </div>
+
+      <div formArrayName="questions">
+        <h5>Preguntas</h5>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let questionGroup of questions.controls; let i=index" [ngClass]="{'bg-light' : i%2 == 0}">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5 class="m-b-0 font-medium">{{'Pregunta #'+ (i+1)}}</h5>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div [formGroupName]="i">
+              <div class="form-group">
+                <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="question"></quill-editor>
+              </div>
+<!-- Unica respuesta start-->
+              <ng-container *ngIf="questionGroup.get('typeQuestion').value === 'Única respuesta'">
+                <mat-radio-group formControlName="answer">
+                  <div formArrayName="options">
+                    <h5>Respuestas</h5>
+                    <button class="float-right" (click)="addAnswerForm(i)"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                    <div *ngFor="let answerGroup of getAnswerControl(i).controls; let j=index">
+                      <div [formGroupName]="j">
+                        <div class="form-group">
+                          <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="option"></quill-editor>
+                        </div>
+                        <div class="form-group">
+                          <mat-radio-button [value]="j">¿ Es la respuesta correcta ?</mat-radio-button>
+                        </div>
+                      </div>
+                    </div>
+                  <!--  <ng-container *ngTemplateOutlet="seleccionRespuesta; context: {questionGroup: questionGroup, i: i}" ></ng-container>-->
+                  </div>
+                </mat-radio-group>
+              </ng-container>
+<!-- Unica respuesta end -->
+
+
+<!-- Multiple respuesta start-->
+<ng-container *ngIf="questionGroup.get('typeQuestion').value === 'Multiple respuesta'">
+
+    <div formArrayName="options">
+      <h5>Respuestas</h5>
+      <button class="float-right" (click)="addAnswerForm(i)"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+        <mat-icon>add</mat-icon>
+      </button>
+      <div *ngFor="let answerGroup of getAnswerControl(i).controls; let j=index">
+        <div [formGroupName]="j">
+          <div class="form-group">
+            <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="option"></quill-editor>
+          </div>
+          <div class="form-group">
+            <mat-checkbox class="example-margin" formControlName="is_correct">¿Es una respuesta correcta?</mat-checkbox>
+          </div>
+        </div>
+      </div>
+    <!--  <ng-container *ngTemplateOutlet="seleccionRespuesta; context: {questionGroup: questionGroup, i: i}" ></ng-container>-->
+    </div>
+
+</ng-container>
+<!-- multiple respuesta end -->
+
+
+<!-- Autocompletar start-->
+<ng-container *ngIf="questionGroup.get('typeQuestion').value === 'Autocompletar'">
+
+    <div class="form-group">
+      <h5>Respuesta</h5>
+      <label class="control-label" >Respuesta esperada</label>
+      <input type="text" class="form-control" formControlName="answer">
+    </div>
+
+</ng-container>
+<!-- Autocompletar end -->
+
+
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <section class="float-right">
+          <button (click)="addQuestion()"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+            <mat-icon>add</mat-icon>
+          </button>
+        </section>
+      </div>
+
+      <ng-template #seleccionRespuesta let-questionGroup="questionGroup" let-i="i">
+          <h5>Respuestas</h5>
+            <div *ngFor="let answerGroup of getAnswerControl(i).controls; let j=index">
+              <pre>
+              </pre>
+              <div>
+                <div class="form-group">
+                  <quill-editor placeholder="Inserte el texto aquí" format="html" [formControl]="answerGroup['controls']['option']"></quill-editor>
+                </div>
+                <div class="form-group">
+                  <mat-radio-button [value]="j">¿ Es la respuesta correcta ?</mat-radio-button>
+                </div>
+              </div>
+            </div>
+            <section class="float-right">
+            <button (click)="addAnswerForm(i)"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+              <mat-icon>add</mat-icon>
+            </button>
+            </section>
+      </ng-template>
+
+      <div class="text-center">
+        <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
+      </div>
+    </form>
+
+

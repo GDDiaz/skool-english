@@ -10,6 +10,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material';
+import { QuillModule } from 'ngx-quill'
 @NgModule({
   declarations: [
     AppComponent
@@ -22,6 +23,7 @@ import { MatDialogModule } from '@angular/material';
     CommonModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    QuillModule.forRoot(),
     MatDialogModule
   ],
   providers: [
