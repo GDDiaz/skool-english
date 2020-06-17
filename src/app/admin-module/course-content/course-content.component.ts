@@ -60,7 +60,7 @@ export class CourseContentComponent implements OnInit {
     this.showVideoForm = true;
   }
 
-  createdVideo(event) {
+  addSlide(event) {
     const unit = this.units.get(this.currentUnitId);
     unit.slides.push(event);
     this.units.set(this.currentUnitId, unit);

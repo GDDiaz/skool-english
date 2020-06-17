@@ -83,7 +83,7 @@ export class TestFormComponent implements OnInit {
     const data = {
       course_id: this.courseId,
       unit_id: this.unitId,
-      type: 'video',
+      type: 'quiz',
       content: JSON.stringify(this.form.value)
     };
 

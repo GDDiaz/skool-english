@@ -18,8 +18,10 @@
               <li *ngFor="let item of unit.slides">
                 <div class="bg-primary-red">
                   <i *ngIf="item.type === 'video'" class="fa fa-video"></i>
+                  <mat-icon *ngIf="item.type === 'quiz'">fact_check</mat-icon>
                 </div>
                 <ng-container *ngIf="item.type === 'video'">{{item.content.video_title}}</ng-container>
+                <ng-container *ngIf="item.type === 'quiz'">{{ item.content.name }}</ng-container>
                 <span class="text-muted"></span>
               </li>
             </ul>
@@ -64,11 +66,11 @@
                 </ng-container>
 
                 <ng-container *ngIf="showVideoForm">
-                  <app-unit-video-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (resource)="createdVideo($event)"></app-unit-video-form>
+                  <app-unit-video-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (resource)="addSlide($event)"></app-unit-video-form>
                 </ng-container>
 
                 <ng-container *ngIf="showQuizForm">
-                  <app-test-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (test)="createdVideo($event)"></app-test-form>
+                  <app-test-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-test-form>
                 </ng-container>
               </div>
           </div>
