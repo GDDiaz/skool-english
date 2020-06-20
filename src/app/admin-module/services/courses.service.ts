@@ -34,6 +34,14 @@ export class CoursesService {
     }));
   }
 
+  editSlide(id, content) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/slide/${id}`, content)
+    .pipe(map(response => {
+        response.content = JSON.parse(response.content);
+        return response;
+    }));
+  }
+
   getAllCourse(): Observable<Course[]> {
     return this.http.get<any>(`${environment.apiUrl}/v1/course`)
         .pipe(map(response => {

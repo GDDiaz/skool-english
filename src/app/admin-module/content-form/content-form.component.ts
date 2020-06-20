@@ -11,9 +11,12 @@ export class ContentFormComponent implements OnInit {
 
   @Input() courseId;
   @Input() unitId;
+  @Input() slide;
   @Output() test: EventEmitter<any> = new EventEmitter<any>();
 
   public disableButton = false;
+  public title = 'Nuevo Contenido';
+  public action = 'new';
   public form = this.fb.group({
     objective_title: ['', Validators.required],
     objectives: this.fb.array([]),
@@ -25,6 +28,21 @@ export class ContentFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private courseService: CoursesService) { }
 
   ngOnInit() {
+    if (this.slide !== null) {
+      this.title = 'Editar Contenido';
+      this.action = 'edit';
+      this.buildEditForm(this.slide.content);
+    }
+  }
+
+  private buildEditForm(data) {
+    for (const iterator of data.objectives) {
+      this.addObjective();
+    }
+    for (const iterator of data.words) {
+      this.addWord();
+    }
+    this.form.patchValue(data);
   }
 
   get objectives() {
@@ -53,16 +71,27 @@ export class ContentFormComponent implements OnInit {
 
   onSubmit() {
     this.disableButton = true;
-    const data = {
-      course_id: this.courseId,
-      unit_id: this.unitId,
-      type: 'content',
-      content: JSON.stringify(this.form.value)
-    };
+    if (this.action === 'new') {
+      const data = {
+        course_id: this.courseId,
+        unit_id: this.unitId,
+        type: 'content',
+        content: JSON.stringify(this.form.value)
+      };
 
-    this.courseService.newSlide(data).subscribe(r => {
-      this.test.emit(r);
-    });
+      this.courseService.newSlide(data).subscribe(r => {
+        this.test.emit(r);
+      });
+    } else {
+      const data = {
+        content: JSON.stringify(this.form.value)
+      };
+
+      this.courseService.editSlide(this.slide.id, data).subscribe(r => {
+        this.test.emit(r);
+      });
+    }
+
   }
 
 }

@@ -11,9 +11,12 @@ export class UnitVideoFormComponent implements OnInit {
 
   @Input() courseId;
   @Input() unitId;
+  @Input() slide;
   @Output() resource: EventEmitter<any> = new EventEmitter<any>();
 
   public disableButton = false;
+  public title = 'Nuevo Vídeo';
+  public action = 'new';
   public form = this.fb.group({
     video_title: ['', Validators.required],
     video_url: ['', Validators.required]
@@ -22,20 +25,34 @@ export class UnitVideoFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private courseService: CoursesService) { }
 
   ngOnInit() {
+    if (this.slide !== null) {
+      this.title = 'Editar Vídeo';
+      this.action = 'edit';
+      this.form.patchValue(this.slide.content);
+    }
   }
 
   onSubmit() {
     this.disableButton = true;
-    const data = {
-      course_id: this.courseId,
-      unit_id: this.unitId,
-      type: 'video',
-      content: JSON.stringify(this.form.value)
-    };
+    if (this.action === 'new') {
+      const data = {
+        course_id: this.courseId,
+        unit_id: this.unitId,
+        type: 'video',
+        content: JSON.stringify(this.form.value)
+      };
 
-    this.courseService.newSlide(data).subscribe(r => {
-      this.resource.emit(r);
-    });
+      this.courseService.newSlide(data).subscribe(r => {
+        this.resource.emit(r);
+      });
+    } else {
+      const data = {
+        content: JSON.stringify(this.form.value)
+      };
+      this.courseService.editSlide(this.slide.id, data).subscribe(r => {
+        this.resource.emit(r);
+      });
+    }
   }
 
 }

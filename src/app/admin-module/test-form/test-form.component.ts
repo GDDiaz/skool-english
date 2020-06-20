@@ -12,9 +12,12 @@ export class TestFormComponent implements OnInit {
 
   @Input() courseId;
   @Input() unitId;
+  @Input() slide;
   @Output() test: EventEmitter<any> = new EventEmitter<any>();
 
   public typeQuestionSelected: any;
+  public title = 'Nuevo Quiz';
+  public action = 'new';
   public typesQuestions = ['Única respuesta', 'Multiple respuesta', 'Autocompletar'];
   public disableButton = false;
   public form = this.fb.group({
@@ -25,6 +28,30 @@ export class TestFormComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer, private fb: FormBuilder, private courseService: CoursesService) { }
 
   ngOnInit() {
+    if (this.slide !== null) {
+      this.title = 'Editar Quiz';
+      this.action = 'edit';
+      this.buildEditForm(this.slide.content);
+    }
+  }
+
+
+  private buildEditForm(data) {
+    for (const key in data.questions) {
+      if (data.questions.hasOwnProperty(key)) {
+        const question = data.questions[key];
+        this.typeQuestionSelected = question.typeQuestion;
+        this.addQuestion();
+        if (question.hasOwnProperty('options')) {
+          for (const i in question.options) {
+            if (question.options.hasOwnProperty(i)) {
+              this.addAnswerForm(key);
+            }
+          }
+        }
+      }
+    }
+    this.form.patchValue(data);
   }
 
   get questions() {
@@ -80,16 +107,26 @@ export class TestFormComponent implements OnInit {
 
   onSubmit() {
     this.disableButton = true;
-    const data = {
-      course_id: this.courseId,
-      unit_id: this.unitId,
-      type: 'quiz',
-      content: JSON.stringify(this.form.value)
-    };
+    if (this.action === 'new') {
+      const data = {
+        course_id: this.courseId,
+        unit_id: this.unitId,
+        type: 'quiz',
+        content: JSON.stringify(this.form.value)
+      };
 
-    this.courseService.newSlide(data).subscribe(r => {
-      this.test.emit(r);
-    });
+      this.courseService.newSlide(data).subscribe(r => {
+        this.test.emit(r);
+      });
+    } else {
+      const data = {
+        content: JSON.stringify(this.form.value)
+      };
+
+      this.courseService.editSlide(this.slide.id, data).subscribe(r => {
+        this.test.emit(r);
+      });
+    }
   }
 
   byPassHTML(html: string) {

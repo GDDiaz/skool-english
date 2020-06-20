@@ -10,6 +10,7 @@ import { CoursesService } from '../services/courses.service';
 export class CourseContentComponent implements OnInit {
   courseId;
   currentUnitId;
+  currentSlide = null;
   showUnitForm = false;
   showVideoForm = false;
   showQuizForm = false;
@@ -53,10 +54,32 @@ export class CourseContentComponent implements OnInit {
     this.showUnitForm = false;
   }
 
-  newVideo(unitId) {
+  newSlide(unitId, type) {
     this.currentUnitId = unitId;
     this.hiddenAllForms();
-    this.showVideoForm = true;
+    this.showForm(type);
+  }
+
+  private showForm(type) {
+    switch (type) {
+      case 'video':
+        this.showVideoForm = true;
+        break;
+      case 'quiz':
+        this.showQuizForm = true;
+        break;
+      case 'content':
+        this.showContentForm = true;
+        break;
+      case 'activity':
+        this.showActivityForm = true;
+        break;
+      case 'unit':
+        this.showUnitForm = true;
+        break;
+      default:
+        this.hiddenAllForms();
+    }
   }
 
   addSlide(event) {
@@ -66,30 +89,19 @@ export class CourseContentComponent implements OnInit {
     this.hiddenAllForms();
   }
 
-  newQuiz(unitId) {
-    this.currentUnitId = unitId;
-    this.hiddenAllForms();
-    this.showQuizForm = true;
-  }
-
-  newActivity(unitId) {
-    this.currentUnitId = unitId;
-    this.hiddenAllForms();
-    this.showActivityForm = true;
-  }
-
-  newContent(unitId) {
-    this.currentUnitId = unitId;
-    this.hiddenAllForms();
-    this.showContentForm = true;
-  }
-
   private hiddenAllForms() {
+    this.currentSlide = null;
     this.showUnitForm = false;
     this.showVideoForm = false;
     this.showQuizForm = false;
     this.showContentForm = false;
     this.showActivityForm = false;
+  }
+
+  editSlide(slide: any) {
+    this.hiddenAllForms();
+    this.currentSlide = slide;
+    this.showForm(slide.type);
   }
 
 }
