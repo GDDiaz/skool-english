@@ -14,7 +14,6 @@ export class CourseContentComponent implements OnInit {
   showVideoForm = false;
   showQuizForm = false;
   showContentForm = false;
-  showObjectiveForm = false;
   showActivityForm = false;
   units = new Map<string, any>();
   constructor(private route: ActivatedRoute, private courseService: CoursesService) { }
@@ -73,12 +72,6 @@ export class CourseContentComponent implements OnInit {
     this.showQuizForm = true;
   }
 
-  newObjective(unitId) {
-    this.currentUnitId = unitId;
-    this.hiddenAllForms();
-    this.showObjectiveForm = true;
-  }
-
   newActivity(unitId) {
     this.currentUnitId = unitId;
     this.hiddenAllForms();
@@ -96,7 +89,6 @@ export class CourseContentComponent implements OnInit {
     this.showVideoForm = false;
     this.showQuizForm = false;
     this.showContentForm = false;
-    this.showObjectiveForm = false;
     this.showActivityForm = false;
   }
 

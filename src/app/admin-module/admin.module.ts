@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   MatDialogModule,
   MatIconModule,
-  MatButtonModule, MatExpansionModule, MatTooltipModule, MatRadioModule, MatCheckboxModule } from '@angular/material';
+  MatButtonModule, MatExpansionModule, MatTooltipModule, MatRadioModule, MatCheckboxModule, MatStepperModule } from '@angular/material';
 import { CourseContentComponent } from './course-content/course-content.component';
 import { UnitFormComponent } from './unit-form/unit-form.component';
 import { UnitVideoFormComponent } from './unit-video-form/unit-video-form.component';
@@ -31,7 +31,9 @@ import { ContentFormComponent } from './content-form/content-form.component';
     ReactiveFormsModule,
     FormsModule,
     QuillModule.forRoot(),
-    MatDialogModule, MatIconModule, MatButtonModule, MatExpansionModule, MatTooltipModule, MatRadioModule, MatCheckboxModule
+    MatDialogModule, MatIconModule, MatButtonModule,
+    MatExpansionModule, MatTooltipModule, MatRadioModule,
+    MatCheckboxModule, MatStepperModule
   ]
 })
 export class AdminModule { }

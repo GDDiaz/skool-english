@@ -19,9 +19,11 @@
                 <div class="bg-primary-red">
                   <i *ngIf="item.type === 'video'" class="fa fa-video"></i>
                   <mat-icon *ngIf="item.type === 'quiz'">fact_check</mat-icon>
+                  <mat-icon *ngIf="item.type === 'content'">article</mat-icon>
                 </div>
                 <ng-container *ngIf="item.type === 'video'">{{item.content.video_title}}</ng-container>
                 <ng-container *ngIf="item.type === 'quiz'">{{ item.content.name }}</ng-container>
+                <ng-container *ngIf="item.type === 'content'">{{ item.content.objective_title }}</ng-container>
                 <span class="text-muted"></span>
               </li>
             </ul>
@@ -38,10 +40,7 @@
                   <button (click)="newQuiz(unit.id)" matTooltip="Quiz" mat-icon-button color="primary" aria-label="Example icon button with a menu icon">
                     <mat-icon>fact_check</mat-icon>
                   </button>
-                  <button (click)="newObjective(unit.id)" matTooltip="Objetivos" mat-icon-button color="primary" aria-label="Example icon button with a heart icon">
-                    <mat-icon>my_location</mat-icon>
-                  </button>
-                  <button (click)="newActivity(unit.id)" matTooltip="Actividades" mat-icon-button color="primary" aria-label="Example icon button with a heart icon">
+                  <button (click)="newActivity(unit.id)" matTooltip="Actividades" mat-icon-button color="primary" >
                     <mat-icon>wb_incandescent</mat-icon>
                   </button>
 
@@ -71,6 +70,10 @@
 
                 <ng-container *ngIf="showQuizForm">
                   <app-test-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-test-form>
+                </ng-container>
+
+                <ng-container *ngIf="showContentForm">
+                  <app-content-form class="col-md-12" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-content-form>
                 </ng-container>
               </div>
           </div>
