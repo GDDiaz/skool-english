@@ -5,11 +5,11 @@ import { first } from 'rxjs/operators';
 import { User2 } from '../../models/user';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'app-navbar-admin',
+  templateUrl: './navbar-admin.component.html',
+  styleUrls: ['./navbar-admin.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarAdminComponent implements OnInit {
   currentUser: User2;
   constructor(private authService: AuthenticationService, private router: Router) { }
 

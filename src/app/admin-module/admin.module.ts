@@ -15,6 +15,7 @@ import { UnitVideoFormComponent } from './unit-video-form/unit-video-form.compon
 import { TestFormComponent } from './test-form/test-form.component';
 import { QuillModule } from 'ngx-quill';
 import { ContentFormComponent } from './content-form/content-form.component';
+import { ShowSlideComponent } from '../student-module/show-slide/show-slide.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { ContentFormComponent } from './content-form/content-form.component';
     UnitFormComponent,
     UnitVideoFormComponent,
     TestFormComponent,
-    ContentFormComponent],
+    ContentFormComponent,  ShowSlideComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

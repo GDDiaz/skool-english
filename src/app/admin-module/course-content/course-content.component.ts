@@ -16,6 +16,8 @@ export class CourseContentComponent implements OnInit {
   showQuizForm = false;
   showContentForm = false;
   showActivityForm = false;
+  showSlideComponent = false;
+  showImage = true;
   units = new Map<string, any>();
   constructor(private route: ActivatedRoute, private courseService: CoursesService) { }
 
@@ -96,12 +98,20 @@ export class CourseContentComponent implements OnInit {
     this.showQuizForm = false;
     this.showContentForm = false;
     this.showActivityForm = false;
+    this.showSlideComponent = false;
+    this.showImage = false;
   }
 
   editSlide(slide: any) {
     this.hiddenAllForms();
     this.currentSlide = slide;
     this.showForm(slide.type);
+  }
+
+  showSlide(slide: any) {
+    this.hiddenAllForms();
+    this.currentSlide = slide;
+    this.showSlideComponent = true;
   }
 
 }

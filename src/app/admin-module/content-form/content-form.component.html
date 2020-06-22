@@ -24,10 +24,11 @@
               </mat-panel-title>
             </mat-expansion-panel-header>
             <div [formGroupName]="i">
-              <div class="form-group">
+             <!-- <div class="form-group">
                 <label class="control-label" for="title">Icono</label>
                 <input type="text" formControlName="icon">
               </div>
+              -->
               <div class="form-group">
                 <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="objective"></quill-editor>
               </div>
@@ -69,16 +70,17 @@
           </mat-expansion-panel-header>
           <div [formGroupName]="i">
 
-            <div class="form-group">
-              <label class="control-label" for="word">Termino</label>
-              <input name="unit_content[word]" id="word_bank_title" type="text" formControlName="word" class="form-control" required>
-            </div>
+            <div class="form-row">
+              <div class="col">
+                <label class="control-label" for="word">Termino</label>
+                <input name="unit_content[word]" id="word_bank_title" type="text" formControlName="word" class="form-control" required>
+              </div>
 
-            <div class="form-group">
-              <label class="control-label" for="traduction">Traducción</label>
-              <input name="unit_content[traduction]" id="traduction" type="text" formControlName="traduction" class="form-control" required>
+              <div class="col">
+                <label class="control-label" for="traduction">Traducción</label>
+                <input name="unit_content[traduction]" id="traduction" type="text" formControlName="traduction" class="form-control" required>
+              </div>
             </div>
-
           </div>
         </mat-expansion-panel>
       </mat-accordion>

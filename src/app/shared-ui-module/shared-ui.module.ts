@@ -8,13 +8,15 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { MatDialogModule } from '@angular/material';
 import { ngfModule, ngf } from 'angular-file';
 import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     LoginComponent,
     FileUploadComponent,
-    SidebarAdminComponent
+    SidebarAdminComponent,
+    NavbarAdminComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SidebarAdminComponent
+    SidebarAdminComponent,
+    NavbarAdminComponent
   ],
   entryComponents: [
     FileUploadComponent

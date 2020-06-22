@@ -21,9 +21,9 @@
                   <mat-icon *ngIf="item.type === 'quiz'" (click)="editSlide(item)">fact_check</mat-icon>
                   <mat-icon *ngIf="item.type === 'content'" (click)="editSlide(item)">article</mat-icon>
                 </div>
-                <ng-container *ngIf="item.type === 'video'">{{item.content.video_title}}</ng-container>
-                <ng-container *ngIf="item.type === 'quiz'">{{ item.content.name }}</ng-container>
-                <ng-container *ngIf="item.type === 'content'">{{ item.content.objective_title }}</ng-container>
+                <ng-container *ngIf="item.type === 'video'">{{item.content.video_title}} <span (click)="showSlide(item)">Ver</span></ng-container>
+                <ng-container *ngIf="item.type === 'quiz'">{{ item.content.name }} <span (click)="showSlide(item)">Ver</span></ng-container>
+                <ng-container *ngIf="item.type === 'content'">{{ item.content.objective_title }} <span (click)="showSlide(item)">Ver</span></ng-container>
                 <span class="text-muted"></span>
               </li>
             </ul>
@@ -75,7 +75,12 @@
                 <ng-container *ngIf="showContentForm">
                   <app-content-form class="col-md-12" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-content-form>
                 </ng-container>
+                <ng-container *ngIf="showSlideComponent">
+                  <app-show-slide [slide]="currentSlide"></app-show-slide>
+                </ng-container>
+
               </div>
+              <img *ngIf="showImage" style="width:100%" src="assets/images/blank_page.jpg">
           </div>
       </div>
   </div>
