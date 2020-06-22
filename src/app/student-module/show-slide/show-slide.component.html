@@ -1,11 +1,11 @@
 <ng-container *ngIf="slide.type === 'video'">
-  <h3 class="card-title">{{slide.content.video_title}}</h3>
+  <h3 class="card-title text-center">{{slide.content.video_title}}</h3>
   <iframe width="560" height="315" [src]="sanitizerUrl(slide.content.video_url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </ng-container>
 
 
 <ng-container *ngIf="slide.type === 'quiz'">
-  <h3 class="card-title">{{slide.content.name}}</h3>
+  <h3 class="card-title text-center">{{slide.content.name}}</h3>
   <mat-horizontal-stepper>
     <ng-container *ngFor="let question of slide.content.questions">
       <mat-step>
@@ -48,7 +48,7 @@
 
 
 <ng-container *ngIf="slide.type === 'content'">
-  <h3 class="card-title">{{slide.content.objective_title}}</h3>
+  <h3 class="card-title text-center">{{slide.content.objective_title}}</h3>
   <mat-horizontal-stepper>
     <mat-step>
       <iframe width="560" height="315" [src]="sanitizerUrl(slide.content.video_url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

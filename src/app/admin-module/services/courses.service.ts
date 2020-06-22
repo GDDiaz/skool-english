@@ -35,11 +35,16 @@ export class CoursesService {
   }
 
   editSlide(id, content) {
-    return this.http.post<any>(`${environment.apiUrl}/v1/slide/${id}`, content)
+    return this.http.post<any>(`${environment.apiUrl}/v1/slide/edit/${id}`, content)
     .pipe(map(response => {
         response.content = JSON.parse(response.content);
         return response;
     }));
+  }
+
+  deleteSlide(id) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/slide/delete/${id}`, null)
+    .pipe(map(response => response));
   }
 
   getAllCourse(): Observable<Course[]> {

@@ -86,6 +86,16 @@ export class CourseContentComponent implements OnInit {
 
   addSlide(event) {
     const unit = this.units.get(this.currentUnitId);
+    for (let index = 0; index < unit.slides.length; index++) {
+      const slide = unit.slides[index];
+      if (slide.id === event.id) {
+        unit.slides[index] = event;
+        this.units.set(this.currentUnitId, unit);
+        this.hiddenAllForms();
+        this.showImage = true;
+        return true;
+      }
+    }
     unit.slides.push(event);
     this.units.set(this.currentUnitId, unit);
     this.hiddenAllForms();
@@ -102,10 +112,22 @@ export class CourseContentComponent implements OnInit {
     this.showImage = false;
   }
 
-  editSlide(slide: any) {
+  editSlide(slide: any, unitId) {
+    this.currentUnitId = unitId;
     this.hiddenAllForms();
     this.currentSlide = slide;
     this.showForm(slide.type);
+  }
+
+  deleteSlide(slide: any, unitId, index) {
+    this.currentUnitId = unitId;
+    this.courseService.deleteSlide(slide.id).subscribe(r => {
+      const unit = this.units.get(this.currentUnitId);
+      unit.slides.splice(index, 1);
+      this.units.set(this.currentUnitId, unit);
+      this.hiddenAllForms();
+      this.showImage = true;
+    });
   }
 
   showSlide(slide: any) {
