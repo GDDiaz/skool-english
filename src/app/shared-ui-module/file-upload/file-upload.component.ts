@@ -4,7 +4,6 @@ import { UploadService } from '../../services/upload.service';
 import { HttpResponse, HttpEvent } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -15,7 +14,7 @@ export class FileUploadComponent implements OnInit {
   accept = '*';
   files: File[] = [];
   progress: number;
-  hasBaseDropZoneOver: boolean = false;
+  hasBaseDropZoneOver = false;
   httpEmitter: Subscription;
   httpEvent: HttpEvent<{}>;
   sendableFormData: FormData;
@@ -44,7 +43,6 @@ export class FileUploadComponent implements OnInit {
   cancel() {
     this.progress = 0;
     if ( this.httpEmitter ) {
-      console.log('cancelled');
       this.httpEmitter.unsubscribe();
     }
   }

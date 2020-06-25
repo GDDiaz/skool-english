@@ -1,0 +1,46 @@
+<ngfFormData
+  [files]      = "files"
+  postName     = "file"
+  [(FormData)] = "sendableFormData"
+  (FormDataChange) = "changeFormData($event)"
+></ngfFormData>
+
+<div class="dropify-wrapper" *ngIf="!(multiple === '0' && files.length > 0)"
+  ngfDrop
+  multiple         = "{{multiple}}"
+  selectable       = "1"
+  [(validDrag)]    = "validComboDrag"
+  [(files)]        = "files"
+  accept           = "{{accept}}"
+  maxSize          = "{{maxSize}}"
+  [(dragFiles)]    = "dragFiles"
+  (filesChange) = "fileChange()"
+  [fileDropDisabled] = "fileDropDisabled"
+>
+<div class="dropify-message text-center">
+  <span class="file-icon"><i class="fas fa-cloud-upload-alt"></i></span>
+  <br>
+  <span>Drag and drop a file here or click</span>
+  <div class="dropify-loader"></div>
+</div>
+</div>
+
+
+<div style="margin-bottom: 20px; margin-top: 20px">
+
+<ol *ngFor="let item of files;let i=index">
+  <li>
+    <i *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0" class="fa fa-file-image"></i>
+    <i *ngIf="['video/mp4'].indexOf(item.type)>=0" class="fa fa-file-video"></i>
+    <i *ngIf="['audio/mpeg','audio/mp4'].indexOf(item.type)>=0" class="fa fa-file-audio"></i>
+    {{ item.name }} - ( {{ item.size/1024/1024 | number:'.2' }} MB)
+    <button type="button"
+          class="theme-progress btn btn-xs"
+          (click)="files.splice(i,1)"
+        >
+          <i  class="theme-progress fas fa-times" ></i>
+        </button>
+    </li>
+</ol>
+
+</div>

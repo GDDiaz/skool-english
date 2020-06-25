@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormArray } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
   selector: 'app-content-form',
@@ -17,6 +18,7 @@ export class ContentFormComponent implements OnInit {
   public disableButton = false;
   public title = 'Nuevo Contenido';
   public action = 'new';
+  private formData = null;
   public form = this.fb.group({
     objective_title: ['', Validators.required],
     objectives: this.fb.array([]),
@@ -58,6 +60,19 @@ export class ContentFormComponent implements OnInit {
     );
   }
 
+  setFormData(event) {
+    this.formData = event;
+  }
+
+  uploadFiles() {
+    return this.courseService.uploadFiles(this.formData).subscribe(event => {
+      this.form.get('audio').patchValue(event.path);
+      this.sendRequest();
+    },
+      error => alert('Error Uploading Files: ' + error.message)
+    );
+  }
+
   get words() {
     return this.form.get('words') as FormArray;
   }
@@ -70,6 +85,15 @@ export class ContentFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.formData !== null) {
+      this.uploadFiles();
+    } else {
+      this.sendRequest();
+    }
+
+  }
+
+  private sendRequest() {
     this.disableButton = true;
     if (this.action === 'new') {
       const data = {
@@ -91,7 +115,6 @@ export class ContentFormComponent implements OnInit {
         this.test.emit(r);
       });
     }
-
   }
 
 }

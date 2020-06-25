@@ -18,6 +18,7 @@ export class UploadService {
    * @param sendableFormData
    */
   uploadFiles(sendableFormData: FormData) {
+    console.log('perroo', sendableFormData);
     const req = new HttpRequest<FormData>(
       'POST',
       this.url,

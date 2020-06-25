@@ -42,6 +42,13 @@ export class CoursesService {
     }));
   }
 
+  uploadFiles(sendableFormData: FormData) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/upload`, sendableFormData)
+    .pipe(map(response => {
+        return response;
+    }));
+  }
+
   deleteSlide(id) {
     return this.http.post<any>(`${environment.apiUrl}/v1/slide/delete/${id}`, null)
     .pipe(map(response => response));

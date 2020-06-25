@@ -11,6 +11,13 @@
 </section>
 
 <div class="row">
+  <div class="col-md-12">
+    <h3>Lista de cursos</h3>
+    <div class="dropdown-divider"></div>
+  </div>
+</div>
+<div class="row">
+
   <div class="list-group col-md-12" *ngIf="courses !== undefined">
     <a  *ngFor="let course of courses"  [routerLink]="['/admin/course/content', course.id]" class="list-group-item list-group-item-action flex-column align-items-start ">
       <div class="d-flex w-100 justify-content-between">

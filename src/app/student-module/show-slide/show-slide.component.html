@@ -1,6 +1,6 @@
 <ng-container *ngIf="slide.type === 'video'">
   <h3 class="card-title text-center">{{slide.content.video_title}}</h3>
-  <iframe width="560" height="315" [src]="sanitizerUrl(slide.content.video_url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div style="width: 100%" class="ql-editor" [innerHTML]="byPassHTML(slide.content.video_url)"></div>
 </ng-container>
 
 
@@ -51,7 +51,7 @@
   <h3 class="card-title text-center">{{slide.content.objective_title}}</h3>
   <mat-horizontal-stepper>
     <mat-step>
-      <iframe width="560" height="315" [src]="sanitizerUrl(slide.content.video_url)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div style="width: 100%" class="ql-editor" [innerHTML]="byPassHTML(slide.content.video_url)"></div>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>

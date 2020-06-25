@@ -7,7 +7,7 @@ import { CourseListComponent } from './course-list/course-list.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   MatDialogModule,
-  MatIconModule,
+  MatIconModule, MatMenuModule,
   MatButtonModule, MatExpansionModule, MatTooltipModule, MatRadioModule, MatCheckboxModule, MatStepperModule } from '@angular/material';
 import { CourseContentComponent } from './course-content/course-content.component';
 import { UnitFormComponent } from './unit-form/unit-form.component';
@@ -16,6 +16,8 @@ import { TestFormComponent } from './test-form/test-form.component';
 import { QuillModule } from 'ngx-quill';
 import { ContentFormComponent } from './content-form/content-form.component';
 import { ShowSlideComponent } from '../student-module/show-slide/show-slide.component';
+import { UploadFileWidgetComponent } from './upload-file-widget/upload-file-widget.component';
+import { ngfModule } from 'angular-file';
 
 @NgModule({
   declarations: [
@@ -25,16 +27,20 @@ import { ShowSlideComponent } from '../student-module/show-slide/show-slide.comp
     UnitFormComponent,
     UnitVideoFormComponent,
     TestFormComponent,
-    ContentFormComponent,  ShowSlideComponent],
+    ContentFormComponent,
+    ShowSlideComponent,
+    UploadFileWidgetComponent
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     QuillModule.forRoot(),
+    ngfModule,
     MatDialogModule, MatIconModule, MatButtonModule,
     MatExpansionModule, MatTooltipModule, MatRadioModule,
-    MatCheckboxModule, MatStepperModule
+    MatCheckboxModule, MatStepperModule, MatMenuModule
   ]
 })
 export class AdminModule { }
