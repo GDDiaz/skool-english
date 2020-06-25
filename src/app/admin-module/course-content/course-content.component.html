@@ -20,6 +20,7 @@
                   <i *ngIf="item.type === 'video'" class="fa fa-video"></i>
                   <mat-icon *ngIf="item.type === 'quiz'">fact_check</mat-icon>
                   <mat-icon *ngIf="item.type === 'content'">article</mat-icon>
+                  <mat-icon *ngIf="item.type === 'activity'"> wb_incandescent</mat-icon>
                 </div>
                 <ng-container *ngIf="item.type === 'video'">{{item.content.video_title}}
                   <span>
@@ -43,6 +44,15 @@
                   <span>
                     <button mat-button [matMenuTriggerFor]="menuContent"><i class="fas fa-ellipsis-v"></i></button>
                     <mat-menu #menuContent="matMenu">
+                     <button mat-menu-item (click)="editSlide(item, unit.id)"><i class="far fa-edit"></i> Editar</button>
+                     <button mat-menu-item (click)="deleteSlide(item, unit.id, i)"><i class="far fa-trash-alt"></i> Eliminar</button>
+                    </mat-menu>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="item.type === 'activity'">{{ item.content.name }}
+                  <span >
+                    <button mat-button [matMenuTriggerFor]="menuActivity"><i class="fas fa-ellipsis-v"></i></button>
+                    <mat-menu #menuActivity="matMenu">
                      <button mat-menu-item (click)="editSlide(item, unit.id)"><i class="far fa-edit"></i> Editar</button>
                      <button mat-menu-item (click)="deleteSlide(item, unit.id, i)"><i class="far fa-trash-alt"></i> Eliminar</button>
                     </mat-menu>
@@ -105,6 +115,9 @@
                 </ng-container>
                 <ng-container *ngIf="showSlideComponent">
                   <app-show-slide [slide]="currentSlide"></app-show-slide>
+                </ng-container>
+                <ng-container *ngIf="showActivityForm">
+                  <app-activity-form [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (resource)="addSlide($event)"></app-activity-form>
                 </ng-container>
 
               </div>

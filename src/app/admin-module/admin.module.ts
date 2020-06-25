@@ -18,6 +18,7 @@ import { ContentFormComponent } from './content-form/content-form.component';
 import { ShowSlideComponent } from '../student-module/show-slide/show-slide.component';
 import { UploadFileWidgetComponent } from './upload-file-widget/upload-file-widget.component';
 import { ngfModule } from 'angular-file';
+import { ActivityFormComponent } from './activity-form/activity-form.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ngfModule } from 'angular-file';
     TestFormComponent,
     ContentFormComponent,
     ShowSlideComponent,
-    UploadFileWidgetComponent
+    UploadFileWidgetComponent,
+    ActivityFormComponent
   ],
   imports: [
     CommonModule,

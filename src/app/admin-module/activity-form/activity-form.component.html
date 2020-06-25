@@ -1,0 +1,12 @@
+
+    <h3 class="card-title text-center">{{title}}</h3>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label class="control-label" for="title">Nombre de la activiada</label>
+        <input name="activityForm[name]" id="title" type="text" formControlName="name" class="form-control" required>
+      </div>
+
+      <div class="text-center">
+        <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
+      </div>
+    </form>

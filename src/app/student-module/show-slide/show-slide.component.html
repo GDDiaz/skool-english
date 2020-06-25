@@ -78,3 +78,7 @@
 
   </mat-horizontal-stepper>
 </ng-container>
+
+<ng-container *ngIf="slide.type === 'activity'">
+  <h3 class="card-title text-center">{{slide.content.name}}</h3>
+</ng-container>

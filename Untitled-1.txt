@@ -1,0 +1,202 @@
+
+    <h3 class="card-title">Nuevo Quíz</h3>
+    <div class="form-group">
+      <label for="type-question">Tipo de pregunta</label>
+      <select  [(ngModel)]="typeQuestionSelected" class="form-control" id="type-question">
+        <option [value]="item" *ngFor="let item of typesQuestions">{{item}}</option>
+      </select>
+    </div>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label class="control-label" for="title">Título del Quíz</label>
+        <input name="unit_quiz[name]" id="title" type="text" formControlName="name" class="form-control" required>
+      </div>
+
+
+
+      <div formArrayName="questions">
+        <h5>Preguntas</h5>
+        <section class="float-right">
+          <button (click)="addQuestion()"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+            <mat-icon>add</mat-icon>
+          </button>
+        </section>
+
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let questionGroup of questions.controls; let i=index" [ngClass]="{'bg-light' : i%2 == 0}">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5 class="m-b-0 font-medium">{{'Pregunta #'+i}}</h5>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div [formGroupName]="i">
+              <div class="form-group">
+                <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="question"></quill-editor>
+              </div>
+              <div formArrayName="answers">
+                <h5>Respuestas</h5>
+                <button class="float-right" (click)="addAnswerForm(i)"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+                  <mat-icon>add</mat-icon>
+                </button>
+                <div *ngFor="let answerGroup of getAnswerControl(i).controls; let j=index">
+                  <div [formGroupName]="j">
+                    <div class="form-group">
+                      <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="answer"></quill-editor>
+                    </div>
+                    <div class="form-group">
+                      <input type="checkbox" formControlName="is_correct">
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <!-- <div class="form-group">
+        <label class="control-label" for="url"></label>
+        <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="question"></quill-editor>
+      </div>
+
+      <div>
+        Presentation in HTML
+        <div class="ql-container ql-snow" style="border-width: 0;">
+          <div style="width: 100%" class="ql-editor" [innerHTML]="byPassHTML(form.get('question').value)"></div>
+        </div>
+      </div>
+    -->
+      <div class="text-center">
+        <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
+      </div>
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ----------------------------------
+
+
+    
+    <h3 class="card-title">Nuevo Quíz</h3>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label class="control-label" for="title">Título del Quíz</label>
+        <input name="unit_quiz[name]" id="title" type="text" formControlName="name" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="type-question">Tipo de pregunta</label>
+        <select  formControlName="typeQuestion" [(ngModel)]="typeQuestionSelected" class="form-control" id="type-question">
+          <option [value]="item" *ngFor="let item of typesQuestions">{{item}}</option>
+        </select>
+      </div>
+
+      <div formArrayName="questions">
+        <h5>Preguntas</h5>
+        <section class="float-right">
+          <button (click)="addQuestion()"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+            <mat-icon>add</mat-icon>
+          </button>
+        </section>
+
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let questionGroup of questions.controls; let i=index" [ngClass]="{'bg-light' : i%2 == 0}">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <h5 class="m-b-0 font-medium">{{'Pregunta #'+ (i+1)}}</h5>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div [formGroupName]="i">
+              <div class="form-group">
+                <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="question"></quill-editor>
+              </div>
+<!-- Unica respuesta start-->
+              <ng-container *ngIf="questionGroup.get('typeQuestion').value === 'Única respuesta'">
+                <mat-radio-group formControlName="answer">
+
+                </mat-radio-group>
+              </ng-container>
+<!-- Unica respuesta end -->
+              <div formArrayName="options">
+                <h5>Respuestas</h5>
+                {{ questionGroup.get('typeQuestion').value }}
+                <button class="float-right" (click)="addAnswerForm(i)"  mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+                  <mat-icon>add</mat-icon>
+                </button>
+                <ng-container *ngIf="questionGroup.get('typeQuestion').value === 'Única respuesta'">
+                  <mat-radio-group formControlName="answer">
+                  <div *ngFor="let answerGroup of getAnswerControl(i).controls; let j=index">
+                    <div [formGroupName]="j">
+                      <div class="form-group">
+                        <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="option"></quill-editor>
+                      </div>
+                      <div class="form-group">
+                        <mat-radio-button value="{{j}}">¿ Es la respuesta correcta ?</mat-radio-button>
+                      </div>
+                    </div>
+
+                  </div>
+                 </mat-radio-group>
+                </ng-container>
+
+
+              </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <pre>
+        {{form.value | json}}
+      </pre>
+      <!-- <div class="form-group">
+        <label class="control-label" for="url"></label>
+        <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="question"></quill-editor>
+      </div>
+
+      <div>
+        Presentation in HTML
+        <div class="ql-container ql-snow" style="border-width: 0;">
+          <div style="width: 100%" class="ql-editor" [innerHTML]="byPassHTML(form.get('question').value)"></div>
+        </div>
+      </div>
+
+
+      --------------------
+
+
+      <div *ngFor="let answerGroup of getAnswerControl(i).controls; let j=index">
+                  <div [formGroupName]="j">
+                    <div class="form-group">
+                      <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="answer"></quill-editor>
+                    </div>
+                    <div class="form-group">
+                      <input type="checkbox" formControlName="is_correct">
+                    </div>
+                  </div>
+
+                </div>
+
+    -->
+      <div class="text-center">
+        <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
+      </div>
+    </form>
+
+
