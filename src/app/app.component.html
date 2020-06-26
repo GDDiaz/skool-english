@@ -2,14 +2,14 @@
 
 
 
-<app-navbar *ngIf="currentUser && currentUser.user?.type === '0' "></app-navbar>
-<div class="toggled" [ngClass]="{'d-flex' : currentUser && currentUser.user?.type === '1'}" id="wrapper">
+<app-navbar *ngIf="currentUser && currentUser.user?.type === 0 "></app-navbar>
+<div class="toggled" [ngClass]="{'d-flex' : currentUser && currentUser.user?.type === 1}" id="wrapper">
 
-  <app-sidebar-admin *ngIf="currentUser && currentUser.user?.type === '1' "></app-sidebar-admin>
+  <app-sidebar-admin *ngIf="currentUser && currentUser.user?.type === 1 "></app-sidebar-admin>
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
-    <app-navbar-admin *ngIf="currentUser && currentUser.user?.type === '1' "></app-navbar-admin>
+    <app-navbar-admin *ngIf="currentUser && currentUser.user?.type === 1 "></app-navbar-admin>
   <div class="container-fluid">
 
     <div class="container" role="main">
