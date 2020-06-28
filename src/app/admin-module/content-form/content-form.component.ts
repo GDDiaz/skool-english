@@ -18,14 +18,14 @@ export class ContentFormComponent implements OnInit {
   public disableButton = false;
   public title = 'Nuevo Contenido';
   public action = 'new';
-  private formData = null;
+  private formData: FormData[] = [];
+  private promises = [];
   public form = this.fb.group({
     objective_title: ['', Validators.required],
     objectives: this.fb.array([]),
     video_url: [''],
-    word_bank_title: ['', Validators.required],
-    words: this.fb.array([]),
-    audio: ['']
+    words_banks: this.fb.array([]),
+    focus: [''],
   });
   constructor(private fb: FormBuilder, private courseService: CoursesService) { }
 
@@ -41,10 +41,35 @@ export class ContentFormComponent implements OnInit {
     for (const iterator of data.objectives) {
       this.addObjective();
     }
-    for (const iterator of data.words) {
-      this.addWord();
+
+    for (const key in data.words_banks) {
+      if (data.words_banks.hasOwnProperty(key)) {
+        const wordBank = data.words_banks[key];
+        this.addWordBank();
+        if (wordBank.hasOwnProperty('words')) {
+          for (const i in wordBank.words) {
+            if (wordBank.words.hasOwnProperty(i)) {
+              this.addWord(key);
+            }
+          }
+        }
+      }
     }
     this.form.patchValue(data);
+  }
+
+  get words_banks() {
+    return this.form.get('words_banks') as FormArray;
+  }
+
+  addWordBank() {
+    this.words_banks.push(
+      this.fb.group({
+        word_bank_title: ['', Validators.required],
+        audio: [''],
+        words: this.fb.array([])
+      })
+    );
   }
 
   get objectives() {
@@ -60,31 +85,38 @@ export class ContentFormComponent implements OnInit {
     );
   }
 
-  setFormData(event) {
-    this.formData = event;
+  setFormData(event, index) {
+    this.formData[index] = event;
   }
 
   uploadFiles() {
-    return this.courseService.uploadFiles(this.formData).subscribe(event => {
-      this.form.get('audio').patchValue(event.path);
+    for (const formData of this.formData) {
+      this.promises.push(this.courseService.uploadFiles(formData).toPromise());
+    }
+    return Promise.all(this.promises).then(values => {
+      for (let i = 0; i < values.length; i++) {
+        // tslint:disable-next-line:no-string-literal
+        this.words_banks.controls[i]['controls']['audio'].patchValue(values[i].path);
+      }
       this.sendRequest();
-    },
-      error => alert('Error Uploading Files: ' + error.message)
-    );
+    }).catch(error => console.error(error));
   }
 
-  get words() {
-    return this.form.get('words') as FormArray;
+  getWordControl(i) {
+    const wordBankControls = this.words_banks.controls[i] as FormArray;
+    // tslint:disable-next-line:no-string-literal
+    return wordBankControls.controls['words'] as FormArray;
   }
 
-  addWord() {
-    this.words.push(this.fb.group({
+  addWord(i) {
+    this.getWordControl(i).push(this.fb.group({
       word: ['', Validators.required],
       traduction: ['', Validators.required]
     }));
   }
 
   onSubmit() {
+    this.disableButton = true;
     if (this.formData !== null) {
       this.uploadFiles();
     } else {
@@ -94,7 +126,6 @@ export class ContentFormComponent implements OnInit {
   }
 
   private sendRequest() {
-    this.disableButton = true;
     if (this.action === 'new') {
       const data = {
         course_id: this.courseId,
@@ -105,7 +136,7 @@ export class ContentFormComponent implements OnInit {
 
       this.courseService.newSlide(data).subscribe(r => {
         this.test.emit(r);
-      });
+      }, error => console.error(error));
     } else {
       const data = {
         content: JSON.stringify(this.form.value)
@@ -113,7 +144,7 @@ export class ContentFormComponent implements OnInit {
 
       this.courseService.editSlide(this.slide.id, data).subscribe(r => {
         this.test.emit(r);
-      });
+      }, error => console.error(error));
     }
   }
 

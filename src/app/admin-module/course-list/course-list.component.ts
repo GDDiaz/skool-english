@@ -12,7 +12,7 @@ export class CourseListComponent implements OnInit {
   constructor(private courseService: CoursesService) { }
 
   ngOnInit() {
-    this.courseService.getAllCourse().subscribe(result  => this.courses = result);
+    this.courseService.getAllCourse().subscribe(result  => this.courses = result, error => console.error(error));
   }
 
 }

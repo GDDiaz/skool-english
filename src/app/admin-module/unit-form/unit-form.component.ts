@@ -32,7 +32,7 @@ export class UnitFormComponent implements OnInit {
       // tslint:disable-next-line:no-string-literal
       r['slides'] = [];
       this.unit.emit(r);
-    });
+    }, error => console.error(error));
   }
 
 }

@@ -32,7 +32,7 @@ export class CourseFormComponent implements OnInit {
   onSubmit() {
     this.courseService.newCourse(this.courseForm.value).subscribe(r => {
       this.router.navigate(['/admin/course/content', r.id]);
-    });
+    }, error => console.error(error));
   }
 
   openDialog(): void {

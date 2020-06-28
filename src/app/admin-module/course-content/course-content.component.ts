@@ -34,7 +34,7 @@ export class CourseContentComponent implements OnInit {
             }
           });
         }
-    });
+    }, error => console.error(error));
   }
 
   get unitsArray() {
@@ -45,8 +45,7 @@ export class CourseContentComponent implements OnInit {
     return data;
   }
 
-  newUnit(unitId) {
-    this.currentUnitId = unitId;
+  newUnit() {
     this.hiddenAllForms();
     this.showUnitForm = true;
   }

@@ -117,7 +117,7 @@
                   <app-show-slide [slide]="currentSlide"></app-show-slide>
                 </ng-container>
                 <ng-container *ngIf="showActivityForm">
-                  <app-activity-form [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (resource)="addSlide($event)"></app-activity-form>
+                  <app-activity-choice-form [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-activity-choice-form>
                 </ng-container>
 
               </div>

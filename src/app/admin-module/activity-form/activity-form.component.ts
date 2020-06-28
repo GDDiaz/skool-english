@@ -42,14 +42,14 @@ export class ActivityFormComponent implements OnInit {
 
       this.courseService.newSlide(data).subscribe(r => {
         this.resource.emit(r);
-      });
+      }, error => console.error(error));
     } else {
       const data = {
         content: JSON.stringify(this.form.value)
       };
       this.courseService.editSlide(this.slide.id, data).subscribe(r => {
         this.resource.emit(r);
-      });
+      }, error => console.error(error));
     }
   }
 

@@ -1,46 +1,44 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Validators, FormBuilder, FormArray } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-test-form',
-  templateUrl: './test-form.component.html',
-  styleUrls: ['./test-form.component.scss']
+  selector: 'app-activity-choice-form',
+  templateUrl: './activity-choice-form.component.html',
+  styleUrls: ['./activity-choice-form.component.scss']
 })
-export class TestFormComponent implements OnInit {
+export class ActivityChoiceFormComponent implements OnInit {
 
   @Input() courseId;
   @Input() unitId;
   @Input() slide;
   @Output() test: EventEmitter<any> = new EventEmitter<any>();
 
-  public typeQuestionSelected: any;
-  public title = 'Nuevo Quiz';
+  public title = 'Nueva Actividad';
   public action = 'new';
-  public typesQuestions = ['Única respuesta', 'Multiple respuesta', 'Autocompletar'];
   public disableButton = false;
   public form = this.fb.group({
     name: ['', Validators.required],
-    typeQuestion: [''],
     questions: this.fb.array([])
   });
-  constructor(private sanitizer: DomSanitizer, private fb: FormBuilder, private courseService: CoursesService) { }
+  private formData: FormData[] = [];
+  private promises = [];
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder, private courseService: CoursesService) { }
+
+  ngOnInit(): void {
+
     if (this.slide !== null) {
-      this.title = 'Editar Quiz';
+      this.title = 'Editar Actividad';
       this.action = 'edit';
       this.buildEditForm(this.slide.content);
     }
   }
 
-
   private buildEditForm(data) {
     for (const key in data.questions) {
       if (data.questions.hasOwnProperty(key)) {
         const question = data.questions[key];
-        this.typeQuestionSelected = question.typeQuestion;
         this.addQuestion();
         if (question.hasOwnProperty('options')) {
           for (const i in question.options) {
@@ -59,33 +57,17 @@ export class TestFormComponent implements OnInit {
   }
 
   addQuestion() {
-    if (this.typeQuestionSelected === undefined) {
-      return;
-    }
     this.questions.push(this.newQuestionForm());
   }
 
   newQuestionForm() {
-    if (this.typeQuestionSelected === 'Multiple respuesta') {
       return this.fb.group({
         question: ['', Validators.required],
-        typeQuestion: [this.typeQuestionSelected],
-        options: this.fb.array([])
-      });
-    }
-    if (this.typeQuestionSelected === 'Única respuesta') {
-      return this.fb.group({
-        question: ['', Validators.required],
-        typeQuestion: [this.typeQuestionSelected],
+        audio: [''],
         answer: ['', Validators.required],
         options: this.fb.array([])
       });
-    }
-    return this.fb.group({
-      question: ['', Validators.required],
-      typeQuestion: [this.typeQuestionSelected],
-      answer: ['', Validators.required],
-    });
+
   }
 
   getAnswerControl(i) {
@@ -100,18 +82,17 @@ export class TestFormComponent implements OnInit {
 
   newAnswerForm() {
     return this.fb.group({
-      option: ['', Validators.required],
-      is_correct: ['']
+      option: ['', Validators.required]
     });
   }
 
-  onSubmit() {
-    this.disableButton = true;
+  sendRequest() {
     if (this.action === 'new') {
       const data = {
         course_id: this.courseId,
         unit_id: this.unitId,
-        type: 'quiz',
+        type: 'activity',
+        subType: 'choice',
         content: JSON.stringify(this.form.value)
       };
 
@@ -129,8 +110,30 @@ export class TestFormComponent implements OnInit {
     }
   }
 
-  byPassHTML(html: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
+  setFormData(event, index) {
+    this.formData[index] = event;
+  }
+
+  uploadFiles() {
+    for (const formData of this.formData) {
+      this.promises.push(this.courseService.uploadFiles(formData).toPromise());
+    }
+    return Promise.all(this.promises).then(values => {
+      for (let i = 0; i < values.length; i++) {
+        // tslint:disable-next-line:no-string-literal
+        this.questions.controls[i]['controls']['audio'].patchValue(values[i].path);
+      }
+      this.sendRequest();
+    }).catch(error => console.error(error));
+  }
+
+  onSubmit() {
+    this.disableButton = true;
+    if (this.formData !== null) {
+      this.uploadFiles();
+    } else {
+      this.sendRequest();
+    }
   }
 
 }
