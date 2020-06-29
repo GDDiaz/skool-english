@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-show-slide',
   templateUrl: './show-slide.component.html',
@@ -14,15 +14,29 @@ export class ShowSlideComponent implements OnInit {
   ngOnInit() {
   }
   byPassHTML(html: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(html)
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   createIframe(url: string) {
-    // tslint:disable-next-line:max-line-length
-    return `<iframe width="560" height="315" src="https://www.youtube.com/embed/hi4pzKvuEQM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    if (url.includes('<iframe')) {
+      return this.byPassHTML(url);
+    } else if (url.includes('youtu')) {
+      const matchs = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+      return this.byPassHTML(`<iframe width="560"
+      height="315"
+      src="https://www.youtube.com/embed/${matchs[1]}"
+      frameborder="0" allow="accelerometer;
+      autoplay; encrypted-media; gyroscope;
+      picture-in-picture" allowfullscreen></iframe>`);
+    } else {
+      return this.byPassHTML(url);
+    }
   }
 
-  sanitizerUrl(url) {
+  sanitizerUrl(url, addApiUrl) {
+    if (addApiUrl) {
+      url = `${environment.baseUrl + url}` ;
+    }
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 

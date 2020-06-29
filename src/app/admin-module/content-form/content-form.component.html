@@ -70,9 +70,17 @@
                   formControlName="word_bank_title" class="form-control" required>
               </div>
 
-              <div class="form-group">
+              <div class="form-group" *ngIf="!hasAudioFile(i)">
                 <label class="control-label" for="word_bank_title">Audio MP3</label>
                 <app-upload-file-widget [accept]="'audio/*'" (formData)="setFormData($event, i)"></app-upload-file-widget>
+              </div>
+
+              <div class="text-center" *ngIf="hasAudioFile(i)">
+                <audio controls class="">
+                  <source [src]="sanitizerUrl(hasAudioFile(i), true)">
+                  Your browser does not support the <code>audio</code> element.
+                </audio>
+                <span class="float-right" (click)="deleteAudio(i)"><i class="fa fa-times"></i></span>
               </div>
 
               <!-- Multiple words start-->

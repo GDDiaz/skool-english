@@ -7,3 +7,25 @@
 .example-radio-button {
   margin: 5px;
 }
+.objective-statement {
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background-color: rgba(63, 81, 181, 0.06);
+}
+
+.word-bank {
+  border-radius: 5px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+  background-color: rgba(63, 81, 181, 0.06);
+  width: 40%;
+  .word {
+    font-weight: bold;
+    color: #EC1B23
+  }
+  .traduction {
+    color: rgba(63, 81, 181);
+  }
+
+}
+

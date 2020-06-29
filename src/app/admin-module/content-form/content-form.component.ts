@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormArray } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
-import { UploadService } from '../../services/upload.service';
+import { environment } from '../../../environments/environment.prod';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-content-form',
@@ -27,7 +28,7 @@ export class ContentFormComponent implements OnInit {
     words_banks: this.fb.array([]),
     focus: [''],
   });
-  constructor(private fb: FormBuilder, private courseService: CoursesService) { }
+  constructor(private fb: FormBuilder, private courseService: CoursesService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     if (this.slide !== null) {
@@ -145,6 +146,32 @@ export class ContentFormComponent implements OnInit {
       this.courseService.editSlide(this.slide.id, data).subscribe(r => {
         this.test.emit(r);
       }, error => console.error(error));
+    }
+  }
+
+  sanitizerUrl(url, addApiUrl) {
+    if (addApiUrl) {
+      url = `${environment.baseUrl + url}` ;
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  hasAudioFile(workBankIndex) {
+    const wordBankControls = this.words_banks.controls[workBankIndex] as FormArray;
+    // tslint:disable-next-line:no-string-literal
+    if (wordBankControls['controls']['audio'] !== undefined && wordBankControls['controls']['audio'] !== '') {
+      // tslint:disable-next-line:no-string-literal
+      return wordBankControls['controls']['audio'].value;
+    }
+    return false;
+  }
+
+  deleteAudio(workBankIndex) {
+    const wordBankControls = this.words_banks.controls[workBankIndex] as FormArray;
+    // tslint:disable-next-line:no-string-literal
+    if (wordBankControls['controls']['audio'] !== undefined && wordBankControls['controls']['audio'] !== '') {
+      // tslint:disable-next-line:no-string-literal
+      return wordBankControls['controls']['audio'].patchValue(null);
     }
   }
 

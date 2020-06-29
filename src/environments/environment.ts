@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://api.skool.co/api'
+  apiUrl: 'http://api.skool.co/api',
+  baseUrl: 'http://api.skool.co'
 };
 
 /*
