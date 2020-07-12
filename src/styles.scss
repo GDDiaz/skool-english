@@ -40,3 +40,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-expansion-panel:not([class*=mat-elevation-z]) {
   box-shadow: none !important;
 }
+
+.hidden-stepper {
+  .mat-horizontal-stepper-header-container {
+    display: none !important;
+  }
+}

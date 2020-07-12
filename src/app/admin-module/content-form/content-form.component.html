@@ -49,6 +49,12 @@
 
       <div>
         <button class="float-right" mat-button matStepperNext>Siguiente</button>
+        <div class="text-center">
+          <button style="width: 70%" class="btn bg-primary-blue " type="submit"
+            [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Guardar
+          </button>
+        </div>
       </div>
     </mat-step>
     <mat-step>
@@ -135,6 +141,12 @@
       <div>
         <button class="float-left" mat-button matStepperPrevious>Regresar</button>
         <button class="float-right" mat-button matStepperNext>Siguiente</button>
+        <div class="text-center">
+          <button style="width: 70%" class="btn bg-primary-blue " type="submit"
+            [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Guardar
+          </button>
+        </div>
       </div>
     </mat-step>
 
@@ -150,7 +162,10 @@
         <button class="float-left" mat-button matStepperPrevious>Regresar</button>
         <div class="text-center">
           <button style="width: 70%" class="btn bg-primary-blue " type="submit"
-            [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
+            [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Guardar
+          </button>
         </div>
       </div>
     </mat-step>

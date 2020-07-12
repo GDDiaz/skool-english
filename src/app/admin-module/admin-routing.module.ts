@@ -4,6 +4,9 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { AuthGuard } from '../helpers/auth.guard';
 import { CourseListComponent } from './course-list/course-list.component';
 import { CourseContentComponent } from './course-content/course-content.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserShowComponent } from './user-show/user-show.component';
 
 
 const routes: Routes = [
@@ -23,9 +26,60 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'students/new',
+    component: UserFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      type: 0
+    }
+  },
+  {
+    path: 'students/edit/:id',
+    component: UserFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      type: 0
+    }
+  },
+  {
+    path: 'students/show/:id',
+    component: UserShowComponent,
+    canActivate: [AuthGuard],
+    data: {
+      type: 0
+    }
+  },
+  {
+    path: 'students',
+    component: UserListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      type: 0
+    }
+  },
+  {
     path: 'teachers',
-    component: CourseFormComponent,
-    canActivate: [AuthGuard]
+    component: UserListComponent,
+    canActivate: [AuthGuard],
+    data: {
+      type: 1
+    }
+  },
+  {
+    path: 'teachers/new',
+    component: UserFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      type: 1
+    }
+  },
+  {
+    path: 'teachers/edit/:id',
+    component: UserFormComponent,
+    canActivate: [AuthGuard],
+    data: {
+      type: 1
+    }
   },
   { path: '**', redirectTo: 'courses' }
 ];

@@ -1,0 +1,44 @@
+<section class="float-right">
+  <div class="example-button-row">
+    <div class="example-flex-container">
+      <div class="example-button-container">
+        <a *ngIf="type === 0" [routerLink]="['/admin/students/new']" [routerLinkActive]="'active'"  mat-mini-fab bg-primary-blue>
+          <mat-icon>add</mat-icon>
+        </a>
+        <a *ngIf="type === 1" [routerLink]="['/admin/teachers/new']" [routerLinkActive]="'active'"  mat-mini-fab bg-primary-blue>
+          <mat-icon>add</mat-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3>{{title}}</h3>
+    <div class="dropdown-divider"></div>
+  </div>
+</div>
+<div class="row">
+
+  <div class="list-group col-md-12" *ngIf="users !== undefined">
+    <ng-container *ngFor="let user of users">
+      <a  *ngIf="type === 0"  [routerLink]="['/admin/students/show', user.id]" class="list-group-item list-group-item-action flex-column align-items-start ">
+       <ng-container *ngTemplateOutlet="userTemplate; context: {user: user }"></ng-container>
+      </a>
+      <a  *ngIf="type === 1"  [routerLink]="['/admin/teachers/edit', user.id]" class="list-group-item list-group-item-action flex-column align-items-start ">
+        <ng-container *ngTemplateOutlet="userTemplate; context: { user: user }"></ng-container>
+      </a>
+    </ng-container>
+
+    <ng-template #userTemplate let-user="user">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{user.name}}</h5>
+        <small></small>
+      </div>
+      <p class="m-1"><i class="fas fa-at"></i> {{ user.email }}</p>
+      <p class="m-1"><small><i class="fa fa-phone"></i> {{ user.phone_number }}</small></p>
+      <p class="m-1"><small><i class="fas fa-id-card-alt"></i> {{ user.identification}}</small></p>
+    </ng-template>
+  </div>
+</div>

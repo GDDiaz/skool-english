@@ -1,0 +1,81 @@
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body" *ngIf="user !== undefined">
+          <div class="text-center m-t-30">
+              <!--<img src="../assets/images/users/5.jpg" class="img-circle" width="150">-->
+              <h4 class="card-title m-t-10">{{user.name}}</h4>
+              <h6 class="card-subtitle">{{user.identification}}</h6>
+          </div>
+      </div>
+      <div>
+          <hr> </div>
+      <div class="card-body" *ngIf="user !== undefined">
+        <small class="text-muted">Email</small><h6>{{user.email}}</h6>
+        <small class="text-muted p-t-30 db">Phone</small><h6>{{user.phone_number}}</h6>
+      </div>
+      <a class="btn btn-light float-left" [routerLink]="'/admin/students/edit/'+userId">Editar</a>
+  </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center">Lista de cursos</h3>
+            <div class="list-group col-md-12" *ngIf="user !== undefined">
+              <a style="width: 500px;" *ngFor="let course of user.my_courses"  [routerLink]="['/admin/course/content', course.id]" class="list-group-item list-group-item-action flex-column align-items-start ">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">{{course.name}}</h5>
+                  <small><i class="fa fa-clock"></i> {{ course.created_at }}</small>
+                </div>
+                <p class="mb-1"><i class="fa fa-user"></i> {{ course.author }}</p>
+                <small>{{ course.slug }}</small>
+              </a>
+            </div>
+            <div>
+              <hr>
+            </div>
+            <div class="text-center">
+              <button *ngIf="courses.length === 0" style="width: 70%" class="btn bg-primary-blue " (click)="addCourses()">Añadir cursos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12" *ngIf="courses.length > 0">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center">Cursos disponibles</h3>
+            <div class="list-group col-md-12">
+              <form [formGroup]="form">
+                <div formArrayName="courses" *ngFor="let courseControl of coursesFormArray.controls; let i = index">
+                  <mat-checkbox class="example-margin" [formControlName]="i">
+                    <a  style="width: 500px;" class="list-group-item list-group-item-action">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{courses[i].name}}</h5>
+                        <small><i class="fa fa-clock"></i> {{ courses[i].created_at }}</small>
+                      </div>
+                      <p class="mb-1"><i class="fa fa-user"></i> {{ courses[i].author }}</p>
+                      <small>{{ courses[i].slug }}</small>
+                    </a>
+                  </mat-checkbox>
+                </div>
+                <div class="text-center">
+                  <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="loading" (click)="onSubmit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Guardar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

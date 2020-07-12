@@ -28,6 +28,7 @@ export class ContentFormComponent implements OnInit {
     words_banks: this.fb.array([]),
     focus: [''],
   });
+  loading = false;
   constructor(private fb: FormBuilder, private courseService: CoursesService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
@@ -127,6 +128,7 @@ export class ContentFormComponent implements OnInit {
   }
 
   private sendRequest() {
+    this.loading = true;
     if (this.action === 'new') {
       const data = {
         course_id: this.courseId,
@@ -136,6 +138,7 @@ export class ContentFormComponent implements OnInit {
       };
 
       this.courseService.newSlide(data).subscribe(r => {
+        this.loading = false;
         this.test.emit(r);
       }, error => console.error(error));
     } else {

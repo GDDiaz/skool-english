@@ -1,6 +1,12 @@
 export class User {
   id: number;
   name: string;
+  identification: number;
+  email: string;
+  // tslint:disable-next-line:variable-name
+  my_courses: any[];
+  // tslint:disable-next-line:variable-name
+  phone_number: string;
   username: string;
   password: string;
   firstName: string;

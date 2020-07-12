@@ -6,7 +6,7 @@
 
 <ng-container *ngIf="slide.type === 'quiz'">
   <h3 class="card-title text-center">{{slide.content.name}}</h3>
-  <mat-horizontal-stepper>
+  <mat-horizontal-stepper class="hidden-stepper">
     <ng-container *ngFor="let question of slide.content.questions; let i = index">
       <mat-step>
 

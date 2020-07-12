@@ -20,6 +20,9 @@ import { UploadFileWidgetComponent } from './upload-file-widget/upload-file-widg
 import { ngfModule } from 'angular-file';
 import { ActivityFormComponent } from './activity-form/activity-form.component';
 import { ActivityChoiceFormComponent } from './activity-choice-form/activity-choice-form.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserShowComponent } from './user-show/user-show.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { ActivityChoiceFormComponent } from './activity-choice-form/activity-cho
     ShowSlideComponent,
     UploadFileWidgetComponent,
     ActivityFormComponent,
-    ActivityChoiceFormComponent
+    ActivityChoiceFormComponent,
+    UserFormComponent,
+    UserListComponent,
+    UserShowComponent
   ],
   imports: [
     CommonModule,

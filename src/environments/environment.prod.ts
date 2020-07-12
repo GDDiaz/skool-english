@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://api.skool.co/api',
-  baseUrl: 'http://api.skool.co'
+  apiUrl: 'http://backend-skool.iis/api',
+  baseUrl: 'http://backend-skool.iis'
 };

@@ -1,0 +1,45 @@
+<h3 class="card-title text-center">{{title}}</h3>
+<div class="card">
+  <div class="card-body">
+<form [formGroup]="form">
+  <div class="form-group">
+    <label class="control-label" for="name">Nombre</label>
+    <input name="user_form[name]" id="name" type="text" formControlName="name" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="identification">Numero de identificación</label>
+    <input name="user_form[identification]" id="identification" type="text" formControlName="identification" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="email">Correo electronico</label>
+    <input name="user_form[email]" id="email" type="text" formControlName="email" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="phone_number">Número télefonico</label>
+    <input name="user_form[phone_number]" id="phone_number" type="text" formControlName="phone_number" class="form-control" required>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="password">Contraseña</label>
+    <input name="user_form[password]" id="password" type="password" formControlName="password" class="form-control" required>
+    <div *ngIf="form.controls.password.errors">Se requiere una contraseña.</div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="confirm_password">Confirmar contraseña</label>
+    <input name="user_form[confirm_password]" id="confirm_password" type="password" formControlName="confirm_password" class="form-control" required>
+    <div *ngIf="form.controls.confirm_password.touched && form.controls.confirm_password.invalid" class="alert alert-danger">
+      <div *ngIf="form.controls.confirm_password.errors.required">Se requiere una contraseña.</div>
+      <div *ngIf="form.controls.confirm_password.errors.confirmedValidator">las Contraseñas deben ser iguales.</div>
+  </div>
+  </div>
+
+  <div class="text-center">
+    <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
+  </div>
+</form>
+</div>
+</div>
