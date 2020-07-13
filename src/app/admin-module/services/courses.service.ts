@@ -104,15 +104,54 @@ export class CoursesService {
     return this.http.get<any>(`${environment.apiUrl}/v1/units/${id}`)
         .pipe(map(response => {
             if (response.length > 0) {
+              const units = [];
+              let replaceUnits = true;
+              let beforePositionUnit = null;
               // tslint:disable-next-line:prefer-for-of
               for (let i = 0; i < response.length; i++) {
                 // tslint:disable-next-line:prefer-const
                 let unit = response[i];
+                const slides = [];
+                let replaceSlide = true;
+                let beforePosition = null;
                 for (let j = 0; j < unit.slides.length; j++) {
                   response[i].slides[j].content = JSON.parse(response[i].slides[j].content);
+                  if (beforePosition !== response[i].slides[j].position) {
+                    slides[response[i].slides[j].position] = response[i].slides[j];
+                  } else  {
+                    replaceSlide = false;
+                  }
+                  beforePosition = response[i].slides[j].position;
                 }
+                if (replaceSlide) {
+                  response[i].slides = slides;
+                }
+
+                if (beforePositionUnit !== unit.position) {
+                  units[unit.position] = response[i];
+                } else  {
+                  replaceUnits = false;
+                }
+                beforePositionUnit = response[i].position;
+              }
+              if (replaceUnits) {
+                response = units;
               }
             }
+            return response;
+        }));
+  }
+
+  reorderSlides(slides) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/slide/reorder-slides`, {slides})
+        .pipe(map(response => {
+            return response;
+        }));
+  }
+
+  reorderUnit(units) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/unit/reorder-units`, {units})
+        .pipe(map(response => {
             return response;
         }));
   }

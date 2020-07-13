@@ -6,21 +6,22 @@
         <div class="card-body little-profile text-center">
             <h3 class="m-b-0">Unidades</h3>
         </div>
-        <mat-accordion>
-          <mat-expansion-panel *ngFor="let unit of unitsArray; let i = index" [ngClass]="{'bg-light' : i%2 == 0}">
+        <mat-accordion cdkDropList (cdkDropListDropped)="dropUnit($event)"  #unitsList="cdkDropList" [cdkDropListData]="unitsArray">
+          <mat-expansion-panel *ngFor="let unit of unitsArray; let i = index" [ngClass]="{'bg-light' : i%2 == 0}" cdkDrag>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <h5 class="m-b-0 font-medium">{{unit.name}}</h5>
               </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <ul class="feeds">
-              <li *ngFor="let item of unit.slides; let i = index" (click)="showSlide(item)">
-                <div class="bg-primary-red">
-                  <i *ngIf="item.type === 'video'" class="fa fa-video"></i>
-                  <mat-icon *ngIf="item.type === 'quiz'">fact_check</mat-icon>
-                  <mat-icon *ngIf="item.type === 'content'">article</mat-icon>
-                  <mat-icon *ngIf="item.type === 'activity'"> wb_incandescent</mat-icon>
+            <ul class="feeds example-list" cdkDropList (cdkDropListDropped)="drop($event, i)"  #slidesList="cdkDropList" [cdkDropListData]="unit.slides">
+              <li class="example-box" *ngFor="let item of unit.slides; let i = index" (click)="showSlide(item)" cdkDrag>
+
+                <div class="bg-primary-red drag-activity">
+                  <i  class="drag-icon" *ngIf="item.type === 'video'" class="fa fa-video"></i>
+                  <mat-icon class="drag-icon" *ngIf="item.type === 'quiz'">fact_check</mat-icon>
+                  <mat-icon class="drag-icon" *ngIf="item.type === 'content'">article</mat-icon>
+                  <mat-icon class="drag-icon" *ngIf="item.type === 'activity'"> wb_incandescent</mat-icon>
                 </div>
                 <ng-container *ngIf="item.type === 'video'">{{item.content.video_title}}
                   <span>
@@ -99,25 +100,25 @@
           <div class="card-body">
               <div class="d-flex no-block">
                 <ng-container *ngIf="showUnitForm">
-                  <app-unit-form class="col-md-12" [courseId]="courseId" (unit)="createdUnit($event)"></app-unit-form>
+                  <app-unit-form [position]="unitsArray.length" class="col-md-12" [courseId]="courseId" (unit)="createdUnit($event)"></app-unit-form>
                 </ng-container>
 
                 <ng-container *ngIf="showVideoForm">
-                  <app-unit-video-form class="col-md-12" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (resource)="addSlide($event)"></app-unit-video-form>
+                  <app-unit-video-form class="col-md-12" [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (resource)="addSlide($event)"></app-unit-video-form>
                 </ng-container>
 
                 <ng-container *ngIf="showQuizForm">
-                  <app-test-form class="col-md-12"  [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-test-form>
+                  <app-test-form class="col-md-12" [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-test-form>
                 </ng-container>
 
                 <ng-container *ngIf="showContentForm">
-                  <app-content-form class="col-md-12" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-content-form>
+                  <app-content-form class="col-md-12" [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-content-form>
                 </ng-container>
                 <ng-container *ngIf="showSlideComponent">
                   <app-show-slide [slide]="currentSlide"></app-show-slide>
                 </ng-container>
                 <ng-container *ngIf="showActivityForm">
-                  <app-activity-choice-form [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-activity-choice-form>
+                  <app-activity-choice-form [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-activity-choice-form>
                 </ng-container>
 
               </div>

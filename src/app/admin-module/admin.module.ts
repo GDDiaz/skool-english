@@ -9,6 +9,7 @@ import {
   MatDialogModule,
   MatIconModule, MatMenuModule,
   MatButtonModule, MatExpansionModule, MatTooltipModule, MatRadioModule, MatCheckboxModule, MatStepperModule } from '@angular/material';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CourseContentComponent } from './course-content/course-content.component';
 import { UnitFormComponent } from './unit-form/unit-form.component';
 import { UnitVideoFormComponent } from './unit-video-form/unit-video-form.component';
@@ -50,7 +51,7 @@ import { UserShowComponent } from './user-show/user-show.component';
     ngfModule,
     MatDialogModule, MatIconModule, MatButtonModule,
     MatExpansionModule, MatTooltipModule, MatRadioModule,
-    MatCheckboxModule, MatStepperModule, MatMenuModule
+    MatCheckboxModule, MatStepperModule, MatMenuModule, DragDropModule
   ]
 })
 export class AdminModule { }

@@ -10,6 +10,7 @@ import { CoursesService } from '../services/courses.service';
 export class ActivityChoiceFormComponent implements OnInit {
 
   @Input() courseId;
+  @Input() position = 0;
   @Input() unitId;
   @Input() slide;
   @Output() test: EventEmitter<any> = new EventEmitter<any>();
@@ -93,6 +94,7 @@ export class ActivityChoiceFormComponent implements OnInit {
         unit_id: this.unitId,
         type: 'activity',
         subType: 'choice',
+        position: this.position,
         content: JSON.stringify(this.form.value)
       };
 

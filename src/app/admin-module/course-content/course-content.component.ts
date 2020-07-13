@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CoursesService } from '../services/courses.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Subject } from 'rxjs/internal/Subject';
+import { Observable } from 'rxjs/internal/Observable';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-course-content',
@@ -8,6 +12,7 @@ import { CoursesService } from '../services/courses.service';
   styleUrls: ['./course-content.component.scss']
 })
 export class CourseContentComponent implements OnInit {
+  currentPositionSlide = null;
   courseId;
   currentUnitId;
   currentSlide = null;
@@ -19,7 +24,12 @@ export class CourseContentComponent implements OnInit {
   showSlideComponent = false;
   showImage = true;
   units = new Map<string, any>();
-  constructor(private route: ActivatedRoute, private courseService: CoursesService) { }
+  public position: Subject<any>;
+  public positionUnit: Subject<any>;
+  constructor(private route: ActivatedRoute, private courseService: CoursesService) {
+    this.position = new Subject<any>();
+    this.positionUnit = new Subject<any>();
+   }
 
   ngOnInit() {
     this.route.paramMap.subscribe((params: any) => {
@@ -35,12 +45,34 @@ export class CourseContentComponent implements OnInit {
           });
         }
     }, error => console.error(error));
+
+    this.position.asObservable().pipe(debounceTime(3000)).subscribe(
+      slides => {
+        this.courseService.reorderSlides(slides).subscribe(
+          response => { console.log(response); },
+          error => console.error(error)
+        );
+      },
+      error => console.error(error));
+
+    this.positionUnit.asObservable().pipe(debounceTime(3000)).subscribe(
+        units => {
+          this.courseService.reorderUnit(units).subscribe(
+            response => { console.log(response); },
+            error => console.error(error)
+          );
+        },
+        error => console.error(error));
   }
 
   get unitsArray() {
     const data = [];
     this.units.forEach((unit) => {
-      data.push(unit);
+      if (unit.hasOwnProperty('position') && unit.position !== null) {
+        data[unit.position] = unit;
+      } else {
+        data.push(unit);
+      }
     });
     return data;
   }
@@ -57,6 +89,8 @@ export class CourseContentComponent implements OnInit {
 
   newSlide(unitId, type) {
     this.currentUnitId = unitId;
+    const currentUnit = this.units.get(unitId);
+    this.currentPositionSlide = (currentUnit?.slides) ? currentUnit.slides.length : 0;
     this.hiddenAllForms();
     this.showForm(type);
   }
@@ -133,6 +167,26 @@ export class CourseContentComponent implements OnInit {
     this.hiddenAllForms();
     this.currentSlide = slide;
     this.showSlideComponent = true;
+  }
+
+  drop(event: CdkDragDrop<any[]>, unitIndex) {
+    moveItemInArray(this.unitsArray[unitIndex].slides, event.previousIndex, event.currentIndex);
+    for (let index = 0; index < this.unitsArray[unitIndex].slides.length; index++) {
+       this.unitsArray[unitIndex].slides[index].position = index;
+    }
+    this.position.next(this.unitsArray[unitIndex].slides);
+  }
+
+  dropUnit(event: CdkDragDrop<any[]>) {
+    const tmp = this.unitsArray;
+    const unitsOrdered = [];
+    moveItemInArray(tmp, event.previousIndex, event.currentIndex);
+    for (let index = 0; index < tmp.length; index++) {
+      tmp[index].position = index;
+      unitsOrdered.push({ id: tmp[index].id, position: tmp[index].position });
+      this.units.set(tmp[index].id, tmp[index]);
+    }
+    this.positionUnit.next(unitsOrdered);
   }
 
 }

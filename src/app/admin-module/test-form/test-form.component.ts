@@ -11,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class TestFormComponent implements OnInit {
 
   @Input() courseId;
+  @Input() position = 0;
   @Input() unitId;
   @Input() slide;
   @Output() test: EventEmitter<any> = new EventEmitter<any>();
@@ -109,6 +110,7 @@ export class TestFormComponent implements OnInit {
     this.disableButton = true;
     if (this.action === 'new') {
       const data = {
+        position: this.position,
         course_id: this.courseId,
         unit_id: this.unitId,
         type: 'quiz',

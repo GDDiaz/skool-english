@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ContentFormComponent implements OnInit {
 
   @Input() courseId;
+  @Input() position = 0;
   @Input() unitId;
   @Input() slide;
   @Output() test: EventEmitter<any> = new EventEmitter<any>();
@@ -134,6 +135,7 @@ export class ContentFormComponent implements OnInit {
         course_id: this.courseId,
         unit_id: this.unitId,
         type: 'content',
+        position: this.position,
         content: JSON.stringify(this.form.value)
       };
 

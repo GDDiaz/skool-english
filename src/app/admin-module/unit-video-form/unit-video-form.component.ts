@@ -12,6 +12,7 @@ export class UnitVideoFormComponent implements OnInit {
   @Input() courseId;
   @Input() unitId;
   @Input() slide;
+  @Input() position = 0;
   @Output() resource: EventEmitter<any> = new EventEmitter<any>();
 
   public disableButton = false;
@@ -36,6 +37,7 @@ export class UnitVideoFormComponent implements OnInit {
     this.disableButton = true;
     if (this.action === 'new') {
       const data = {
+        position: this.position,
         course_id: this.courseId,
         unit_id: this.unitId,
         type: 'video',

@@ -9,6 +9,7 @@ import { CoursesService } from '../services/courses.service';
 })
 export class UnitFormComponent implements OnInit {
   @Input() courseId;
+  @Input() position = 0;
   @Output() unit: EventEmitter<any> = new EventEmitter<any>();
   public form = this.fb.group({
     name: ['', Validators.required]
@@ -26,8 +27,10 @@ export class UnitFormComponent implements OnInit {
     const values = this.form.value;
     // tslint:disable-next-line:no-string-literal
     values['course_id'] = this.courseId;
+    // tslint:disable-next-line:no-string-literal
+    values['position'] = this.position;
     // TODO: backend service
-    this.unit.emit(values);
+    // this.unit.emit(values);
     this.courseService.newUnit(values).subscribe(r => {
       // tslint:disable-next-line:no-string-literal
       r['slides'] = [];
