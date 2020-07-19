@@ -15,7 +15,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: LoginComponent },
     // otherwise redirect to student
   { path: '', redirectTo: `student`, pathMatch: 'full' },
   { path: '**', redirectTo: 'student' }
