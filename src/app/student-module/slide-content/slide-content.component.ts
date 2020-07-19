@@ -13,8 +13,10 @@ export class SlideContentComponent implements OnInit {
   public wordsBank: Array<any>;
   public focus: any;
   public pageWordBank: number;
+  public lastPage: number;
   constructor(private sanitizer: DomSanitizer) {
     this.step = 1;
+    this.lastPage = 0;
     this.video = "";
     this.objective = "";
     this.wordsBank = [];
@@ -32,10 +34,20 @@ export class SlideContentComponent implements OnInit {
     };
     this.wordsBank = this.dataSlide.words_banks;
     this.focus = this.dataSlide.focus;
-    console.log(this.video);
-    console.log(this.objective);
-    console.log(this.wordsBank);
-    console.log(this.focus);
+
+    if (this.video !== "") {
+      this.lastPage = this.lastPage + 1;
+    }
+    if (this.objective !== "") {
+      this.lastPage = this.lastPage + 1;
+    }
+    if (this.wordsBank !== []) {
+      this.lastPage = this.lastPage + 1;
+    }
+    if (this.focus !== "") {
+      this.lastPage = this.lastPage + 1;
+    }
+    console.log(this.lastPage);
   }
   previusStep() {
     if (this.step === 3) {
