@@ -11,8 +11,10 @@ export class UnitFormComponent implements OnInit {
   @Input() courseId;
   @Input() position = 0;
   @Output() unit: EventEmitter<any> = new EventEmitter<any>();
+  types = ['Listening', 'Speaking', 'Writing', 'Reading', 'Vocabulary'];
   public form = this.fb.group({
-    name: ['', Validators.required]
+    name: ['', Validators.required],
+    type: ['Listening']
   });
 
   public disableButton = false;

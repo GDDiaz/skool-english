@@ -7,6 +7,13 @@
         <input name="unit[name]" id="name" type="text" formControlName="name" class="form-control" required>
       </div>
 
+      <div class="form-group">
+        <label class="control-label" for="type">Tipo</label>
+        <select class="form-control" name="unit[type]" id="type" formControlName="type">
+          <option *ngFor="let item of types" [value]="item">{{item}}</option>
+        </select>
+      </div>
+
       <div class="text-center">
         <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
       </div>

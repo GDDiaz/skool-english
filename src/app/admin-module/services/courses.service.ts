@@ -155,4 +155,11 @@ export class CoursesService {
             return response;
         }));
   }
+
+  getSlideById(id: number) {
+    return this.http.get<any>(`${environment.apiUrl}/v1/slide/${id}`)
+        .pipe(map(response => {
+            return response;
+        }));
+  }
 }
