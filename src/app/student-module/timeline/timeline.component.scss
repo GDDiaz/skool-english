@@ -1,13 +1,11 @@
-
 .half-with {
   width: 50% !important;
 }
 
 .bg-skool-red {
-
-  background-color: #EC4E55;
+  background-color: #ec4e55;
   li {
-    background-color: #C13A40;
+    background-color: #c13a40;
     color: #fff;
   }
 
@@ -35,7 +33,7 @@
     content: counter(list);
     background: #fff;
     font-family: Arial, sans-serif;
-    color: #EC4E55;
+    color: #ec4e55;
     font-size: 13px;
     text-align: center;
     border-radius: 50%;
@@ -47,37 +45,48 @@
     margin-left: -7px;
   }
   .progress {
-    background-color: #C13A40;
+    background-color: #c13a40;
     height: 0.4rem;
     margin-left: 40px;
     .progress-bar {
       background-color: #fff;
     }
   }
-
 }
 
-
 .listening {
-  background-color: #743F95;
+  background-color: #743f95;
 }
 
 .writing {
-  background-color: #6795FC
+  background-color: #6795fc;
 }
 .speaking {
-  background-color: #FFC400;
+  background-color: #ffc400;
 }
 
 .language {
-  background-color:#77CB6C
+  background-color: #77cb6c;
 }
 .reading {
-  background-color: #FF8752;
+  background-color: #ff8752;
 }
 
 .vocabulary {
-  background-color: #76D6C7;
+  background-color: #76d6c7;
 }
-
-
+.card-component {
+  width: 50%;
+}
+.right {
+  width: 50%;
+  margin-left: auto;
+}
+.lineaRight {
+  height: 140px;
+  border-left: 3px solid #c6d0d0;
+}
+.lineaLeft {
+  height: 140px;
+  border-right: 3px solid #c6d0d0;
+}

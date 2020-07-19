@@ -1,0 +1,87 @@
+.unit-card {
+  background-color: #ec4e55;
+  position: relative;
+  border-radius: 30px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 18px 20px 18px 67px;
+  width: 100%;
+  .icon-card {
+    background-color: #743f95;
+    padding: 15px;
+    border-radius: 50px;
+    position: absolute;
+
+    text-align: center;
+    width: 17%;
+  }
+
+  &.right {
+    .icon-card {
+      top: -25px;
+      right: -35px;
+    }
+    &.unit-card {
+      padding: 18px 67px 18px 67px;
+    }
+  }
+  &.left {
+    .icon-card {
+      top: -25px;
+      left: -35px;
+    }
+    &.unit-card {
+      padding: 18px 20px 18px 67px;
+    }
+    .unit {
+      cursor: pointer;
+    }
+  }
+
+  .progreso {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .progress-bar {
+      height: 10px;
+      border-radius: 3px;
+      margin-top: 4px;
+      background-color: #c13a40;
+      width: 100%;
+      .completed-bar {
+        height: 10px;
+        background-color: #fff;
+        width: 50%;
+      }
+    }
+  }
+  .units-content {
+    margin-top: 10px;
+    .unit {
+      margin-bottom: 10px;
+      border-radius: 20px;
+      background-color: #c13a40;
+      position: relative;
+      padding: 10px 30px;
+      p {
+        margin: 0px;
+      }
+      .lesson-number {
+        color: #ec4e55;
+        background-color: #fff;
+        border-radius: 50px;
+        text-align: center;
+
+        width: 7.5%;
+        padding: 6px;
+        position: absolute;
+        top: 2px;
+        left: -14px;
+      }
+    }
+  }
+}

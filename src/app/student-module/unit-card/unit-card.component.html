@@ -1,0 +1,35 @@
+<div class="unit-card {{ positionIconClass }}">
+  <div class="icon-card">
+    <img src="{{ '/assets/icons/svg/ear.svg' }}" alt="" />
+    <div>
+      Listening
+    </div>
+  </div>
+  <div class="progreso">
+    <div>
+      <p>Nice to meet you</p>
+    </div>
+    <div>50% Completado</div>
+    <div class="progress-bar">
+      <div class="completed-bar"></div>
+    </div>
+  </div>
+
+  <div class="units-content">
+    <div
+      class="unit"
+      *ngFor="let item of unidades; let i = index"
+      (click)="click(item.type, i)"
+    >
+      <p *ngIf="item.type === 'video'">{{ item.content.video_title }}</p>
+      <p *ngIf="item.type === 'quiz'">{{ item.content.name }}</p>
+      <p *ngIf="item.type === 'activity'">{{ item.content.name }}</p>
+      <p *ngIf="item.type === 'content'">{{ item.content.objective_title }}</p>
+      <p *ngIf="item.type === 'no data'">{{ item.content.name }}</p>
+
+      <div class="lesson-number">
+        {{ i + 1 }}
+      </div>
+    </div>
+  </div>
+</div>

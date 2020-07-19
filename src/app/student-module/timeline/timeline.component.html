@@ -1,33 +1,94 @@
-<div class="card-body">
-  <ul class="timeline">
-      <li *ngFor="let unit of units; let i = index" [ngClass]="{'timeline-inverted': i%2==0}">
-          <div class="timeline-badge" ngClass="{{unit.type}}"><img class="img-responsive" alt="{{unit.name}}" src="{{'/assets/icons/svg/' + unit.icon}}"> </div>
-          <div class="timeline-panel half-with bg-skool-red">
-              <div class="timeline-heading">
-                  <div class="progress">
-                  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': unit.percentage + '%'}"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p><small class="text-muted"></small> </p>
-              </div>
-              <div class="timeline-body">
-                <ol>
-                  <li *ngFor="let item of unit.themes">{{item.name}}<i  class="theme-progress" [ngClass]="{'fas fa-circle': item.state==2, 'far fa-circle': item.state==0, 'fas fa-adjust': item.state==1 }"></i></li>
-                </ol>
-              </div>
-          </div>
-      </li>
-      <li class="timeline-inverted">
-          <div class="timeline-badge warning"><img class="img-responsive" alt="user" src="../assets/images/users/2.jpg"> </div>
-          <div class="timeline-panel">
-              <div class="timeline-heading">
-                  <h4 class="timeline-title">Ritesh Deshmukh</h4>
-              </div>
-              <div class="timeline-body">
-                  <p><img class="img-responsive" alt="user" src="../assets/images/users/3.jpg"></p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium maiores odit qui est tempora eos, nostrum provident explicabo dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
-              </div>
-          </div>
-      </li>
-
-  </ul>
+<div class="circle-progress">
+  <div>
+    <div></div>
+  </div>
 </div>
+<div *ngIf="lessons != undefined">
+  <div
+    class="card-component"
+    *ngFor="let item of lessons; let i = index"
+    [ngClass]="{ right: i % 2 === 0 }"
+  >
+    <app-unit-card [dataToCard]="item" [positionIcon]="i"></app-unit-card>
+    <div
+      *ngIf="i + 1 != lessons.length"
+      [ngClass]="i % 2 === 0 ? 'lineaRight' : 'lineaLeft'"
+    ></div>
+  </div>
+</div>
+
+<!-- <div class="card-body">
+  <ul class="timeline">
+    <li
+      *ngFor="let unit of units; let i = index"
+      [ngClass]="{ 'timeline-inverted': i % 2 == 0 }"
+    >
+      <div class="timeline-badge" ngClass="{{ unit.type }}">
+        <img
+          class="img-responsive"
+          alt="{{ unit.name }}"
+          src="{{ '/assets/icons/svg/' + unit.icon }}"
+        />
+      </div>
+      <div class="timeline-panel half-with bg-skool-red">
+        <div class="timeline-heading">
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [ngStyle]="{ width: unit.percentage + '%' }"
+              aria-valuenow="25"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <p><small class="text-muted"></small></p>
+        </div>
+        <div class="timeline-body">
+          <ol>
+            <li *ngFor="let item of unit.themes">
+              {{ item.name
+              }}<i
+                class="theme-progress"
+                [ngClass]="{
+                  'fas fa-circle': item.state == 2,
+                  'far fa-circle': item.state == 0,
+                  'fas fa-adjust': item.state == 1
+                }"
+              ></i>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge warning">
+        <img
+          class="img-responsive"
+          alt="user"
+          src="../assets/images/users/2.jpg"
+        />
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Ritesh Deshmukh</h4>
+        </div>
+        <div class="timeline-body">
+          <p>
+            <img
+              class="img-responsive"
+              alt="user"
+              src="../assets/images/users/3.jpg"
+            />
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
+            maiores odit qui est tempora eos, nostrum provident explicabo
+            dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae
+            minus eaque facere.
+          </p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div> -->
