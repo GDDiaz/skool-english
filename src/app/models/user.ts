@@ -24,3 +24,11 @@ export class User2 {
   expires_in: number;
   user: User;
 }
+
+export interface SlideUser {
+  slide_id: number;
+  status: string;
+  course_id?: number;
+  unit_id?: number;
+  response_user?: string;
+}
