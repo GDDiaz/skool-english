@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Course } from '../../models/course';
 import { Observable } from 'rxjs';
 import { User2 } from 'src/app/models/user';
-import { User } from '../../models/user';
+import { User, SlideUser } from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -158,6 +158,13 @@ export class CoursesService {
 
   getSlideById(id: number) {
     return this.http.get<any>(`${environment.apiUrl}/v1/slide/${id}`)
+        .pipe(map(response => {
+            return response;
+        }));
+  }
+
+  setSlideUser(data: SlideUser) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/slide/user`, data)
         .pipe(map(response => {
             return response;
         }));
