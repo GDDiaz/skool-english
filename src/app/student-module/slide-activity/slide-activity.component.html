@@ -1,1 +1,17 @@
-<p>slide-activity works!</p>
+<ng-container>
+  <div class="content-type">
+    <div class="mb-5">
+      <h1>{{ nameActivity }}</h1>
+    </div>
+    <div [innerHTML]="questions[page]?.question" class="questions"></div>
+    <div class="options">
+      <div
+        *ngFor="let answer of questions[page]?.options; let i = index"
+        class="option"
+        (click)="selected(i)"
+      >
+        <div [innerHTML]="answer?.option"></div>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -6,7 +6,11 @@ import { SlideComponent } from "./slide/slide.component";
 
 const routes: Routes = [
   { path: "", component: TimelineComponent, canActivate: [AuthGuard] },
-  { path: "slide/:type", component: SlideComponent, canActivate: [AuthGuard] },
+  {
+    path: "slide/:idUnidad/:lugarArray",
+    component: SlideComponent,
+    canActivate: [AuthGuard],
+  },
   // otherwise redirect to home
   { path: "**", redirectTo: "" },
 ];

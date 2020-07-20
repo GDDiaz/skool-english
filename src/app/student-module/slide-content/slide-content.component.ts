@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { StudentService } from "../services/student.service";
 @Component({
   selector: "app-slide-content",
   templateUrl: "./slide-content.component.html",
@@ -7,6 +8,7 @@ import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 })
 export class SlideContentComponent implements OnInit {
   @Input() dataSlide: any;
+  @Output() nextSlide: EventEmitter<any> = new EventEmitter();
   public step: number;
   public video: any;
   public objective: any;
@@ -14,7 +16,7 @@ export class SlideContentComponent implements OnInit {
   public focus: any;
   public pageWordBank: number;
   public lastPage: number;
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private studenService: StudentService) {
     this.step = 1;
     this.lastPage = 0;
     this.video = "";
@@ -26,8 +28,7 @@ export class SlideContentComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.dataSlide);
-
-    this.video = this.createIframe(this.dataSlide.video_url);
+    this.video = this.studenService.createIframe(this.dataSlide.video_url);
     this.objective = {
       title: this.dataSlide.objective_title,
       objectivesArray: this.dataSlide.objectives,
@@ -61,36 +62,18 @@ export class SlideContentComponent implements OnInit {
     }
   }
   nextStep() {
-    if (this.step === 3) {
-      if (this.pageWordBank + 1 < this.wordsBank.length) {
-        this.pageWordBank = this.pageWordBank + 1;
+    if (this.step === this.lastPage) {
+      this.nextSlide.emit(1);
+    } else {
+      if (this.step === 3) {
+        if (this.pageWordBank + 1 < this.wordsBank.length) {
+          this.pageWordBank = this.pageWordBank + 1;
+        } else {
+          this.step = this.step + 1;
+        }
       } else {
         this.step = this.step + 1;
       }
-    } else {
-      this.step = this.step + 1;
-    }
-  }
-
-  byPassHTML(html: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
-  }
-
-  createIframe(url: string) {
-    if (url.includes("<iframe")) {
-      return this.byPassHTML(url);
-    } else if (url.includes("youtu")) {
-      const matchs = url.match(
-        /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/
-      );
-      return this.byPassHTML(`<iframe width="900"
-      height="550"
-      src="https://www.youtube.com/embed/${matchs[1]}"
-      frameborder="0" allow="accelerometer;
-      autoplay; encrypted-media; gyroscope;
-      picture-in-picture" allowfullscreen></iframe>`);
-    } else {
-      return this.byPassHTML(url);
     }
   }
 }

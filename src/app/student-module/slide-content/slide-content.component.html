@@ -52,5 +52,16 @@
       </button>
     </div>
   </ng-container>
-  <ng-container *ngIf="focus !== '' && step === 4"> </ng-container>
+  <ng-container *ngIf="focus !== '' && step === 4">
+    <div class="content-type">
+      <div [innerHTML]="focus" style="text-align: left;"></div>
+    </div>
+    <div class="buttons">
+      <button type="button" class="controlButton" (click)="previusStep()">
+        Regresar</button
+      ><button type="button" class="controlButton" (click)="nextStep()">
+        Continuar
+      </button>
+    </div>
+  </ng-container>
 </div>

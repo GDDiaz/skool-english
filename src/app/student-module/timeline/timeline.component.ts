@@ -15,7 +15,7 @@ export class TimelineComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.studentService.getUnitsByCourse(2).subscribe(
+    this.studentService.getUnitsByCourse(3).subscribe(
       (response) => {
         this.lessons = response;
       },
@@ -26,14 +26,14 @@ export class TimelineComponent implements OnInit {
         console.log(this.lessons);
       }
     );
-    this.studentService.getAllCourse().subscribe(
+    /*     this.studentService.getAllCourse().subscribe(
       (response) => {
         console.log(response);
       },
       (error) => {
         console.log(error);
       }
-    );
+    ); */
 
     this.units = [
       {

@@ -1,0 +1,50 @@
+::ng-deep .content-type {
+  text-align: center;
+  background: #fff;
+  width: 100%;
+  padding: 24px 110px;
+  -webkit-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+
+  p {
+    margin: 0px !important;
+  }
+  .question {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+
+    padding: 12px 18px;
+    border: 1px solid;
+  }
+  .options {
+    width: 53%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    /* text-align: center; */
+    /* justify-content: center; */
+    justify-content: space-between;
+    .option {
+      display: flex;
+      justify-content: center;
+      width: 30%;
+
+      padding: 10px;
+      margin: 9px;
+      cursor: pointer;
+      background-color: #eeeeee;
+      color: #cccccc;
+      font-weight: bold;
+      font-size: 17px;
+      text-align: center;
+      border-radius: 6px;
+      &:hover {
+        background-color: red;
+        color: #fff;
+      }
+    }
+  }
+}

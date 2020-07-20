@@ -1,0 +1,28 @@
+.container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .content-type {
+    text-align: center;
+    background: #fff;
+    width: 100%;
+    padding: 24px 110px;
+    -webkit-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+  }
+  .buttons {
+    margin: 15px 0px;
+    width: 100%;
+    display: flex;
+    .controlButton {
+      margin: 0 auto;
+      color: #374174;
+      font-weight: bold;
+      border: 1px solid #374174;
+      border-radius: 10px;
+      padding: 10px 30px;
+    }
+  }
+}

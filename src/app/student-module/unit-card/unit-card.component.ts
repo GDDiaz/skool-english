@@ -25,6 +25,15 @@ export class UnitCardComponent implements OnInit {
       this.positionIconClass = "right";
     }
     if (this.dataToCard.slides.length > 0) {
+      this.dataToCard.slides.sort(function (a, b) {
+        if (a.position > b.position) {
+          return 1;
+        }
+        if (a.position < b.position) {
+          return -1;
+        }
+        return 0;
+      });
       this.unidades = this.dataToCard.slides;
       for (let index = 0; index < this.unidades.length; index++) {
         this.unidades[index].content = JSON.parse(this.unidades[index].content);
@@ -50,9 +59,10 @@ export class UnitCardComponent implements OnInit {
       ];
     }
   }
-  click(tipo, posicion) {
-    this.studentService.dataLeccion = this.unidades[posicion].content;
 
-    this._router.navigate(["/student/slide/" + tipo]);
+  click(tipo, posicion) {
+    this._router.navigate([
+      "/student/slide/" + this.unidades[posicion].unit_id + "/" + posicion,
+    ]);
   }
 }
