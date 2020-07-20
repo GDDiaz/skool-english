@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder, FormArray } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
+import { environment } from '../../../environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-activity-choice-form',
@@ -25,7 +27,7 @@ export class ActivityChoiceFormComponent implements OnInit {
   private formData: FormData[] = [];
   private promises = [];
 
-  constructor(private fb: FormBuilder, private courseService: CoursesService) { }
+  constructor(private fb: FormBuilder, private courseService: CoursesService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
 
@@ -135,6 +137,32 @@ export class ActivityChoiceFormComponent implements OnInit {
       this.uploadFiles();
     } else {
       this.sendRequest();
+    }
+  }
+
+  sanitizerUrl(url, addApiUrl) {
+    if (addApiUrl) {
+      url = `${environment.baseUrl + url}` ;
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  hasAudioFile(questionIndex) {
+    const questionControls = this.questions.controls[questionIndex] as FormArray;
+    // tslint:disable-next-line:no-string-literal
+    if (questionControls['controls']['audio'] !== undefined && questionControls['controls']['audio'] !== '') {
+      // tslint:disable-next-line:no-string-literal
+      return questionControls['controls']['audio'].value;
+    }
+    return false;
+  }
+
+  deleteAudio(workBankIndex) {
+    const questionControls = this.questions.controls[workBankIndex] as FormArray;
+    // tslint:disable-next-line:no-string-literal
+    if (questionControls['controls']['audio'] !== undefined && questionControls['controls']['audio'] !== '') {
+      // tslint:disable-next-line:no-string-literal
+      return questionControls['controls']['audio'].patchValue(null);
     }
   }
 

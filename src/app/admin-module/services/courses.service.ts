@@ -169,4 +169,11 @@ export class CoursesService {
             return response;
         }));
   }
+
+  getUnitById(id: number) {
+    return this.http.get<any>(`${environment.apiUrl}/v1/unit/${id}`)
+        .pipe(map(response => {
+            return response;
+        }));
+  }
 }

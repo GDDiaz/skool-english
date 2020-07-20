@@ -54,7 +54,7 @@
 
 <ng-container *ngIf="slide.type === 'content'">
   <h3 class="card-title text-center">{{slide.content.objective_title}}</h3>
-  <mat-horizontal-stepper>
+  <mat-horizontal-stepper class="hidden-stepper">
     <mat-step>
       <div style="width: 100%" class="ql-editor" [innerHTML]="createIframe(slide.content.video_url)"></div>
       <div>
@@ -109,6 +109,13 @@
       <mat-step>
         <div class="ql-container ql-snow" style="border-width: 0;">
           <div style="width: 100%" class="ql-editor" [innerHTML]="byPassHTML(question.question)"></div>
+        </div>
+
+        <div class="text-center">
+          <audio controls class="">
+            <source [src]="sanitizerUrl(question.audio, true)">
+            Your browser does not support the <code>audio</code> element.
+          </audio>
         </div>
         <div class="dropdown-divider"></div>
         <div class="p">

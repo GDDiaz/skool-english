@@ -93,13 +93,20 @@ export class ContentFormComponent implements OnInit {
   }
 
   uploadFiles() {
+    let index = 0;
     for (const formData of this.formData) {
-      this.promises.push(this.courseService.uploadFiles(formData).toPromise());
+      if (formData !== undefined) {
+        this.promises[index] = this.courseService.uploadFiles(formData).toPromise();
+      }
+      index++;
     }
     return Promise.all(this.promises).then(values => {
       for (let i = 0; i < values.length; i++) {
-        // tslint:disable-next-line:no-string-literal
+
+        if (values[i] !== undefined) {
+          // tslint:disable-next-line:no-string-literal
         this.words_banks.controls[i]['controls']['audio'].patchValue(values[i].path);
+        }
       }
       this.sendRequest();
     }).catch(error => console.error(error));
