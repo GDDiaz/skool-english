@@ -53,14 +53,34 @@ export class SlideComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-  nextSlide(e) {
+  nextSlide(data) {
+    let json = {
+      slide_id: this.dataSlides[this.actualSlide].id,
+      status: "completado",
+      course_id: 3,
+      unit_id: this.dataSlides[this.actualSlide].unit_id,
+      response_user: JSON.stringify(data.dataAnswer),
+    };
+    console.log(json);
+    this.studentService.saveAnswer(json).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     this.actualSlide = this.actualSlide + 1;
     console.log(this.actualSlide);
 
-    if (e === 1 && this.actualSlide < Object.keys(this.dataSlides).length) {
+    if (
+      data.action === 1 &&
+      this.actualSlide < Object.keys(this.dataSlides).length
+    ) {
       this.lugarArray = this.lugarArray;
       this.data = this.dataSlides[this.actualSlide].content;
       this.tipo = this.dataSlides[this.actualSlide].type;
+      console.log(this.data);
     } else {
       this._router.navigate(["/student"]);
     }

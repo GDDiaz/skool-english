@@ -1,0 +1,70 @@
+::ng-deep .container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p {
+    margin: 0px;
+  }
+  .content-type {
+    text-align: center;
+    background: #fff;
+    width: 100%;
+    padding: 24px 110px;
+    -webkit-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
+    .imagen {
+      img {
+        width: 25%;
+      }
+    }
+    .questions {
+      text-align: center;
+      font-size: 25px;
+      margin-bottom: 25px;
+      color: #374174;
+    }
+    .option {
+      margin-bottom: 50px;
+      .example-radio-button {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    .example-section {
+      text-align: left;
+    }
+    .step-play {
+      width: 55%;
+
+      .linea-pasos {
+        height: 10px;
+        background: #eeeeee;
+        border-radius: 20px;
+        .completado {
+          background-color: red;
+          border-radius: 20px;
+          height: 10px;
+        }
+      }
+    }
+  }
+  .buttons {
+    margin: 15px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .controlButton {
+      color: #374174;
+      font-weight: bold;
+      border: 1px solid #374174;
+      border-radius: 10px;
+      padding: 10px 30px;
+    }
+    .right {
+      margin-left: auto;
+    }
+  }
+}

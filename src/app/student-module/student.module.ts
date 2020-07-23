@@ -9,6 +9,7 @@ import { SlideContentComponent } from "./slide-content/slide-content.component";
 import { SlideVideoComponent } from "./slide-video/slide-video.component";
 import { SlideQuizComponent } from "./slide-quiz/slide-quiz.component";
 import { SlideActivityComponent } from "./slide-activity/slide-activity.component";
+import { NgCircleProgressModule } from "ng-circle-progress";
 import {
   MatDialogModule,
   MatIconModule,
@@ -19,7 +20,12 @@ import {
   MatRadioModule,
   MatCheckboxModule,
   MatStepperModule,
+  MatSelectModule,
+  MatFormFieldModule,
 } from "@angular/material";
+import { FormsModule } from "@angular/forms";
+import { AudioButtonComponent } from './audio-button/audio-button.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,8 @@ import {
     SlideVideoComponent,
     SlideQuizComponent,
     SlideActivityComponent,
+    AudioButtonComponent,
+    ProfileComponent,
   ],
   imports: [
     StudentRoutingModule,
@@ -44,6 +52,23 @@ import {
     MatRadioModule,
     MatCheckboxModule,
     MatStepperModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    FormsModule,
+    NgCircleProgressModule.forRoot({
+      backgroundPadding: 7,
+      space: -2,
+      outerStrokeGradient: true,
+      outerStrokeColor: "#ec4e55",
+      outerStrokeGradientStopColor: "#283790",
+      innerStrokeColor: "#e7e8ea",
+      title: ["working", "in", "progress"],
+      animateTitle: false,
+      animationDuration: 1000,
+      showSubtitle: false,
+      showUnits: false,
+      clockwise: false,
+    }),
   ],
   providers: [],
 })

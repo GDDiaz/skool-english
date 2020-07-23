@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+} from "@angular/core";
 
 @Component({
   selector: "app-slide-activity",
@@ -28,6 +35,13 @@ export class SlideActivityComponent implements OnInit {
     test = document.getElementsByTagName("img");
     console.log(test);
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.answersSelected = [];
+    this.active = false;
+    this.page = 0;
+    this.nameActivity = this.dataSlide.name;
+    this.questions = this.dataSlide.questions;
+  }
 
   selected(id) {
     console.log(this.page);
@@ -37,6 +51,7 @@ export class SlideActivityComponent implements OnInit {
       this.answersSelected[this.page] = id;
       this.page = this.page + 1;
     } else {
+      this.answersSelected[this.page] = id;
       this.nextSlide.emit(1);
     }
 

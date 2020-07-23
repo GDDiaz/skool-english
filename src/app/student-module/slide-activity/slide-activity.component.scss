@@ -7,17 +7,63 @@
   -moz-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
   margin-bottom: 20px;
+  position: relative;
+  .audio-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
+    .audio-text {
+      position: relative;
+      height: 50px;
+      width: 18%;
+      background-color: #283890;
+      color: #fff;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 14px;
+      .audio {
+        position: absolute;
+        top: 4px;
+        left: -20px;
+      }
+    }
+  }
   p {
     margin: 0px !important;
   }
-  .question {
-    text-align: left;
-    display: flex;
-    flex-direction: column;
+  .questions {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 25px;
+    color: #374174;
+    font-weight: bold;
+    margin-top: 100px;
+  }
+  .imagen {
+    position: absolute;
+    top: -70px;
+    left: 370px;
+    img {
+      width: 50%;
+    }
+  }
+  .step-play {
+    margin-top: 80px;
+    width: 100%;
 
-    padding: 12px 18px;
-    border: 1px solid;
+    .linea-pasos {
+      height: 10px;
+      background: #eeeeee;
+      border-radius: 20px;
+      .completado {
+        background-color: red;
+        border-radius: 20px;
+        height: 10px;
+      }
+    }
   }
   .options {
     width: 53%;

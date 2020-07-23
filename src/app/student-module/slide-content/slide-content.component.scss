@@ -7,11 +7,12 @@
     text-align: center;
     background: #fff;
     width: 100%;
-    padding: 24px 110px;
+    padding: 24px 80px;
     -webkit-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
     box-shadow: 0px 0px 22px -1px rgba(0, 0, 0, 0.75);
     h1,
+    h2,
     h4 {
       color: #374174;
     }
@@ -50,18 +51,38 @@
         }
       }
     }
+    .step-play {
+      width: 55%;
+      .button-play {
+        cursor: pointer;
+      }
+      .linea-pasos {
+        height: 10px;
+        background: #eeeeee;
+        border-radius: 20px;
+        .completado {
+          background-color: red;
+          border-radius: 20px;
+          height: 10px;
+        }
+      }
+    }
   }
   .buttons {
     margin: 15px 0px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     .controlButton {
-      margin: 0 auto;
       color: #374174;
       font-weight: bold;
       border: 1px solid #374174;
       border-radius: 10px;
       padding: 10px 30px;
+    }
+    .right {
+      margin-left: auto;
     }
   }
 }

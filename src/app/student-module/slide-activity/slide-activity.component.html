@@ -1,9 +1,19 @@
 <ng-container>
   <div class="content-type">
-    <div class="mb-5">
-      <h1>{{ nameActivity }}</h1>
+    <div class="imagen">
+      <img src="{{ '/assets/images/dress.png' }}" alt="" />
     </div>
     <div [innerHTML]="questions[page]?.question" class="questions"></div>
+    <div class="audio-content">
+      <div class="audio-text">
+        <div class="audio">
+          <app-audio-button
+            [urlAudio]="questions[page]?.audio"
+          ></app-audio-button>
+        </div>
+        Test
+      </div>
+    </div>
     <div class="options">
       <div
         *ngFor="let answer of questions[page]?.options; let i = index"
@@ -12,6 +22,16 @@
       >
         <div [innerHTML]="answer?.option"></div>
       </div>
+    </div>
+
+    <div class="step-play">
+      <div class="linea-pasos">
+        <div
+          class="completado"
+          [ngStyle]="{ width: ((page + 1) / questions.length) * 100 + '%' }"
+        ></div>
+      </div>
+      <div>{{ page + 1 }} / {{ questions.length }}</div>
     </div>
   </div>
 </ng-container>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { element } from "protractor";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { StudentService } from "../services/student.service";
 
 @Component({
@@ -10,6 +11,7 @@ export class TimelineComponent implements OnInit {
   public units: Units[];
   public test: string;
   public lessons: Array<any>;
+
   constructor(private studentService: StudentService) {
     this.test = "Prueba";
   }
@@ -113,6 +115,11 @@ export class TimelineComponent implements OnInit {
         ],
       },
     ];
+  }
+
+  scroll(e) {
+    let element = document.getElementById(e);
+    element.scrollIntoView();
   }
 }
 

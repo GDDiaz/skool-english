@@ -4,7 +4,12 @@
       <div [innerHTML]="video"></div>
     </div>
     <div class="buttons">
-      ><button type="button" class="controlButton" (click)="nextStep()">
+      <button
+        type="button"
+        class="controlButton"
+        (click)="nextStep()"
+        [ngClass]="{ right: step === 1 }"
+      >
         Continuar
       </button>
     </div>
@@ -12,8 +17,9 @@
 
   <ng-container *ngIf="objective !== '' && step === 2">
     <div class="content-type">
-      <h1>{{ objective.title }}</h1>
-      <h4>I will be able to - Yo seré capaz de:</h4>
+      <h1 class="mb-5">{{ objective.title }}</h1>
+      <h2>OBJECTIVES</h2>
+      <h4 class="mb-3">I will be able to - Yo seré capaz de:</h4>
       <br />
       <div *ngFor="let item of objective.objectivesArray" class="objective">
         <div *ngIf="item.icon !== ''"></div>
@@ -22,13 +28,30 @@
         </div>
         <div [innerHTML]="item.objective" class="objective-text"></div>
       </div>
-    </div>
-    <div class="buttons">
-      <button type="button" class="controlButton" (click)="previusStep()">
-        Regresar</button
-      ><button type="button" class="controlButton" (click)="nextStep()">
-        Continuar
-      </button>
+      <div class="buttons">
+        <div>
+          <button type="button" class="controlButton" (click)="previusStep()">
+            Regresar
+          </button>
+        </div>
+        <div class="step-play">
+          <div class="mb-3" *ngIf="step !== 2">
+            <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+          </div>
+          <div class="linea-pasos">
+            <div
+              class="completado"
+              [ngStyle]="{ width: (step / lastPage) * 100 + '%' }"
+            ></div>
+          </div>
+          <div>{{ step }} / {{ lastPage }}</div>
+        </div>
+        <div>
+          <button type="button" class="controlButton" (click)="nextStep()">
+            Continuar
+          </button>
+        </div>
+      </div>
     </div>
   </ng-container>
   <ng-container *ngIf="wordsBank !== [] && step === 3">
@@ -43,25 +66,61 @@
           </p>
         </div>
       </div>
-    </div>
-    <div class="buttons">
-      <button type="button" class="controlButton" (click)="previusStep()">
-        Regresar</button
-      ><button type="button" class="controlButton" (click)="nextStep()">
-        Continuar
-      </button>
+      <div class="buttons">
+        <div>
+          <button type="button" class="controlButton" (click)="previusStep()">
+            Regresar
+          </button>
+        </div>
+        <div class="step-play">
+          <div class="mb-3" (click)="play()" class="button-play">
+            <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+          </div>
+          <div class="linea-pasos">
+            <div
+              class="completado"
+              [ngStyle]="{ width: (step / lastPage) * 100 + '%' }"
+            ></div>
+          </div>
+          <div>{{ step }} / {{ lastPage }}</div>
+        </div>
+        <div>
+          <button type="button" class="controlButton" (click)="nextStep()">
+            Continuar
+          </button>
+        </div>
+      </div>
     </div>
   </ng-container>
   <ng-container *ngIf="focus !== '' && step === 4">
     <div class="content-type">
-      <div [innerHTML]="focus" style="text-align: left;"></div>
-    </div>
-    <div class="buttons">
-      <button type="button" class="controlButton" (click)="previusStep()">
-        Regresar</button
-      ><button type="button" class="controlButton" (click)="nextStep()">
-        Continuar
-      </button>
+      <div class="mb-4"><h1>LENGUAGE FOCUS</h1></div>
+      <div [innerHTML]="focus" style="text-align: center;" class="mb-5"></div>
+
+      <div class="buttons">
+        <div>
+          <button type="button" class="controlButton" (click)="previusStep()">
+            Regresar
+          </button>
+        </div>
+        <div class="step-play">
+          <div class="mb-3">
+            <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+          </div>
+          <div class="linea-pasos">
+            <div
+              class="completado"
+              [ngStyle]="{ width: (step / lastPage) * 100 + '%' }"
+            ></div>
+          </div>
+          <div>{{ step }} / {{ lastPage }}</div>
+        </div>
+        <div>
+          <button type="button" class="controlButton" (click)="nextStep()">
+            Continuar
+          </button>
+        </div>
+      </div>
     </div>
   </ng-container>
 </div>

@@ -90,3 +90,53 @@
   height: 140px;
   border-right: 3px solid #c6d0d0;
 }
+.circle-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  .blue-bar {
+    display: flex;
+    position: fixed;
+    width: 88%;
+    color: #ffffff;
+    border-radius: 50px;
+    background: #283790;
+    margin-right: 100px;
+    justify-content: center;
+    z-index: 1000;
+    bottom: 0;
+    .units-bar {
+      cursor: pointer;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #fff;
+      border-radius: 50px;
+      margin: 10px;
+
+      &:hover {
+        background-color: #ec4e55;
+      }
+    }
+  }
+  .internal-circle {
+    position: absolute;
+
+    display: flex;
+    color: #fff;
+    flex-direction: column;
+    justify-content: center;
+    top: 33px;
+    align-items: center;
+    width: 77px;
+    height: 77px;
+    padding-left: 5px;
+    border-radius: 50px;
+    background: transparent linear-gradient(168deg, #ec4e55 0%, #283790 100%) 0%
+      0% no-repeat;
+  }
+}

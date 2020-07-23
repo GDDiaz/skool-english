@@ -1,14 +1,12 @@
 :host {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 14px;
   color: #333;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
-
 .toolbar {
   height: 60px;
   margin: -8px;
@@ -39,6 +37,9 @@
 
 #page-content-wrapper {
   width: 100%;
+
+  background-image: url("../assets/lineaTiempo.svg");
+  background-size: cover;
 }
 
 svg#clouds {
@@ -55,13 +56,7 @@ svg#clouds {
 
 /* Responsive Styles */
 @media screen and (max-width: 767px) {
-
-
-
-
-
-
- /** svg#rocket-smoke {
+  /** svg#rocket-smoke {
     right: 120px;
     transform: rotate(-5deg);
   }*/

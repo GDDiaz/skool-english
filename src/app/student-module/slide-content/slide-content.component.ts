@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
 import { StudentService } from "../services/student.service";
 @Component({
   selector: "app-slide-content",
@@ -16,17 +17,20 @@ export class SlideContentComponent implements OnInit {
   public focus: any;
   public pageWordBank: number;
   public lastPage: number;
+  public progress: number;
   constructor(private studenService: StudentService) {
     this.step = 1;
     this.lastPage = 0;
     this.video = "";
     this.objective = "";
     this.wordsBank = [];
+
     this.focus = "";
     this.pageWordBank = 0;
   }
 
   ngOnInit(): void {
+    this.step = 1;
     console.log(this.dataSlide);
     this.video = this.studenService.createIframe(this.dataSlide.video_url);
     this.objective = {
@@ -48,6 +52,7 @@ export class SlideContentComponent implements OnInit {
     if (this.focus !== "") {
       this.lastPage = this.lastPage + 1;
     }
+
     console.log(this.lastPage);
   }
   previusStep() {
@@ -62,8 +67,13 @@ export class SlideContentComponent implements OnInit {
     }
   }
   nextStep() {
+    this.progress = this.step / this.lastPage;
     if (this.step === this.lastPage) {
-      this.nextSlide.emit(1);
+      let data = {
+        action: 1,
+        dataAnswer: null,
+      };
+      this.nextSlide.emit(data);
     } else {
       if (this.step === 3) {
         if (this.pageWordBank + 1 < this.wordsBank.length) {
@@ -75,5 +85,15 @@ export class SlideContentComponent implements OnInit {
         this.step = this.step + 1;
       }
     }
+  }
+  play() {
+    console.log("asdasd");
+
+    let audio = new Audio();
+    audio.src = environment.baseUrl + this.wordsBank[this.pageWordBank].audio;
+    console.log(audio.src);
+
+    audio.load();
+    audio.play();
   }
 }

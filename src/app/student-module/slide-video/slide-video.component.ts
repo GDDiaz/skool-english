@@ -20,6 +20,10 @@ export class SlideVideoComponent implements OnInit {
   nextStep() {
     console.log("asdasdasd");
 
-    this.nextSlide.emit(1);
+    let data = {
+      action: 1,
+      dataAnswer: null,
+    };
+    this.nextSlide.emit(data);
   }
 }

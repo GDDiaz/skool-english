@@ -45,6 +45,19 @@ export class StudentService {
       .pipe(map((data) => data));
   }
 
+  saveAnswer(json): Observable<any> {
+    const url = `${environment.apiUrl}/v1/slide/user`;
+    const body = json;
+    return this.http
+      .post(url, body, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        }),
+      })
+      .pipe(map((data) => data));
+  }
+
   byPassHTML(html: string) {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
