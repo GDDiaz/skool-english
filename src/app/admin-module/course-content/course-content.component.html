@@ -80,6 +80,9 @@
                     <button (click)="newSlide(unit.id, 'activity')" matTooltip="Actividades" mat-icon-button color="primary" >
                       <mat-icon>wb_incandescent</mat-icon>
                     </button>
+                    <button (click)="newSlide(unit.id, 'pdf')" matTooltip="PDF" mat-icon-button color="primary" >
+                      <i class="fas fa-file-pdf"></i>
+                    </button>
                   </div>
 
 
@@ -119,6 +122,9 @@
                 </ng-container>
                 <ng-container *ngIf="showActivityForm">
                   <app-activity-choice-form [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-activity-choice-form>
+                </ng-container>
+                <ng-container *ngIf="showPdfForm">
+                  <app-attach-form [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-attach-form>
                 </ng-container>
 
               </div>
