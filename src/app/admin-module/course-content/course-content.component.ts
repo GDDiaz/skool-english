@@ -17,6 +17,7 @@ export class CourseContentComponent implements OnInit {
   currentUnitId;
   currentSlide = null;
   showUnitForm = false;
+  showPdfForm = false;
   showVideoForm = false;
   showQuizForm = false;
   showContentForm = false;
@@ -112,6 +113,9 @@ export class CourseContentComponent implements OnInit {
       case 'unit':
         this.showUnitForm = true;
         break;
+      case 'pdf':
+        this.showPdfForm = true;
+        break;
       default:
         this.hiddenAllForms();
     }
@@ -142,6 +146,7 @@ export class CourseContentComponent implements OnInit {
     this.showContentForm = false;
     this.showActivityForm = false;
     this.showSlideComponent = false;
+    this.showPdfForm = false;
     this.showImage = false;
   }
 

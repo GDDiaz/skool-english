@@ -24,6 +24,7 @@ import { ActivityChoiceFormComponent } from './activity-choice-form/activity-cho
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserShowComponent } from './user-show/user-show.component';
+import { AttachFormComponent } from './attach-form/attach-form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UserShowComponent } from './user-show/user-show.component';
     ActivityChoiceFormComponent,
     UserFormComponent,
     UserListComponent,
-    UserShowComponent
+    UserShowComponent,
+    AttachFormComponent
   ],
   imports: [
     CommonModule,
