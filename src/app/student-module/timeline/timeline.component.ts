@@ -24,9 +24,7 @@ export class TimelineComponent implements OnInit {
       (error) => {
         console.log(error);
       },
-      () => {
-        console.log(this.lessons);
-      }
+      () => {}
     );
     /*     this.studentService.getAllCourse().subscribe(
       (response) => {

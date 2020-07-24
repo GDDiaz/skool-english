@@ -24,8 +24,9 @@ import {
   MatFormFieldModule,
 } from "@angular/material";
 import { FormsModule } from "@angular/forms";
-import { AudioButtonComponent } from './audio-button/audio-button.component';
-import { ProfileComponent } from './profile/profile.component';
+import { AudioButtonComponent } from "./audio-button/audio-button.component";
+import { ProfileComponent } from "./profile/profile.component";
+import { SharedUiModule } from "../shared-ui-module/shared-ui.module";
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatSelectModule,
     MatFormFieldModule,
     FormsModule,
+    SharedUiModule,
     NgCircleProgressModule.forRoot({
       backgroundPadding: 7,
       space: -2,

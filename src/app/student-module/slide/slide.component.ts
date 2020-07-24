@@ -71,7 +71,9 @@ export class SlideComponent implements OnInit {
       }
     );
     this.actualSlide = this.actualSlide + 1;
-    console.log(this.actualSlide);
+    if (this.dataSlides[this.actualSlide].status_by_user === "completado") {
+      this.actualSlide = this.actualSlide + 1;
+    }
 
     if (
       data.action === 1 &&

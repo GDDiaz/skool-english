@@ -12,6 +12,7 @@ export class UnitCardComponent implements OnInit {
   @Input() positionIcon: number;
   public positionIconClass: string;
   public unidades: Array<any>;
+  public progress: number;
 
   constructor(
     private _router: Router,
@@ -19,6 +20,8 @@ export class UnitCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.calcProgress();
+
     if (this.positionIcon % 2 === 0) {
       this.positionIconClass = "left";
     } else {
@@ -60,9 +63,23 @@ export class UnitCardComponent implements OnInit {
     }
   }
 
-  click(tipo, posicion) {
-    this._router.navigate([
-      "/student/slide/" + this.unidades[posicion].unit_id + "/" + posicion,
-    ]);
+  click(tipo, posicion, status) {
+    if (status !== "completado") {
+      this._router.navigate([
+        "/student/slide/" + this.unidades[posicion].unit_id + "/" + posicion,
+      ]);
+    }
+  }
+  calcProgress() {
+    let completados = 0;
+    for (let index = 0; index < this.dataToCard.slides.length; index++) {
+      if (this.dataToCard.slides[index].status_by_user === "completado") {
+        completados = completados + 1;
+      }
+    }
+    this.progress = (completados / this.dataToCard.slides.length) * 100;
+    if (completados === 0) {
+      this.progress = 0;
+    }
   }
 }

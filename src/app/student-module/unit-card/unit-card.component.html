@@ -9,9 +9,9 @@
     <div>
       <p>Nice to meet you</p>
     </div>
-    <div>50% Completado</div>
+    <div>{{ progress }}% Completado</div>
     <div class="progress-bar">
-      <div class="completed-bar"></div>
+      <div class="completed-bar" [ngStyle]="{ width: progress + '%' }"></div>
     </div>
   </div>
 
@@ -19,7 +19,8 @@
     <div
       class="unit"
       *ngFor="let item of unidades; let i = index"
-      (click)="click(item.type, i)"
+      (click)="click(item.type, i, item.status_by_user)"
+      [ngClass]="{ disable: item.status_by_user === 'completado' }"
     >
       <p *ngIf="item.type === 'video'">{{ item.content.video_title }}</p>
       <p *ngIf="item.type === 'quiz'">{{ item.content.name }}</p>
@@ -31,7 +32,16 @@
         {{ i + 1 }}
       </div>
       <div class="status">
-        <div class="{{ item.type }}"></div>
+        <div
+          *ngIf="item.status_by_user !== null"
+          class="{{ item.status_by_user }}"
+        >
+          <i
+            class="fas fa-check"
+            *ngIf="item.status_by_user"
+            style="color: #d7444b;"
+          ></i>
+        </div>
       </div>
     </div>
   </div>

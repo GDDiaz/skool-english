@@ -1,57 +1,59 @@
-<div class="circle-progress">
-  <div class="blue-bar">
+<div class="time-line-content">
+  <div class="circle-progress">
+    <div class="blue-bar">
+      <div
+        class="units-bar"
+        *ngFor="let item of lessons; let i = index"
+        (click)="scroll(item.name + i)"
+      >
+        <div>Unidad {{ i + 1 }}</div>
+      </div>
+    </div>
+    <div>
+      <circle-progress
+        [percent]="80"
+        [radius]="60"
+        [outerStrokeWidth]="3"
+        [innerStrokeWidth]="0"
+        [outerStrokeColor]="'#ec4e55'"
+        [outerStrokeGradientStopColor]="'#283790'"
+        [innerStrokeColor]="'#e7e8ea'"
+        [animation]="true"
+        [animationDuration]="300"
+        [showTitle]="false"
+      ></circle-progress>
+    </div>
+    <div class="internal-circle">
+      <p class="m-0">
+        Easy
+      </p>
+      <p class="m-0">
+        English
+      </p>
+    </div>
+    <div class="lineaRight"></div>
+  </div>
+
+  <div *ngIf="lessons != undefined">
     <div
-      class="units-bar"
+      class="card-component"
       *ngFor="let item of lessons; let i = index"
-      (click)="scroll(item.name + i)"
+      [ngClass]="{ right: i % 2 === 0 }"
     >
-      <div>Unidad {{ i + 1 }}</div>
+      <app-unit-card
+        [dataToCard]="item"
+        [positionIcon]="i"
+        [id]="item.name + i"
+      ></app-unit-card>
+      <div
+        *ngIf="i + 1 != lessons.length"
+        [ngClass]="i % 2 === 0 ? 'lineaRight' : 'lineaLeft'"
+      ></div>
     </div>
   </div>
-  <div>
-    <circle-progress
-      [percent]="80"
-      [radius]="60"
-      [outerStrokeWidth]="3"
-      [innerStrokeWidth]="0"
-      [outerStrokeColor]="'#ec4e55'"
-      [outerStrokeGradientStopColor]="'#283790'"
-      [innerStrokeColor]="'#e7e8ea'"
-      [animation]="true"
-      [animationDuration]="300"
-      [showTitle]="false"
-    ></circle-progress>
-  </div>
-  <div class="internal-circle">
-    <p class="m-0">
-      Easy
-    </p>
-    <p class="m-0">
-      English
-    </p>
-  </div>
-  <div class="lineaRight"></div>
-</div>
 
-<div *ngIf="lessons != undefined">
-  <div
-    class="card-component"
-    *ngFor="let item of lessons; let i = index"
-    [ngClass]="{ right: i % 2 === 0 }"
-  >
-    <app-unit-card
-      [dataToCard]="item"
-      [positionIcon]="i"
-      [id]="item.name + i"
-    ></app-unit-card>
-    <div
-      *ngIf="i + 1 != lessons.length"
-      [ngClass]="i % 2 === 0 ? 'lineaRight' : 'lineaLeft'"
-    ></div>
-  </div>
+  <!-- <div class="card-body">
 </div>
-
-<!-- <div class="card-body">
   <ul class="timeline">
     <li
       *ngFor="let unit of units; let i = index"
@@ -126,3 +128,4 @@
     </li>
   </ul>
 </div> -->
+</div>

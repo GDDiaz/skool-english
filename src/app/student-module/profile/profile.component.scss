@@ -1,7 +1,15 @@
+::ng-deep .container-fluid {
+  background: #eee;
+}
+.logo {
+  text-align: right;
+}
 .profile {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 25px;
+  background: #fff;
   .photo {
     width: 200px;
     height: 200px;
@@ -17,4 +25,11 @@
       margin-bottom: 0.5rem;
     }
   }
+}
+::ng-deep .navbar {
+  display: none;
+}
+::ng-deep .container-fluid {
+  padding-top: 0px;
+  padding-left: 0px !important;
 }

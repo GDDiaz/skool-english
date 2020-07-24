@@ -10,18 +10,18 @@
   width: 100%;
   .icon-card {
     background-color: #743f95;
-    padding: 15px;
-    border-radius: 50px;
+    padding: 35px;
+    border-radius: 80px;
     position: absolute;
 
     text-align: center;
-    width: 17%;
+    width: 130px;
   }
 
   &.right {
     .icon-card {
-      top: -25px;
-      right: -35px;
+      top: -50px;
+      right: -70px;
     }
     &.unit-card {
       padding: 18px 67px 18px 67px;
@@ -29,14 +29,11 @@
   }
   &.left {
     .icon-card {
-      top: -25px;
-      left: -35px;
+      top: -20px;
+      left: -68px;
     }
     &.unit-card {
       padding: 18px 20px 18px 67px;
-    }
-    .unit {
-      cursor: pointer;
     }
   }
 
@@ -45,7 +42,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    padding: 5px 18px;
     .progress-bar {
       height: 10px;
       border-radius: 3px;
@@ -61,14 +58,28 @@
   }
   .units-content {
     margin-top: 10px;
+
     .unit {
       margin-bottom: 10px;
       border-radius: 20px;
       background-color: #c13a40;
       position: relative;
       padding: 10px 30px;
+      cursor: pointer;
+      &:hover {
+        color: #c13a40;
+        background-color: #fff;
+        .lesson-number {
+          color: #fff;
+          background: #c13a40;
+        }
+      }
       p {
         margin: 0px;
+      }
+      &.disable {
+        cursor: not-allowed;
+        opacity: 0.5;
       }
       .lesson-number {
         color: #ec4e55;
@@ -76,11 +87,16 @@
         border-radius: 50px;
         text-align: center;
 
-        width: 7.5%;
+        width: 33px;
         padding: 6px;
         position: absolute;
         top: 2px;
         left: -14px;
+        opacity: 1;
+        &:hover {
+          color: #fff;
+          background-color: #c13a40;
+        }
       }
       .status {
         position: absolute;
@@ -90,6 +106,139 @@
         right: 15px;
         border: 1px solid #fff;
         border-radius: 40px;
+        .completado {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          background: #fff;
+          border-radius: 50px;
+          top: -2px;
+          left: -1px;
+          padding: 2px;
+        }
+        .visitado {
+          width: 58%;
+
+          height: 100%;
+          background: #fff;
+
+          border-top-left-radius: 50px;
+          border-bottom-left-radius: 50px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 690px) {
+  .unit-card {
+    background-color: #ec4e55;
+    position: relative;
+    border-radius: 30px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px;
+    width: 100%;
+    .icon-card {
+      display: none;
+    }
+
+    &.right {
+      .icon-card {
+        top: -25px;
+        right: -35px;
+      }
+      &.unit-card {
+        padding: 0px;
+      }
+    }
+    &.left {
+      .icon-card {
+        top: -25px;
+        left: -35px;
+      }
+      &.unit-card {
+        padding: 0px;
+      }
+    }
+
+    .progreso {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .progress-bar {
+        height: 10px;
+        border-radius: 3px;
+        margin-top: 4px;
+        background-color: #c13a40;
+        width: 100%;
+        .completed-bar {
+          height: 10px;
+          background-color: #fff;
+          width: 50%;
+        }
+      }
+    }
+    .units-content {
+      margin-top: 10px;
+
+      .unit {
+        margin-bottom: 10px;
+        border-radius: 20px;
+        background-color: #c13a40;
+        position: relative;
+        padding: 10px 45px;
+        cursor: pointer;
+
+        p {
+          margin: 0px;
+        }
+        &.disable {
+          cursor: not-allowed;
+          color: #ccc;
+        }
+        .lesson-number {
+          color: #ec4e55;
+          background-color: #fff;
+          border-radius: 50px;
+          text-align: center;
+
+          width: 7.5%;
+          padding: 6px;
+          position: absolute;
+          top: 2px;
+          left: 6px;
+        }
+        .status {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: 10px;
+          right: 15px;
+          border: 1px solid #fff;
+          border-radius: 40px;
+          .completado {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50px;
+            top: -2px;
+            left: -1px;
+          }
+          .visitado {
+            width: 58%;
+
+            height: 100%;
+            background: #fff;
+
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+          }
+        }
       }
     }
   }
