@@ -79,4 +79,22 @@ export class StudentService {
       return this.byPassHTML(url);
     }
   }
+
+  createIframeMobile(url: string) {
+    if (url.includes("<iframe")) {
+      return this.byPassHTML(url);
+    } else if (url.includes("youtu")) {
+      const matchs = url.match(
+        /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/
+      );
+      return this.byPassHTML(`<iframe width="300"
+      height="300"
+      src="https://www.youtube.com/embed/${matchs[1]}"
+      frameborder="0" allow="accelerometer;
+      autoplay; encrypted-media; gyroscope;
+      picture-in-picture" allowfullscreen></iframe>`);
+    } else {
+      return this.byPassHTML(url);
+    }
+  }
 }

@@ -28,13 +28,25 @@
         </div>
         <div [innerHTML]="item.objective" class="objective-text"></div>
       </div>
+      <div class="step-play" *ngIf="width < 769">
+        <div class="mb-3" *ngIf="step !== 2">
+          <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+        </div>
+        <div class="linea-pasos">
+          <div
+            class="completado"
+            [ngStyle]="{ width: (step / lastPage) * 100 + '%' }"
+          ></div>
+        </div>
+        <div>{{ step }} / {{ lastPage }}</div>
+      </div>
       <div class="buttons">
         <div>
           <button type="button" class="controlButton" (click)="previusStep()">
             Regresar
           </button>
         </div>
-        <div class="step-play">
+        <div class="step-play" *ngIf="width > 769">
           <div class="mb-3" *ngIf="step !== 2">
             <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
           </div>
@@ -66,13 +78,25 @@
           </p>
         </div>
       </div>
+      <div class="step-play" *ngIf="width < 769">
+        <div class="mb-3" (click)="play()" class="button-play">
+          <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+        </div>
+        <div class="linea-pasos">
+          <div
+            class="completado"
+            [ngStyle]="{ width: (step / lastPage) * 100 + '%' }"
+          ></div>
+        </div>
+        <div>{{ step }} / {{ lastPage }}</div>
+      </div>
       <div class="buttons">
         <div>
           <button type="button" class="controlButton" (click)="previusStep()">
             Regresar
           </button>
         </div>
-        <div class="step-play">
+        <div class="step-play" *ngIf="width > 769">
           <div class="mb-3" (click)="play()" class="button-play">
             <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
           </div>
@@ -96,14 +120,25 @@
     <div class="content-type">
       <div class="mb-4"><h1>LENGUAGE FOCUS</h1></div>
       <div [innerHTML]="focus" style="text-align: center;" class="mb-5"></div>
-
+      <div class="step-play" *ngIf="width < 769">
+        <div class="mb-3">
+          <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+        </div>
+        <div class="linea-pasos">
+          <div
+            class="completado"
+            [ngStyle]="{ width: (step / lastPage) * 100 + '%' }"
+          ></div>
+        </div>
+        <div>{{ step }} / {{ lastPage }}</div>
+      </div>
       <div class="buttons">
         <div>
           <button type="button" class="controlButton" (click)="previusStep()">
             Regresar
           </button>
         </div>
-        <div class="step-play">
+        <div class="step-play" *ngIf="width > 769">
           <div class="mb-3">
             <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
           </div>

@@ -52,6 +52,16 @@
         />
       </div>
     </div>
+
+    <div class="step-play" *ngIf="width < 769">
+      <div class="linea-pasos">
+        <div
+          class="completado"
+          [ngStyle]="{ width: ((page + 1) / questions.length) * 100 + '%' }"
+        ></div>
+      </div>
+      <div>{{ page + 1 }} / {{ questions.length }}</div>
+    </div>
     <div class="buttons mt-5">
       <div>
         <button
@@ -63,7 +73,7 @@
           Regresar
         </button>
       </div>
-      <div class="step-play">
+      <div class="step-play" *ngIf="width > 769">
         <div class="linea-pasos">
           <div
             class="completado"

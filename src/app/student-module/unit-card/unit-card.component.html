@@ -22,15 +22,19 @@
       (click)="click(item.type, i, item.status_by_user)"
       [ngClass]="{ disable: item.status_by_user === 'completado' }"
     >
-      <p *ngIf="item.type === 'video'">{{ item.content.video_title }}</p>
-      <p *ngIf="item.type === 'quiz'">{{ item.content.name }}</p>
-      <p *ngIf="item.type === 'activity'">{{ item.content.name }}</p>
-      <p *ngIf="item.type === 'content'">{{ item.content.objective_title }}</p>
-      <p *ngIf="item.type === 'no data'">{{ item.content.name }}</p>
-
       <div class="lesson-number">
         {{ i + 1 }}
       </div>
+      <div>
+        <p *ngIf="item.type === 'video'">{{ item.content.video_title }}</p>
+        <p *ngIf="item.type === 'quiz'">{{ item.content.name }}</p>
+        <p *ngIf="item.type === 'activity'">{{ item.content.name }}</p>
+        <p *ngIf="item.type === 'content'">
+          {{ item.content.objective_title }}
+        </p>
+        <p *ngIf="item.type === 'no data'">{{ item.content.name }}</p>
+      </div>
+
       <div class="status">
         <div
           *ngIf="item.status_by_user !== null"

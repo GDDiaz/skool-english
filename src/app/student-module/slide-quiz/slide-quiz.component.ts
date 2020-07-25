@@ -22,7 +22,7 @@ export class SlideQuizComponent implements OnInit {
   public answersMultiSelected: Array<any>;
   public answerMulti: Array<boolean>;
   public answerAutoComplete: Array<string>;
-
+  public width: any;
   public checkBox: any;
   public answersSelected;
   public page: number;
@@ -41,10 +41,11 @@ export class SlideQuizComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.width = window.screen.width;
     this.resetComponent();
     this.quizName = this.dataSlide.name;
     this.questions = this.dataSlide.questions;
-    this.typeQuestion = this.dataSlide.typeQuestion;
+    this.typeQuestion = this.dataSlide.questions[this.page].typeQuestion;
 
     if (this.typeQuestion === "Multiple respuesta") {
       console.log(this.questions[this.page].options);
@@ -71,11 +72,13 @@ export class SlideQuizComponent implements OnInit {
   }
   nextStep() {
     this.checkBox;
+
     if (this.typeQuestion === "Única respuesta") {
       if (this.page + 1 < this.questions.length) {
         this.answersUniqueSelected[this.page] = this.answer;
         this.answer = null;
         this.page = this.page + 1;
+        this.typeQuestion = this.dataSlide.questions[this.page].typeQuestion;
       } else {
         this.answersUniqueSelected[this.page] = this.answer;
         console.log("Respuestas-", this.answersUniqueSelected);
@@ -94,6 +97,7 @@ export class SlideQuizComponent implements OnInit {
           answer: this.answerMulti,
         };
         this.page = this.page + 1;
+        this.typeQuestion = this.dataSlide.questions[this.page].typeQuestion;
         this.answerMulti = [];
         for (
           let index = 0;
@@ -119,6 +123,7 @@ export class SlideQuizComponent implements OnInit {
     if (this.typeQuestion === "Autocompletar") {
       if (this.page + 1 < this.questions.length) {
         this.page = this.page + 1;
+        this.typeQuestion = this.dataSlide.questions[this.page].typeQuestion;
       } else {
         let data = {
           action: 1,

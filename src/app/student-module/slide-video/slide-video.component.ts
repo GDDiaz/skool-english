@@ -8,6 +8,7 @@ import { StudentService } from "../services/student.service";
 })
 export class SlideVideoComponent implements OnInit {
   public video: any;
+  public width: any;
   @Input() dataSlide: any;
   @Output() nextSlide: EventEmitter<any> = new EventEmitter();
   constructor(private studentService: StudentService) {
@@ -15,7 +16,15 @@ export class SlideVideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.video = this.studentService.createIframe(this.dataSlide.video_url);
+    this.width = window.screen.width;
+    if (this.width > 769) {
+      this.video = this.studentService.createIframe(this.dataSlide.video_url);
+    }
+    if (this.width <= 769) {
+      this.video = this.studentService.createIframeMobile(
+        this.dataSlide.video_url
+      );
+    }
   }
   nextStep() {
     console.log("asdasdasd");

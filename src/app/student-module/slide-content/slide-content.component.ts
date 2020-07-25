@@ -18,6 +18,7 @@ export class SlideContentComponent implements OnInit {
   public pageWordBank: number;
   public lastPage: number;
   public progress: number;
+  public width: any;
   constructor(private studenService: StudentService) {
     this.step = 1;
     this.lastPage = 0;
@@ -30,9 +31,18 @@ export class SlideContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.width = window.screen.width;
     this.step = 1;
     console.log(this.dataSlide);
-    this.video = this.studenService.createIframe(this.dataSlide.video_url);
+
+    if (this.width > 769) {
+      this.video = this.studenService.createIframe(this.dataSlide.video_url);
+    }
+    if (this.width <= 769) {
+      this.video = this.studenService.createIframeMobile(
+        this.dataSlide.video_url
+      );
+    }
     this.objective = {
       title: this.dataSlide.objective_title,
       objectivesArray: this.dataSlide.objectives,

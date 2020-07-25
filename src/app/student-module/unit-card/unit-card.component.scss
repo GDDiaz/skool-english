@@ -23,17 +23,11 @@
       top: -50px;
       right: -70px;
     }
-    &.unit-card {
-      padding: 18px 67px 18px 67px;
-    }
   }
   &.left {
     .icon-card {
       top: -20px;
       left: -68px;
-    }
-    &.unit-card {
-      padding: 18px 20px 18px 67px;
     }
   }
 
@@ -71,7 +65,7 @@
         background-color: #fff;
         .lesson-number {
           color: #fff;
-          background: #c13a40;
+          background: #ec4e55;
         }
       }
       p {
@@ -90,8 +84,9 @@
         width: 33px;
         padding: 6px;
         position: absolute;
-        top: 2px;
-        left: -14px;
+        top: 50%;
+        left: 0%;
+        transform: translate(-50%, -50%);
         opacity: 1;
         &:hover {
           color: #fff;
@@ -102,8 +97,9 @@
         position: absolute;
         width: 20px;
         height: 20px;
-        top: 10px;
-        right: 15px;
+        top: 50%;
+        right: 0%;
+        transform: translate(-50%, -50%);
         border: 1px solid #fff;
         border-radius: 40px;
         .completado {
@@ -129,7 +125,7 @@
     }
   }
 }
-@media (max-width: 690px) {
+@media (max-width: 768px) {
   .unit-card {
     background-color: #ec4e55;
     position: relative;
@@ -138,28 +134,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0px;
+    padding: 0px 10px;
     width: 100%;
-    .icon-card {
-      display: none;
-    }
 
     &.right {
       .icon-card {
-        top: -25px;
-        right: -35px;
-      }
-      &.unit-card {
-        padding: 0px;
+        top: -80px;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
     &.left {
       .icon-card {
-        top: -25px;
-        left: -35px;
-      }
-      &.unit-card {
-        padding: 0px;
+        top: -80px;
+
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
     }
 
@@ -190,7 +180,7 @@
         border-radius: 20px;
         background-color: #c13a40;
         position: relative;
-        padding: 10px 45px;
+        padding: 10px 20px;
         cursor: pointer;
 
         p {
@@ -201,23 +191,15 @@
           color: #ccc;
         }
         .lesson-number {
-          color: #ec4e55;
-          background-color: #fff;
-          border-radius: 50px;
-          text-align: center;
-
-          width: 7.5%;
-          padding: 6px;
-          position: absolute;
-          top: 2px;
-          left: 6px;
+          display: none;
         }
         .status {
           position: absolute;
           width: 20px;
           height: 20px;
-          top: 10px;
-          right: 15px;
+          top: 50%;
+          right: 0%;
+          transform: translate(-50%, -50%);
           border: 1px solid #fff;
           border-radius: 40px;
           .completado {

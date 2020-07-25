@@ -11,13 +11,16 @@ export class TimelineComponent implements OnInit {
   public units: Units[];
   public test: string;
   public lessons: Array<any>;
-
+  public width: any;
   constructor(private studentService: StudentService) {
     this.test = "Prueba";
   }
 
   ngOnInit() {
-    this.studentService.getUnitsByCourse(3).subscribe(
+    this.width = window.screen.width;
+    console.log(this.width);
+
+    this.studentService.getUnitsByCourse(2).subscribe(
       (response) => {
         this.lessons = response;
       },

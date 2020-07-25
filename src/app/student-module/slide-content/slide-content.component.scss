@@ -86,3 +86,26 @@
     }
   }
 }
+
+@media (max-width: 769px) {
+  .container-content {
+    .content-type {
+      padding: 24px 10px;
+      h1 {
+        font-size: 1.5rem;
+      }
+      h2,
+      h4 {
+        font-size: 1rem;
+      }
+      .words-content {
+        .word {
+          width: 100%;
+        }
+      }
+      .step-play {
+        width: 100%;
+      }
+    }
+  }
+}

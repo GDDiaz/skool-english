@@ -29,6 +29,7 @@ export class SlideActivityComponent implements OnInit {
     this.page = 0;
     this.nameActivity = this.dataSlide.name;
     this.questions = this.dataSlide.questions;
+
     console.log(this.dataSlide.name);
     console.log(this.questions);
     let test;

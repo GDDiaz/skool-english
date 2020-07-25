@@ -1,5 +1,8 @@
 <ng-container>
-  <div class="content-type">
+  <div *ngIf="questions.length <= 0">
+    <h1>Esta actividad no tiene preguntas aun</h1>
+  </div>
+  <div class="content-type" *ngIf="questions.length > 0">
     <div class="imagen">
       <img src="{{ '/assets/images/dress.png' }}" alt="" />
     </div>
