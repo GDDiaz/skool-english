@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1920" height="5633" viewBox="0 0 1920 5633">
+  <defs>
+    <clipPath id="clip-Linea_de_tiempo_1">
+      <rect width="1920" height="5633"/>
+    </clipPath>
+  </defs>
+  <g id="Linea_de_tiempo_1" data-name="Linea de tiempo – 1" clip-path="url(#clip-Linea_de_tiempo_1)">
+    <rect width="1920" height="5633" fill="#f8f5f5"/>
+    <path id="Unión_1" data-name="Unión 1" d="M1297.148,6346.974c-112.613,103.538-322.549-5.324-709.558-656.7-966.14-1626.109-106.3-1658.442,296.969-2557.381s-36.141-1548.248-523.608-2101.42S20.956,0,20.956,0l1276.2,131.247L2573.341,0s147.471,478.3-340,1031.471-926.878,1202.482-523.608,2101.422,1263.109,931.271,296.969,2557.382c-305.869,514.809-501.156,690.743-625.18,690.771C1348.626,6381.053,1320.759,6368.682,1297.148,6346.974Z" transform="translate(-337 -289.522)" fill="#fff" opacity="0.503"/>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+<div *ngIf="tipo === 'content'">
+  <app-slide-content
+    [dataSlide]="data"
+    (nextSlide)="nextSlide($event)"
+  ></app-slide-content>
+</div>
+<div *ngIf="tipo === 'quiz'">
+  <app-slide-quiz
+    [dataSlide]="data"
+    (nextSlide)="nextSlide($event)"
+  ></app-slide-quiz>
+</div>
+<div *ngIf="tipo === 'activity'">
+  <app-slide-activity
+    [dataSlide]="data"
+    (nextSlide)="nextSlide($event)"
+  ></app-slide-activity>
+</div>
+<div *ngIf="tipo === 'video'">
+  <app-slide-video
+    [dataSlide]="data"
+    (nextSlide)="nextSlide($event)"
+  ></app-slide-video>
+</div>

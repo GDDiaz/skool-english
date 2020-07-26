@@ -1,5 +1,5 @@
 .navbar-skool {
-  background-color: #232B61;
+  background-color: #232b61;
 
   border-radius: 1000px / 300px;
   height: 1000px;
@@ -7,10 +7,25 @@
   top: -50px;
   padding-top: 700px;
   margin-left: -55px;
-  margin-right: -55px !important;
+  margin-right: 0px;
   background-image: url("/assets/images/header.png");
-  background-color: #232B61;
+  background-color: #232b61;
   background-blend-mode: soft-light;
   background-position: 25% 75%;
-
 }
+/* 
+.navbar-skool {
+  background-color: #232b61;
+  border-radius: 1114px/212px;
+  height: 1065px;
+  margin-top: -700px;
+  top: -50px;
+  margin-right: 0px;
+  background-size: cover;
+  background-image: url(/assets/images/header.png);
+  background-color: #232b61;
+  background-blend-mode: soft-light;
+  background-position: 25% 75%;
+  background-position: center;
+  background-repeat: no-repeat;
+} */

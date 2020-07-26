@@ -1,33 +1,131 @@
-<div class="card-body">
-  <ul class="timeline">
-      <li *ngFor="let unit of units; let i = index" [ngClass]="{'timeline-inverted': i%2==0}">
-          <div class="timeline-badge" ngClass="{{unit.type}}"><img class="img-responsive" alt="{{unit.name}}" src="{{'/assets/icons/svg/' + unit.icon}}"> </div>
-          <div class="timeline-panel half-with bg-skool-red">
-              <div class="timeline-heading">
-                  <div class="progress">
-                  <div class="progress-bar" role="progressbar" [ngStyle]="{'width': unit.percentage + '%'}"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p><small class="text-muted"></small> </p>
-              </div>
-              <div class="timeline-body">
-                <ol>
-                  <li *ngFor="let item of unit.themes">{{item.name}}<i  class="theme-progress" [ngClass]="{'fas fa-circle': item.state==2, 'far fa-circle': item.state==0, 'fas fa-adjust': item.state==1 }"></i></li>
-                </ol>
-              </div>
-          </div>
-      </li>
-      <li class="timeline-inverted">
-          <div class="timeline-badge warning"><img class="img-responsive" alt="user" src="../assets/images/users/2.jpg"> </div>
-          <div class="timeline-panel">
-              <div class="timeline-heading">
-                  <h4 class="timeline-title">Ritesh Deshmukh</h4>
-              </div>
-              <div class="timeline-body">
-                  <p><img class="img-responsive" alt="user" src="../assets/images/users/3.jpg"></p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium maiores odit qui est tempora eos, nostrum provident explicabo dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
-              </div>
-          </div>
-      </li>
+<div class="time-line-content">
+  <div class="circle-progress">
+    <div class="blue-bar">
+      <div
+        class="units-bar"
+        *ngFor="let item of lessons; let i = index"
+        (click)="scroll(item.name + i)"
+      >
+        <div style="text-align: center;">Unidad {{ i + 1 }}</div>
+      </div>
+    </div>
+    <div>
+      <circle-progress
+        [percent]="80"
+        [radius]="60"
+        [outerStrokeWidth]="3"
+        [innerStrokeWidth]="0"
+        [outerStrokeColor]="'#ec4e55'"
+        [outerStrokeGradientStopColor]="'#283790'"
+        [innerStrokeColor]="'#e7e8ea'"
+        [animation]="true"
+        [animationDuration]="300"
+        [showTitle]="false"
+      ></circle-progress>
+    </div>
+    <div class="internal-circle">
+      <p class="m-0">
+        Easy
+      </p>
+      <p class="m-0">
+        English
+      </p>
+    </div>
+    <div class="lineaRight"></div>
+  </div>
 
+  <div *ngIf="lessons != undefined">
+    <div
+      class="card-component"
+      *ngFor="let item of lessons; let i = index"
+      [ngClass]="{ right: i % 2 === 0 }"
+    >
+      <app-unit-card
+        [dataToCard]="item"
+        [positionIcon]="i"
+        [id]="item.name + i"
+      ></app-unit-card>
+      <div
+        *ngIf="i + 1 != lessons.length"
+        [ngClass]="i % 2 === 0 ? 'lineaRight' : 'lineaLeft'"
+      ></div>
+    </div>
+  </div>
+
+  <!-- <div class="card-body">
+</div>
+  <ul class="timeline">
+    <li
+      *ngFor="let unit of units; let i = index"
+      [ngClass]="{ 'timeline-inverted': i % 2 == 0 }"
+    >
+      <div class="timeline-badge" ngClass="{{ unit.type }}">
+        <img
+          class="img-responsive"
+          alt="{{ unit.name }}"
+          src="{{ '/assets/icons/svg/' + unit.icon }}"
+        />
+      </div>
+      <div class="timeline-panel half-with bg-skool-red">
+        <div class="timeline-heading">
+          <div class="progress">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              [ngStyle]="{ width: unit.percentage + '%' }"
+              aria-valuenow="25"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
+          <p><small class="text-muted"></small></p>
+        </div>
+        <div class="timeline-body">
+          <ol>
+            <li *ngFor="let item of unit.themes">
+              {{ item.name
+              }}<i
+                class="theme-progress"
+                [ngClass]="{
+                  'fas fa-circle': item.state == 2,
+                  'far fa-circle': item.state == 0,
+                  'fas fa-adjust': item.state == 1
+                }"
+              ></i>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </li>
+    <li class="timeline-inverted">
+      <div class="timeline-badge warning">
+        <img
+          class="img-responsive"
+          alt="user"
+          src="../assets/images/users/2.jpg"
+        />
+      </div>
+      <div class="timeline-panel">
+        <div class="timeline-heading">
+          <h4 class="timeline-title">Ritesh Deshmukh</h4>
+        </div>
+        <div class="timeline-body">
+          <p>
+            <img
+              class="img-responsive"
+              alt="user"
+              src="../assets/images/users/3.jpg"
+            />
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium
+            maiores odit qui est tempora eos, nostrum provident explicabo
+            dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae
+            minus eaque facere.
+          </p>
+        </div>
+      </div>
+    </li>
   </ul>
+</div> -->
 </div>

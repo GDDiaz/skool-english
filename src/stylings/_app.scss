@@ -1,4 +1,4 @@
-@import './variable';
+@import "./variable";
 .bg-primary-red {
   background-color: $primary-red !important;
   color: #fff;
@@ -10,16 +10,17 @@
 }
 
 .container-fluid {
-  padding-top: 50px;
+  padding-top: 0px;
+  padding-bottom: 123px;
 }
 
 .btn-primary-red {
   color: #fff;
-  background-color:$primary-red;
+  background-color: $primary-red;
   border-color: $primary-red;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
+.custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
   border-color: $primary-blue;
   background-color: $primary-blue;

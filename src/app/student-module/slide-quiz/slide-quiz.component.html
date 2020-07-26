@@ -1,0 +1,92 @@
+<div class="container-content">
+  <div class="content-type">
+    <!-- UNICA RESPUESTA -->
+    <div *ngIf="typeQuestion === 'Única respuesta'">
+      <!-- <div class="mb-5">
+        <h1>{{ quizName }}</h1>
+      </div> -->
+      <div class="imagen">
+        <img src="{{ '/assets/images/dress.png' }}" alt="" />
+      </div>
+      <div [innerHTML]="questions[page]?.question" class="questions"></div>
+      <div class="option">
+        <mat-radio-group
+          aria-labelledby="example-radio-group-label"
+          class="example-radio-group"
+          [(ngModel)]="answer"
+        >
+          <mat-radio-button
+            class="example-radio-button"
+            *ngFor="let option of questions[page]?.options; let i = index"
+            [value]="i + 1"
+          >
+            <div [innerHTML]="option.option"></div>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <!-- MULTIPLE RESPUESTA -->
+    <div *ngIf="typeQuestion === 'Multiple respuesta'">
+      <div [innerHTML]="questions[page]?.question" class="questions"></div>
+      <section class="example-section">
+        <div *ngFor="let option of questions[page]?.options; let i = index">
+          <mat-checkbox
+            class="example-margin"
+            name="'option-'+i"
+            (change)="selected(i)"
+            ><span [innerHTML]="option.option"></span
+          ></mat-checkbox>
+        </div>
+      </section>
+    </div>
+    <!-- Auto completar -->
+    <div *ngIf="typeQuestion === 'Autocompletar'">
+      <div [innerHTML]="questions[page]?.question" class="questions"></div>
+      <div class="form-group mt-4 mb-4">
+        <input
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          [(ngModel)]="answerAutoComplete[page]"
+        />
+      </div>
+    </div>
+
+    <div class="step-play" *ngIf="width < 769">
+      <div class="linea-pasos">
+        <div
+          class="completado"
+          [ngStyle]="{ width: ((page + 1) / questions.length) * 100 + '%' }"
+        ></div>
+      </div>
+      <div>{{ page + 1 }} / {{ questions.length }}</div>
+    </div>
+    <div class="buttons mt-5">
+      <div>
+        <button
+          type="button"
+          class="controlButton"
+          (click)="previusStep()"
+          [disabled]="page + 1 === 1"
+        >
+          Regresar
+        </button>
+      </div>
+      <div class="step-play" *ngIf="width > 769">
+        <div class="linea-pasos">
+          <div
+            class="completado"
+            [ngStyle]="{ width: ((page + 1) / questions.length) * 100 + '%' }"
+          ></div>
+        </div>
+        <div>{{ page + 1 }} / {{ questions.length }}</div>
+      </div>
+      <div>
+        <button type="button" class="controlButton" (click)="nextStep()">
+          Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

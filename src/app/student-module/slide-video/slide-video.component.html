@@ -1,0 +1,12 @@
+<div class="container-content">
+  <ng-container *ngIf="video !== ''">
+    <div class="content-type">
+      <div [innerHTML]="video"></div>
+    </div>
+    <div class="buttons">
+      <button type="button" class="controlButton" (click)="nextStep()">
+        Continuar
+      </button>
+    </div>
+  </ng-container>
+</div>
