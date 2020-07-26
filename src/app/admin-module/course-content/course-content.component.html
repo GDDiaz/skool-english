@@ -13,12 +13,13 @@
                 <h5 class="m-b-0 font-medium">{{unit.name}}</h5>
               </mat-panel-title>
             </mat-expansion-panel-header>
-
             <ul class="feeds example-list" cdkDropList (cdkDropListDropped)="drop($event, i)"  #slidesList="cdkDropList" [cdkDropListData]="unit.slides">
+
               <li class="example-box" *ngFor="let item of unit.slides; let i = index" (click)="showSlide(item)" cdkDrag>
 
                 <div class="bg-primary-red drag-activity">
                   <i  class="drag-icon" *ngIf="item.type === 'video'" class="fa fa-video"></i>
+                  <i  class="drag-icon fas fa-file-pdf" *ngIf="item.type === 'pdf'"></i>
                   <mat-icon class="drag-icon" *ngIf="item.type === 'quiz'">fact_check</mat-icon>
                   <mat-icon class="drag-icon" *ngIf="item.type === 'content'">article</mat-icon>
                   <mat-icon class="drag-icon" *ngIf="item.type === 'activity'"> wb_incandescent</mat-icon>
@@ -54,6 +55,15 @@
                   <span >
                     <button mat-button [matMenuTriggerFor]="menuActivity"><i class="fas fa-ellipsis-v"></i></button>
                     <mat-menu #menuActivity="matMenu">
+                     <button mat-menu-item (click)="editSlide(item, unit.id)"><i class="far fa-edit"></i> Editar</button>
+                     <button mat-menu-item (click)="deleteSlide(item, unit.id, i)"><i class="far fa-trash-alt"></i> Eliminar</button>
+                    </mat-menu>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="item.type === 'pdf'">{{ item.content.name }}
+                  <span >
+                    <button mat-button [matMenuTriggerFor]="menuPdf"><i class="fas fa-ellipsis-v"></i></button>
+                    <mat-menu #menuPdf="matMenu">
                      <button mat-menu-item (click)="editSlide(item, unit.id)"><i class="far fa-edit"></i> Editar</button>
                      <button mat-menu-item (click)="deleteSlide(item, unit.id, i)"><i class="far fa-trash-alt"></i> Eliminar</button>
                     </mat-menu>
@@ -101,7 +111,7 @@
   <div class="col-lg-7 col-xlg-8">
       <div class="card">
           <div class="card-body">
-              <div class="d-flex no-block">
+              <div class="">
                 <ng-container *ngIf="showUnitForm">
                   <app-unit-form [position]="unitsArray.length" class="col-md-12" [courseId]="courseId" (unit)="createdUnit($event)"></app-unit-form>
                 </ng-container>

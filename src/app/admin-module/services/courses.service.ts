@@ -116,7 +116,7 @@ export class CoursesService {
                 let beforePosition = null;
                 for (let j = 0; j < unit.slides.length; j++) {
                   response[i].slides[j].content = JSON.parse(response[i].slides[j].content);
-                  if (beforePosition !== response[i].slides[j].position) {
+                  if (beforePosition !== response[i].slides[j].position && response[i].slides[j] !== null) {
                     slides[response[i].slides[j].position] = response[i].slides[j];
                   } else  {
                     replaceSlide = false;
@@ -124,10 +124,17 @@ export class CoursesService {
                   beforePosition = response[i].slides[j].position;
                 }
                 if (replaceSlide) {
-                  response[i].slides = slides;
+                  const newSlide = [];
+                  // tslint:disable-next-line:prefer-for-of
+                  for (let k = 0; k < slides.length; k++ ) {
+                    if (slides[k] !== undefined) {
+                      newSlide.push(slides[k]);
+                    }
+                  }
+                  response[i].slides = newSlide;
                 }
 
-                if (beforePositionUnit !== unit.position) {
+                if (beforePositionUnit !== unit.position && response[i] !== null) {
                   units[unit.position] = response[i];
                 } else  {
                   replaceUnits = false;
@@ -135,7 +142,14 @@ export class CoursesService {
                 beforePositionUnit = response[i].position;
               }
               if (replaceUnits) {
-                response = units;
+                const newUnit = [];
+                // tslint:disable-next-line:prefer-for-of
+                for (let l = 0; l < units.length; l++ ) {
+                  if (units[l] !== undefined) {
+                    newUnit.push(units[l]);
+                  }
+                }
+                response = newUnit;
               }
             }
             return response;

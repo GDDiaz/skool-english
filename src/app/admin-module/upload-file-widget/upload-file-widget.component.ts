@@ -37,7 +37,7 @@ export class UploadFileWidgetComponent implements OnInit {
   fileChange() {
     this.fileDropDisabled = false;
     if (this.multiple === '1' && this.files.length >  0) {
-      this.fileDropDisabled = true;
+      this.fileDropDisabled = false;
     }
   }
 
