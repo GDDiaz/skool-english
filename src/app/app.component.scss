@@ -37,9 +37,13 @@
 
 #page-content-wrapper {
   width: 100%;
-
-  background-image: url("../assets/lineaTiempo.svg");
-  background-size: cover;
+  position: relative;
+  .fondo {
+    position: absolute;
+    top: 0;
+    left: -246px;
+    z-index: -1000;
+  }
 }
 
 svg#clouds {
@@ -52,6 +56,11 @@ svg#clouds {
 
 .container-fluid {
   padding-left: 0px;
+
+  padding: 34px 50px;
+  &.inside {
+    background: #f7f7fa;
+  }
 }
 
 /* Responsive Styles */

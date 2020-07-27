@@ -26,8 +26,8 @@
     }
   }
 }
-::ng-deep .navbar {
-  display: none;
+.navbar {
+  display: none !important;
 }
 ::ng-deep .container-fluid {
   padding-top: 0px;

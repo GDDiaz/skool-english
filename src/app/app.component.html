@@ -1,4 +1,10 @@
-<app-navbar *ngIf="currentUser && currentUser.user?.type === 0"></app-navbar>
+<app-navbar
+  *ngIf="
+    currentUser &&
+    currentUser.user?.type === 0 &&
+    actualURL !== '/student/profile'
+  "
+></app-navbar>
 <div
   class="toggled"
   [ngClass]="{ 'd-flex': currentUser && currentUser.user?.type === 1 }"
@@ -10,10 +16,18 @@
 
   <!-- Page Content -->
   <div id="page-content-wrapper">
+    <img
+      src="assets/lineaTiempo.svg"
+      class="rounded-circle fondo"
+      *ngIf="actualURL === '/student'"
+    />
     <app-navbar-admin
       *ngIf="currentUser && currentUser.user?.type === 1"
     ></app-navbar-admin>
-    <div class="container-fluid">
+    <div
+      class="container-fluid"
+      [ngClass]="{ inside: actualURL !== '/student' }"
+    >
       <div class="container" role="main">
         <router-outlet></router-outlet>
         <!-- <svg
@@ -33,6 +47,7 @@
           />
         </svg> -->
       </div>
+      <app-footer></app-footer>
     </div>
   </div>
 </div>

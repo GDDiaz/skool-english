@@ -7,17 +7,24 @@ import { environment } from "../../../environments/environment";
 })
 export class AudioButtonComponent implements OnInit {
   @Input() urlAudio: any;
-  constructor() {}
+  public bandPlay: boolean;
+  public audio: any;
+  constructor() {
+    this.bandPlay = false;
+  }
 
   ngOnInit(): void {
-    console.log(this.urlAudio);
+    this.audio = new Audio();
+    this.audio.src = environment.baseUrl + this.urlAudio;
+    this.audio.load();
   }
   play() {
-    let audio = new Audio();
-    audio.src = environment.baseUrl + this.urlAudio;
-    console.log(audio.src);
+    this.bandPlay = true;
 
-    audio.load();
-    audio.play();
+    this.audio.play();
+  }
+  pause() {
+    this.bandPlay = false;
+    this.audio.pause();
   }
 }
