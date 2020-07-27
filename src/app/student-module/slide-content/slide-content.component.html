@@ -67,6 +67,12 @@
     </div>
   </ng-container>
   <ng-container *ngIf="wordsBank !== [] && step === 3">
+    <a class="ml-auto" [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
     <div class="content-type wordsBank">
       <h1>WORD BANK</h1>
       <div class="words-content">
@@ -105,7 +111,11 @@
       </div>
       <div class="buttons">
         <div>
-          <button type="button" class="controlButton" (click)="previusStep()">
+          <button
+            type="button"
+            class="controlButton mr-3"
+            (click)="previusStep()"
+          >
             Regresar
           </button>
         </div>
@@ -135,7 +145,7 @@
           <div>{{ step }} / {{ lastPage }}</div>
         </div>
         <div>
-          <button type="button" class="controlButton" (click)="nextStep()">
+          <button type="button" class="controlButton ml-3" (click)="nextStep()">
             Continuar
           </button>
         </div>
