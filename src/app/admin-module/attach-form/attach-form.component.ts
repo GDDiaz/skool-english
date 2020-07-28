@@ -42,7 +42,6 @@ export class AttachFormComponent implements OnInit {
   }
 
   deleteAttach(index) {
-    console.log('epa');
     this.currentFiles.splice(index, 1);
   }
 

@@ -67,6 +67,15 @@ export class UserShowComponent implements OnInit {
     this.getCourses();
   }
 
+  delete() {
+    this.courseService.deleteUser(this.userId).subscribe(
+      r => {
+        this.router.navigate(['/admin/students']);
+      },
+      e => console.error(e)
+    );
+  }
+
   onSubmit() {
     this.loading = true;
     const selectedCoursesIds = this.form.value.courses
