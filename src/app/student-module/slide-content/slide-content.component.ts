@@ -19,6 +19,9 @@ export class SlideContentComponent implements OnInit {
   public lastPage: number;
   public progress: number;
   public width: any;
+
+  public bandPlay: boolean;
+  public audio: any;
   constructor(private studenService: StudentService) {
     this.step = 1;
     this.lastPage = 0;
@@ -28,6 +31,7 @@ export class SlideContentComponent implements OnInit {
 
     this.focus = "";
     this.pageWordBank = 0;
+    this.bandPlay = false;
   }
 
   ngOnInit(): void {
@@ -63,7 +67,10 @@ export class SlideContentComponent implements OnInit {
       this.lastPage = this.lastPage + 1;
     }
 
-    console.log(this.lastPage);
+    this.audio = new Audio();
+    this.audio.src =
+      environment.baseUrl + this.wordsBank[this.pageWordBank].audio;
+    this.audio.load();
   }
   previusStep() {
     if (this.step === 3) {
@@ -97,13 +104,14 @@ export class SlideContentComponent implements OnInit {
     }
   }
   play() {
-    console.log("asdasd");
+    this.bandPlay = !this.bandPlay;
+    console.log(this.bandPlay);
 
-    let audio = new Audio();
-    audio.src = environment.baseUrl + this.wordsBank[this.pageWordBank].audio;
-    console.log(audio.src);
-
-    audio.load();
-    audio.play();
+    this.audio.play();
+  }
+  pause() {
+    this.bandPlay = false;
+    this.audio.pause();
+    console.log(this.bandPlay);
   }
 }

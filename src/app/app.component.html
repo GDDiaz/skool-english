@@ -4,12 +4,17 @@
   <main [ngClass]="{ 'page-content': currentUser && currentUser.user?.type === 1 }">
     <app-navbar-admin *ngIf="currentUser && currentUser.user?.type === 1"></app-navbar-admin>
     <div class="container-fluid">
-      <app-navbar *ngIf="currentUser && currentUser.user?.type === 0"></app-navbar>
+      <img
+      src="assets/lineaTiempo.svg"
+      class="rounded-circle fondo"
+      *ngIf="actualURL === '/student'"
+    />
+      <app-navbar *ngIf="currentUser && currentUser.user?.type === 0 &&  actualURL !== '/student/profile'"></app-navbar>
 
       <div class="container">
         <router-outlet></router-outlet>
+        <app-footer *ngIf="currentUser && currentUser.user?.type === 0"></app-footer>
       </div>
-
     </div>
   </main>
 </div>

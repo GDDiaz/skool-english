@@ -67,7 +67,13 @@
     </div>
   </ng-container>
   <ng-container *ngIf="wordsBank !== [] && step === 3">
-    <div class="content-type">
+    <a class="ml-auto" [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
+    <div class="content-type wordsBank">
       <h1>WORD BANK</h1>
       <div class="words-content">
         <div *ngFor="let item of wordsBank[pageWordBank].words" class="word">
@@ -79,8 +85,21 @@
         </div>
       </div>
       <div class="step-play" *ngIf="width < 769">
-        <div class="mb-3" (click)="play()" class="button-play">
+        <div
+          *ngIf="bandPlay === false"
+          class="mb-3"
+          (click)="play()"
+          class="button-play"
+        >
           <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+        </div>
+        <div
+          class="mb-3"
+          (click)="pause()"
+          class="button-play"
+          *ngIf="bandPlay === true"
+        >
+          <img src="{{ '/assets/icons/svg/pause.svg' }}" alt="" />
         </div>
         <div class="linea-pasos">
           <div
@@ -92,13 +111,30 @@
       </div>
       <div class="buttons">
         <div>
-          <button type="button" class="controlButton" (click)="previusStep()">
+          <button
+            type="button"
+            class="controlButton mr-3"
+            (click)="previusStep()"
+          >
             Regresar
           </button>
         </div>
         <div class="step-play" *ngIf="width > 769">
-          <div class="mb-3" (click)="play()" class="button-play">
+          <div
+            *ngIf="bandPlay === false"
+            class="mb-3"
+            (click)="play()"
+            class="button-play"
+          >
             <img src="{{ '/assets/icons/svg/play.svg' }}" alt="" />
+          </div>
+          <div
+            class="mb-3"
+            (click)="pause()"
+            class="button-play"
+            *ngIf="bandPlay === true"
+          >
+            <img src="{{ '/assets/icons/svg/pause.svg' }}" alt="" />
           </div>
           <div class="linea-pasos">
             <div
@@ -109,7 +145,7 @@
           <div>{{ step }} / {{ lastPage }}</div>
         </div>
         <div>
-          <button type="button" class="controlButton" (click)="nextStep()">
+          <button type="button" class="controlButton ml-3" (click)="nextStep()">
             Continuar
           </button>
         </div>

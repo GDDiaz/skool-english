@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile",
@@ -10,7 +11,7 @@ export class ProfileComponent implements OnInit {
   public id: string;
   public cursoName: string;
 
-  constructor() {
+  constructor(private router: Router) {
     this.name = "Lorena Torres";
     this.id = "93248497";
     this.cursoName = "EASY ENGLISH";
