@@ -77,6 +77,13 @@ export class CoursesService {
         }));
   }
 
+  getDeleteById(id: number): Observable<User> {
+    return this.http.post<any>(`${environment.apiUrl}/v1/user/delete`, {id})
+        .pipe(map(response => {
+            return response;
+        }));
+  }
+
   newUser(user) {
     return this.http.post<any>(`${environment.apiUrl}/v1/user`, user)
     .pipe(map(response => {

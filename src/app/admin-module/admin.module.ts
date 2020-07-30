@@ -25,6 +25,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserShowComponent } from './user-show/user-show.component';
 import { AttachFormComponent } from './attach-form/attach-form.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AttachFormComponent } from './attach-form/attach-form.component';
     FormsModule,
     QuillModule.forRoot(),
     ngfModule,
+    PdfViewerModule,
     MatDialogModule, MatIconModule, MatButtonModule,
     MatExpansionModule, MatTooltipModule, MatRadioModule,
     MatCheckboxModule, MatStepperModule, MatMenuModule, DragDropModule

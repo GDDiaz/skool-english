@@ -16,6 +16,9 @@
         <small class="text-muted p-t-30 db">Phone</small><h6>{{user.phone_number}}</h6>
       </div>
       <a class="btn btn-light float-left" [routerLink]="'/admin/students/edit/'+userId">Editar</a>
+      <button  class="btn bg-primary-red float-right" (click)="delete()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>Eliminar
+      </button>
   </div>
   </div>
 
