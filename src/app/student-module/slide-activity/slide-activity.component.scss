@@ -52,13 +52,13 @@
     width: 100%;
 
     .linea-pasos {
-      height: 10px;
+      height: 4px;
       background: #eeeeee;
       border-radius: 20px;
       .completado {
         background-color: red;
         border-radius: 20px;
-        height: 10px;
+        height: 4px;
       }
     }
   }

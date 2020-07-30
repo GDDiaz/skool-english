@@ -21,10 +21,18 @@
       <h2>OBJECTIVES</h2>
       <h4 class="mb-3">I will be able to - Yo seré capaz de:</h4>
       <br />
-      <div *ngFor="let item of objective.objectivesArray" class="objective">
+      <div
+        *ngFor="let item of objective.objectivesArray; let i = index"
+        class="objective"
+      >
         <div *ngIf="item.icon !== ''"></div>
-        <div *ngIf="item.icon === ''" style="color: #374174;">
-          <i class="fas fa-book-open"></i>
+        <div
+          *ngIf="item.icon === ''"
+          style="font-size: 1.2rem;"
+          class="objective-icon"
+          [ngStyle]="{ color: i % 2 ? arrayColors[0] : arrayColors[1] }"
+        >
+          <i class="fas fa-bullseye"></i>
         </div>
         <div [innerHTML]="item.objective" class="objective-text"></div>
       </div>

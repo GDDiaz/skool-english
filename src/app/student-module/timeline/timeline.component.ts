@@ -120,7 +120,7 @@ export class TimelineComponent implements OnInit {
 
   scroll(e) {
     let element = document.getElementById(e);
-    element.scrollIntoView();
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 }
 

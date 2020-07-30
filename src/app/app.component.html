@@ -1,8 +1,6 @@
 <app-navbar
   *ngIf="
-    currentUser &&
-    currentUser.user?.type === 0 &&
-    actualURL !== '/student/profile'
+    currentUser && currentUser.user?.type === 0 && actualURL === '/student'
   "
 ></app-navbar>
 <div
@@ -15,12 +13,10 @@
   ></app-sidebar-admin>
 
   <!-- Page Content -->
-  <div id="page-content-wrapper">
-    <img
-      src="assets/lineaTiempo.svg"
-      class="rounded-circle fondo"
-      *ngIf="actualURL === '/student'"
-    />
+  <div
+    id="page-content-wrapper"
+    [ngClass]="{ imgFondo: actualURL === '/student' }"
+  >
     <app-navbar-admin
       *ngIf="currentUser && currentUser.user?.type === 1"
     ></app-navbar-admin>
@@ -47,7 +43,7 @@
           />
         </svg> -->
       </div>
-      <app-footer></app-footer>
     </div>
+    <app-footer></app-footer>
   </div>
 </div>

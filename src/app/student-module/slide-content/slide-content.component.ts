@@ -19,7 +19,8 @@ export class SlideContentComponent implements OnInit {
   public lastPage: number;
   public progress: number;
   public width: any;
-
+  public arrayColors: Array<string>;
+  public actualColor: string;
   public bandPlay: boolean;
   public audio: any;
   constructor(private studenService: StudentService) {
@@ -28,10 +29,10 @@ export class SlideContentComponent implements OnInit {
     this.video = "";
     this.objective = "";
     this.wordsBank = [];
-
     this.focus = "";
     this.pageWordBank = 0;
     this.bandPlay = false;
+    this.arrayColors = ["#6FD6AB", "#FF9446", "#EC1B23"];
   }
 
   ngOnInit(): void {
@@ -113,5 +114,8 @@ export class SlideContentComponent implements OnInit {
     this.bandPlay = false;
     this.audio.pause();
     console.log(this.bandPlay);
+  }
+  changeColor(i) {
+    console.log(i);
   }
 }
