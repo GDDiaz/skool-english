@@ -46,6 +46,7 @@ main {
 }
 
 .container-fluid {
+  overflow: hidden;
   min-height: calc(100vh - 100px);
   &.inside {
     padding: 30px 10px;

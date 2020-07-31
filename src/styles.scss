@@ -53,3 +53,8 @@ body {
     display: none !important;
   }
 }
+@media (max-width: 769px) {
+  .container {
+    background: #ededed;
+  }
+}

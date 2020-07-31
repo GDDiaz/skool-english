@@ -85,6 +85,10 @@ export class SlideContentComponent implements OnInit {
     }
   }
   nextStep() {
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+    }
     this.progress = this.step / this.lastPage;
     if (this.step === this.lastPage) {
       let data = {
