@@ -34,11 +34,7 @@
   display: flex;
   align-items: center;
 }
-
-#page-content-wrapper {
-  width: 100%;
-  position: relative;
-
+main {
   &.imgFondo {
     background-size: cover;
     background-image: url("/assets/lineaTiempo.svg");
@@ -50,8 +46,10 @@
 }
 
 .container-fluid {
-  padding-left: 0px;
   min-height: calc(100vh - 100px);
+  &.inside {
+    padding: 30px 10px;
+  }
 }
 
 .fondo {

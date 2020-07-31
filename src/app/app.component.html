@@ -1,20 +1,10 @@
-<app-navbar
-  *ngIf="
-    currentUser && currentUser.user?.type === 0 && actualURL === '/student'
-  "
-></app-navbar>
-<div
-  class="toggled"
-  [ngClass]="{ 'd-flex': currentUser && currentUser.user?.type === 1 }"
-  id="wrapper"
->
+<div class="page-wrapper chiller-theme toggled">
   <app-sidebar-admin
     *ngIf="currentUser && currentUser.user?.type === 1"
   ></app-sidebar-admin>
 
-  <!-- Page Content -->
-  <div
-    id="page-content-wrapper"
+  <main
+    [ngClass]="{ 'page-content': currentUser && currentUser.user?.type === 1 }"
     [ngClass]="{ imgFondo: actualURL === '/student' }"
   >
     <app-navbar-admin
@@ -22,15 +12,21 @@
     ></app-navbar-admin>
     <div
       class="container-fluid"
-      [ngClass]="{ inside: actualURL !== '/student' }"
+      [ngClass]="{
+        inside:
+          actualURL !== '/student' &&
+          currentUser &&
+          currentUser.user?.type === 0
+      }"
     >
-      <div class="container" role="main">
+      <app-navbar *ngIf="actualURL === '/student'"></app-navbar>
+
+      <div class="container">
         <router-outlet></router-outlet>
-        <app-footer
-          *ngIf="currentUser && currentUser.user?.type === 0"
-        ></app-footer>
       </div>
     </div>
-    <app-footer></app-footer>
-  </div>
+    <app-footer
+      *ngIf="currentUser && currentUser.user?.type === 0"
+    ></app-footer>
+  </main>
 </div>
