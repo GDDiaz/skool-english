@@ -43,11 +43,30 @@ export class SlideComponent implements OnInit {
         }
       },
       () => {
+        this.visitado();
         if (this.data === undefined) {
           console.log("undefined");
 
           this._router.navigate(["/student"]);
         }
+      }
+    );
+  }
+  visitado() {
+    let json = {
+      slide_id: this.dataSlides[this.actualSlide].id,
+      status: "visitado",
+      course_id: 3,
+      unit_id: this.dataSlides[this.actualSlide].unit_id,
+      response_user: null,
+    };
+    console.log(json);
+    this.studentService.saveAnswer(json).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
       }
     );
   }

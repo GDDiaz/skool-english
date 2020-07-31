@@ -2,6 +2,12 @@
   <div *ngIf="questions.length <= 0">
     <h1>Esta actividad no tiene preguntas aun</h1>
   </div>
+  <a class="ml-auto" [routerLink]="['/student']">
+    <img
+      src="assets/logo/SkooL Centro Educativo 2017-02.png"
+      class="rounded-circle"
+    />
+  </a>
   <div class="content-type" *ngIf="questions.length > 0">
     <div class="imagen">
       <img src="{{ '/assets/images/dress.png' }}" alt="" />
