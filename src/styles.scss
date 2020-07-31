@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -27,22 +26,35 @@ $skool-theme: mat-light-theme($skool-primary, $skool-accent, $skool-warn);
 @include angular-material-theme($skool-theme);
 
 /* You can add global styles to this file, and also import other style files */
-@import './stylings/_app.scss';
-@import './stylings/form-pages.scss';
-@import './stylings/_timeline.scss';
-@import './stylings/card-page.scss';
-@import './stylings/other-pages.scss';
-@import './stylings/dropify.scss';
+@import "./stylings/_app.scss";
+@import "./stylings/form-pages.scss";
+@import "./stylings/_timeline.scss";
+@import "./stylings/card-page.scss";
+@import "./stylings/other-pages.scss";
+@import "./stylings/dropify.scss";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f7f7fa;
+  z-index: -1000;
+}
 
-.mat-expansion-panel:not([class*=mat-elevation-z]) {
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
   box-shadow: none !important;
 }
 
 .hidden-stepper {
   .mat-horizontal-stepper-header-container {
     display: none !important;
+  }
+}
+@media (max-width: 769px) {
+  .container {
+    background: #ededed;
   }
 }

@@ -1,8 +1,52 @@
 <div class="container-nav">
-  <nav class="navbar navbar-skool navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-skool navbar-expand-lg navbar-light">
+    <div class="navbar-logo">
+      <a class="mx-auto" [routerLink]="['/student']">
+        <img
+          src="assets/logo/SkooL Centro Educativo 2017-02.png"
+          class="rounded-circle"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
     <div
-      class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0"
+      class="collapse navbar-collapse navbar-items"
+      id="navbarSupportedContent"
     >
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link">RECURSOS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">MENSAJES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">CALIFICACIONES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/student/profile']"
+            >PERFIL DE ESTUDIANTE</a
+          >
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<!-- <div class="container-nav">
+  <nav class="navbar navbar-skool navbar-expand-lg navbar-dark">
+    <div class="navbar-collapse collapse dual-collapse2 order-1 order-md-0">
       <ul class="navbar-nav ml-auto text-center">
         <li class="nav-item">
           <a
@@ -25,7 +69,7 @@
         </li>
       </ul>
     </div>
-    <div class="mx-auto my-2 order-0 order-md-1 position-relative">
+    <div class="my-2 order-0 order-md-1 position-relative">
       <a class="mx-auto" [routerLink]="['/student']">
         <img
           src="assets/logo/SkooL Centro Educativo 2017-02.png"
@@ -41,9 +85,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
-    <div
-      class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2"
-    >
+    <div class="navbar-collapse collapse dual-collapse2 order-2 order-md-2">
       <ul class="navbar-nav mr-auto text-center">
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
@@ -60,3 +102,4 @@
     </div>
   </nav>
 </div>
+ -->

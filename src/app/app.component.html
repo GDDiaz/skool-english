@@ -1,20 +1,31 @@
 <div class="page-wrapper chiller-theme toggled">
-  <app-sidebar-admin *ngIf="currentUser && currentUser.user?.type === 1"></app-sidebar-admin>
+  <app-sidebar-admin
+    *ngIf="currentUser && currentUser.user?.type === 1"
+    ></app-sidebar-admin>
 
-  <main [ngClass]="{ 'page-content': currentUser && currentUser.user?.type === 1 }">
-    <app-navbar-admin *ngIf="currentUser && currentUser.user?.type === 1"></app-navbar-admin>
-    <div class="container-fluid">
-      <img
-      src="assets/lineaTiempo.svg"
-      class="rounded-circle fondo"
-      *ngIf="actualURL === '/student'"
-    />
-      <app-navbar *ngIf="currentUser && currentUser.user?.type === 0 &&  actualURL !== '/student/profile'"></app-navbar>
+  <main
+    [ngClass]="{ 'page-content': currentUser && currentUser.user?.type === 1, 'imgFondo': actualURL === '/student' && currentUser.user?.type === 0 }"
+    >
+    <app-navbar-admin
+      *ngIf="currentUser && currentUser.user?.type === 1"
+    ></app-navbar-admin>
+    <div
+      class="container-fluid"
+      [ngClass]="{
+        'inside':
+          actualURL !== '/student' &&
+          currentUser &&
+          currentUser.user?.type === 0
+      }"
+    >
+      <app-navbar *ngIf="actualURL === '/student' && currentUser && currentUser.user?.type === 0"></app-navbar>
 
       <div class="container">
         <router-outlet></router-outlet>
-        <app-footer *ngIf="currentUser && currentUser.user?.type === 0"></app-footer>
       </div>
     </div>
+    <app-footer
+      *ngIf="currentUser && currentUser.user?.type === 0"
+    ></app-footer>
   </main>
 </div>

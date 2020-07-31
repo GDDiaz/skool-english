@@ -11,7 +11,7 @@
     background: #fff;
     width: 100%;
     padding: 24px 110px;
-
+    border-radius: 11px;
     .imagen {
       img {
         width: 25%;
@@ -37,13 +37,13 @@
       width: 55%;
 
       .linea-pasos {
-        height: 10px;
+        height: 4px;
         background: #eeeeee;
         border-radius: 20px;
         .completado {
           background-color: red;
           border-radius: 20px;
-          height: 10px;
+          height: 4px;
         }
       }
     }

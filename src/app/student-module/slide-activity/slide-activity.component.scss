@@ -5,6 +5,7 @@
   padding: 24px 110px;
   margin-bottom: 20px;
   position: relative;
+  border-radius: 11px;
   .audio-content {
     width: 100%;
     display: flex;
@@ -52,13 +53,13 @@
     width: 100%;
 
     .linea-pasos {
-      height: 10px;
+      height: 4px;
       background: #eeeeee;
       border-radius: 20px;
       .completado {
         background-color: red;
         border-radius: 20px;
-        height: 10px;
+        height: 4px;
       }
     }
   }

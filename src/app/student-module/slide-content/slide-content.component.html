@@ -1,5 +1,11 @@
 <div class="container-content">
   <ng-container *ngIf="video !== '' && step === 1">
+    <a class="ml-auto" [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
     <div class="content-type">
       <div [innerHTML]="video"></div>
     </div>
@@ -16,15 +22,29 @@
   </ng-container>
 
   <ng-container *ngIf="objective !== '' && step === 2">
+    <a class="ml-auto" [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
     <div class="content-type">
       <h1 class="mb-5">{{ objective.title }}</h1>
       <h2>OBJECTIVES</h2>
       <h4 class="mb-3">I will be able to - Yo seré capaz de:</h4>
       <br />
-      <div *ngFor="let item of objective.objectivesArray" class="objective">
+      <div
+        *ngFor="let item of objective.objectivesArray; let i = index"
+        class="objective"
+      >
         <div *ngIf="item.icon !== ''"></div>
-        <div *ngIf="item.icon === ''" style="color: #374174;">
-          <i class="fas fa-book-open"></i>
+        <div
+          *ngIf="item.icon === ''"
+          style="font-size: 1.2rem;"
+          class="objective-icon"
+          [ngStyle]="{ color: i % 2 ? arrayColors[0] : arrayColors[1] }"
+        >
+          <i class="fas fa-bullseye"></i>
         </div>
         <div [innerHTML]="item.objective" class="objective-text"></div>
       </div>
@@ -153,6 +173,12 @@
     </div>
   </ng-container>
   <ng-container *ngIf="focus !== '' && step === 4">
+    <a class="ml-auto" [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
     <div class="content-type">
       <div class="mb-4"><h1>LENGUAGE FOCUS</h1></div>
       <div [innerHTML]="focus" style="text-align: center;" class="mb-5"></div>

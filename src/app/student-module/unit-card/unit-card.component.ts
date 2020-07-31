@@ -20,6 +20,8 @@ export class UnitCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.dataToCard);
+
     this.calcProgress();
 
     if (this.positionIcon % 2 === 0) {

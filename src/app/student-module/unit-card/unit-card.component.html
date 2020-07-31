@@ -6,9 +6,7 @@
     </div>
   </div>
   <div class="progreso">
-    <div>
-      <p>Nice to meet you</p>
-    </div>
+    <div class="mb-3">{{ dataToCard.name }}</div>
     <div>{{ progress }}% Completado</div>
     <div class="progress-bar">
       <div class="completed-bar" [ngStyle]="{ width: progress + '%' }"></div>

@@ -34,32 +34,31 @@
   display: flex;
   align-items: center;
 }
+main {
+  &.imgFondo {
+    background-size: cover;
+    background-image: url("/assets/lineaTiempo.svg");
+    background-blend-mode: soft-light;
 
-#page-content-wrapper {
-  width: 100%;
-  position: relative;
-  .fondo {
-    position: absolute;
-    top: 0;
-    left: -246px;
-    z-index: -1000;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 
-
 .container-fluid {
-  padding-right: 0px !important;
-  padding-left: 0px !important;
-  width: 100%;
+  overflow: hidden;
+  min-height: calc(100vh - 100px);
+  &.inside {
+    padding: 30px 10px;
+  }
 }
 
 .fondo {
   position: absolute;
-    top: 0;
-    left: -246px;
-    z-index: -1000;
+  top: 0;
+  left: -246px;
+  z-index: -1000;
 }
-
 
 /* Responsive Styles */
 @media (max-width: 690px) {
@@ -68,8 +67,6 @@
     padding-bottom: 127px !important;
   }
 }
-
-
 
 /*----------------page-wrapper----------------*/
 
@@ -413,11 +410,10 @@
   background: transparent;
 }
 
-
 /*-----------------------------chiller-theme-------------------------------------------------*/
 
 .chiller-theme .sidebar-wrapper {
-    background: #31353D;
+    background: #31353d;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-header,
@@ -436,17 +432,17 @@
 .chiller-theme .sidebar-wrapper .sidebar-header .user-info .user-status,
 .chiller-theme .sidebar-wrapper .sidebar-search input.search-menu,
 .chiller-theme .sidebar-wrapper .sidebar-search .input-group-text,
-.chiller-theme .sidebar-wrapper .sidebar-brand>a,
+.chiller-theme .sidebar-wrapper .sidebar-brand > a,
 .chiller-theme .sidebar-wrapper .sidebar-menu ul li a,
-.chiller-theme .sidebar-footer>a {
+.chiller-theme .sidebar-footer > a {
     color: #818896;
 }
 
-.chiller-theme .sidebar-wrapper .sidebar-menu ul li:hover>a,
-.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active>a,
+.chiller-theme .sidebar-wrapper .sidebar-menu ul li:hover > a,
+.chiller-theme .sidebar-wrapper .sidebar-menu .sidebar-dropdown.active > a,
 .chiller-theme .sidebar-wrapper .sidebar-header .user-info,
-.chiller-theme .sidebar-wrapper .sidebar-brand>a:hover,
-.chiller-theme .sidebar-footer>a:hover i {
+.chiller-theme .sidebar-wrapper .sidebar-brand > a:hover,
+.chiller-theme .sidebar-footer > a:hover i {
     color: #b8bfce;
 }
 
