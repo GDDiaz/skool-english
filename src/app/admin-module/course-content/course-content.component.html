@@ -138,7 +138,18 @@
                 </ng-container>
 
               </div>
-              <img *ngIf="showImage" style="width:100%" src="assets/images/blank_page.jpg">
+              <div *ngIf="showImage && course !== null">
+                <h3 class="card-title text-center">{{ course.name }}</h3>
+                <div style="width: 100%" class="ql-editor" [innerHTML]="createIframe(course.video_url)"></div>
+                <h6>Autor: {{ course.author }}</h6>
+
+                <div class="card-body text-center">
+                  <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Edita curso</button>
+                  <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-red btn-md btn-rounded">Eliminar</button>
+                </div>
+              </div>
+
+              <img *ngIf="showImage && course === null" style="width:100%" src="assets/images/blank_page.jpg">
           </div>
       </div>
   </div>

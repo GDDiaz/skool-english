@@ -63,6 +63,10 @@ export class CoursesService {
         }));
   }
 
+  getCourseById(id: number): Observable<Course> {
+    return this.http.get<any>(`${environment.apiUrl}/v1/course/info/${id}`);
+  }
+
   getUsers(type: number): Observable<User2[]> {
     return this.http.get<any>(`${environment.apiUrl}/v1/users/${type}`)
         .pipe(map(response => {

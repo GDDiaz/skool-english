@@ -5,6 +5,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs/internal/Subject';
 import { Observable } from 'rxjs/internal/Observable';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-course-content',
@@ -24,10 +25,11 @@ export class CourseContentComponent implements OnInit {
   showActivityForm = false;
   showSlideComponent = false;
   showImage = true;
+  course = null;
   units = new Map<string, any>();
   public position: Subject<any>;
   public positionUnit: Subject<any>;
-  constructor(private route: ActivatedRoute, private courseService: CoursesService) {
+  constructor(private route: ActivatedRoute, private courseService: CoursesService, private sanitizer: DomSanitizer) {
     this.position = new Subject<any>();
     this.positionUnit = new Subject<any>();
    }
@@ -44,6 +46,11 @@ export class CourseContentComponent implements OnInit {
               }
             }
           });
+
+          this.courseService.getCourseById(this.courseId).subscribe(
+            result => this.course = result,
+            error  => console.error(error)
+          );
         }
     }, error => console.error(error));
 
@@ -192,6 +199,26 @@ export class CourseContentComponent implements OnInit {
       this.units.set(tmp[index].id, tmp[index]);
     }
     this.positionUnit.next(unitsOrdered);
+  }
+
+  byPassHTML(html: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  createIframe(url: string) {
+    if (url.includes('<iframe')) {
+      return this.byPassHTML(url);
+    } else if (url.includes('youtu')) {
+      const matchs = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+      return this.byPassHTML(`<iframe width="560"
+      height="315"
+      src="https://www.youtube.com/embed/${matchs[1]}"
+      frameborder="0" allow="accelerometer;
+      autoplay; encrypted-media; gyroscope;
+      picture-in-picture" allowfullscreen></iframe>`);
+    } else {
+      return this.byPassHTML(url);
+    }
   }
 
 }
