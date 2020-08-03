@@ -3,12 +3,14 @@
     <img
       src="assets/logo/SkooL Centro Educativo 2017-02.png"
       class="rounded-circle"
+      *ngIf="photo === null"
     />
+    <img src="{{ photo }}" class="rounded-circle" *ngIf="photo !== null" />
   </a>
 </div>
 <div class="profile">
   <div class="photo">
-    <img src="{{ '/assets/images/dress.png' }}" alt="" />
+    <img src="/assets/images/dress.png" alt="" />
   </div>
   <div class="info">
     <h2 style="color: #283890;">{{ name }}</h2>

@@ -1,8 +1,12 @@
 <div class="unit-card {{ positionIconClass }}">
-  <div class="icon-card">
-    <img src="{{ '/assets/icons/svg/ear.svg' }}" alt="" />
+  <div
+    class="icon-card"
+    *ngIf="dataToCard.icon !== ''"
+    [ngStyle]="{ 'background-color': dataToCard.color }"
+  >
+    <img src="/assets/icons/svg/{{ dataToCard.icon }}" alt="" />
     <div>
-      Listening
+      {{ dataToCard.type }}
     </div>
   </div>
   <div class="progreso">
