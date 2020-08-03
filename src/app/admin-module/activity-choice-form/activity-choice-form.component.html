@@ -26,12 +26,22 @@
             <app-upload-file-widget [accept]="'audio/*'" (formData)="setFormData($event, i)"></app-upload-file-widget>
           </div>
 
+          <div class="form-group" *ngIf="!hasImageFile(i)">
+            <label class="control-label" for="word_bank_title">Imagen</label>
+            <app-upload-file-widget [accept]="'image/*'" (formData)="setFormDataImage($event, i)"></app-upload-file-widget>
+          </div>
+
           <div class="text-center" *ngIf="hasAudioFile(i)">
             <audio controls class="">
               <source [src]="sanitizerUrl(hasAudioFile(i), true)">
               Your browser does not support the <code>audio</code> element.
             </audio>
             <span class="float-right" (click)="deleteAudio(i)"><i class="fa fa-times"></i></span>
+          </div>
+
+          <div class="text-center" *ngIf="hasImageFile(i)">
+            <img [src]="sanitizerUrl(hasAudioFile(i), true)">
+            <span class="float-right" (click)="deleteAudio(i, 'image')"><i class="fa fa-times"></i></span>
           </div>
 
           <!-- Unica respuesta start-->

@@ -3,6 +3,8 @@ import { CoursesService } from '../services/courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user';
 import { FormBuilder, FormArray, FormControl } from '@angular/forms';
+import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -22,7 +24,8 @@ export class UserShowComponent implements OnInit {
     private courseService: CoursesService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sanitizer: DomSanitizer
   ) {
     this.form = this.formBuilder.group({
       courses: new FormArray([])
@@ -92,6 +95,13 @@ export class UserShowComponent implements OnInit {
         }
         );
     }
+  }
+
+  sanitizerUrl(url, addApiUrl) {
+    if (addApiUrl) {
+      url = `${environment.baseUrl + url}` ;
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 }

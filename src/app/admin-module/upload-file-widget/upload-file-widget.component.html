@@ -27,20 +27,33 @@
 
 
 <div style="margin-bottom: 20px; margin-top: 20px">
-
-<ol *ngFor="let item of files;let i=index">
-  <li>
-    <i *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0" class="fa fa-file-image"></i>
-    <i *ngIf="['video/mp4'].indexOf(item.type)>=0" class="fa fa-file-video"></i>
-    <i *ngIf="['audio/mpeg','audio/mp4'].indexOf(item.type)>=0" class="fa fa-file-audio"></i>
-    {{ item.name }} - ( {{ item.size/1024/1024 | number:'.2' }} MB)
-    <button type="button"
-          class="theme-progress btn btn-xs"
-          (click)="files.splice(i,1)"
-        >
-          <i  class="theme-progress fas fa-times" ></i>
-        </button>
-    </li>
-</ol>
-
+    
+  <div class="text-center" *ngIf="showImageContent">
+    <ng-container *ngFor="let item of files;let i=index">
+      <div class="previewIcon" [ngfBackground]="item"></div>
+      <button type="button"
+        class="theme-progress btn btn-xs"
+        (click)="files.splice(i,1)"
+      >
+        <i  class="theme-progress fas fa-times" ></i>
+      </button>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="!showImageContent">
+    <ol *ngFor="let item of files;let i=index">
+      <li>
+        <i *ngIf="['image/gif','image/png','image/jpeg'].indexOf(item.type)>=0" class="fa fa-file-image"></i>
+        <i *ngIf="['video/mp4'].indexOf(item.type)>=0" class="fa fa-file-video"></i>
+        <i *ngIf="['audio/mpeg','audio/mp4'].indexOf(item.type)>=0" class="fa fa-file-audio"></i>
+        {{ item.name }} - ( {{ item.size/1024/1024 | number:'.2' }} MB)
+        <button type="button"
+              class="theme-progress btn btn-xs"
+              (click)="files.splice(i,1)"
+            >
+              <i  class="theme-progress fas fa-times" ></i>
+            </button>
+        </li>
+    </ol>
+  </ng-container>
+  
 </div>

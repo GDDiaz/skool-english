@@ -37,3 +37,17 @@ ol li::before {
   margin-left: -7px;
   border: 1px solid #c3c3c3;
 }
+
+.previewIcon {
+  padding: .25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: .25rem;
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+}
+
+.theme-progress {
+  vertical-align: top;
+}

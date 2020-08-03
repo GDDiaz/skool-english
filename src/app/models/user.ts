@@ -13,6 +13,7 @@ export class User {
   lastName: string;
   token: string;
   type: any;
+  photo: string;
 }
 
 export class User2 {
