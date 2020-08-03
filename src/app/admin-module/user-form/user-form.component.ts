@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-form',
@@ -16,6 +18,7 @@ export class UserFormComponent implements OnInit {
   @Output() response;
 
   public disableButton = false;
+  public formData: FormData = null;
   public title;
   public action = 'new';
   public form = this.fb.group({
@@ -24,7 +27,8 @@ export class UserFormComponent implements OnInit {
     email: ['', [Validators.required, Validators.email ]],
     phone_number: [''],
     password: ['', Validators.required],
-    confirm_password: ['']
+    confirm_password: [''],
+    photo: ['']
   }, {
     validator: this.ConfirmedValidator('password', 'confirm_password')
   });
@@ -32,7 +36,8 @@ export class UserFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private courseService: CoursesService,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private sanitizer: DomSanitizer
     ) { }
 
   ngOnInit() {
@@ -57,6 +62,14 @@ export class UserFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.formData !==  null) {
+      this.sendImage();
+    } else {
+      this.sendRequest();
+    }
+  }
+
+  private sendRequest() {
     this.disableButton = true;
     const values = this.form.value;
     if (this.action === 'new') {
@@ -67,6 +80,7 @@ export class UserFormComponent implements OnInit {
         password: values.password,
         identification: values.identification,
         phone_number: values.phone_number,
+        photo: values.photo
       };
 
       this.courseService.newUser(data).subscribe(r => {
@@ -84,6 +98,7 @@ export class UserFormComponent implements OnInit {
         password: values.password,
         identification: values.identification,
         phone_number: values.phone_number,
+        photo: values.photo
       };
       this.courseService.editUser(this.userId, data).subscribe(r => {
         if (this.type === 0) {
@@ -108,6 +123,38 @@ export class UserFormComponent implements OnInit {
             matchingControl.setErrors(null);
         }
     };
+  }
+
+  sanitizerUrl(url, addApiUrl) {
+    if (addApiUrl) {
+      url = `${environment.baseUrl + url}` ;
+    }
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  setFormDataImage(event) {
+    this.formData = event;
+  }
+
+  private sendImage() {
+    this.courseService.uploadFiles(this.formData).subscribe(
+      response =>  {
+        this.form.get('photo').patchValue(response.path);
+        this.sendRequest();
+      },
+      error => console.error(error)
+    );
+  }
+
+  deletePhoto() {
+    this.form.get('photo').patchValue(null);
+  }
+
+  hasImageFile() {
+    if (this.form.get('photo').value !==  null && this.form.get('photo').value !== '') {
+      return this.form.get('photo').value;
+    }
+    return false;
   }
 
 }

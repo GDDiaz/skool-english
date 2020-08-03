@@ -25,7 +25,9 @@ export class ActivityChoiceFormComponent implements OnInit {
     questions: this.fb.array([])
   });
   private formData: FormData[] = [];
+  private formDataImage: FormData[] = [];
   private promises = [];
+  private promisesImage = [];
 
   constructor(private fb: FormBuilder, private courseService: CoursesService, private sanitizer: DomSanitizer) { }
 
@@ -67,6 +69,7 @@ export class ActivityChoiceFormComponent implements OnInit {
       return this.fb.group({
         question: ['', Validators.required],
         audio: [''],
+        image: [''],
         answer: ['', Validators.required],
         options: this.fb.array([])
       });
@@ -118,16 +121,29 @@ export class ActivityChoiceFormComponent implements OnInit {
     this.formData[index] = event;
   }
 
+  setFormDataImage(event, index) {
+    this.formDataImage[index] = event;
+  }
+
   uploadFiles() {
     for (const formData of this.formData) {
       this.promises.push(this.courseService.uploadFiles(formData).toPromise());
+    }
+    for (const formData of this.formDataImage) {
+      this.promisesImage.push(this.courseService.uploadFiles(formData).toPromise());
     }
     return Promise.all(this.promises).then(values => {
       for (let i = 0; i < values.length; i++) {
         // tslint:disable-next-line:no-string-literal
         this.questions.controls[i]['controls']['audio'].patchValue(values[i].path);
       }
-      this.sendRequest();
+      Promise.all(this.promisesImage).then(values => {
+        for (let i = 0; i < values.length; i++) {
+          // tslint:disable-next-line:no-string-literal
+          this.questions.controls[i]['controls']['image'].patchValue(values[i].path);
+        }
+        this.sendRequest();
+      });
     }).catch(error => console.error(error));
   }
 
@@ -157,12 +173,22 @@ export class ActivityChoiceFormComponent implements OnInit {
     return false;
   }
 
-  deleteAudio(workBankIndex) {
+  hasImageFile(questionIndex) {
+    const questionControls = this.questions.controls[questionIndex] as FormArray;
+    // tslint:disable-next-line:no-string-literal
+    if (questionControls['controls']['image'] !== undefined && questionControls['controls']['image'] !== '') {
+      // tslint:disable-next-line:no-string-literal
+      return questionControls['controls']['image'].value;
+    }
+    return false;
+  }
+
+  deleteAudio(workBankIndex, key = 'audio') {
     const questionControls = this.questions.controls[workBankIndex] as FormArray;
     // tslint:disable-next-line:no-string-literal
-    if (questionControls['controls']['audio'] !== undefined && questionControls['controls']['audio'] !== '') {
+    if (questionControls['controls'][key] !== undefined && questionControls['controls'][key] !== '') {
       // tslint:disable-next-line:no-string-literal
-      return questionControls['controls']['audio'].patchValue(null);
+      return questionControls['controls'][key].patchValue(null);
     }
   }
 

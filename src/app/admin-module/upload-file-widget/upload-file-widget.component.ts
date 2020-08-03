@@ -13,6 +13,8 @@ export class UploadFileWidgetComponent implements OnInit {
   maxSize: '200000';
   @Input()
   multiple = '0';
+  @Input()
+  showImageContent = false;
   @Output()
   formData: EventEmitter<FormData> = new EventEmitter<FormData>();
 

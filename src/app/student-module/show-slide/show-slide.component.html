@@ -107,11 +107,14 @@
   <mat-horizontal-stepper class="hidden-stepper">
     <ng-container *ngFor="let question of slide.content.questions; let i = index">
       <mat-step>
+        <div class="imagen">
+          <img class="img-thumbnail" *ngIf="question?.image && question.image !== '' " [src]="sanitizerUrl(question.image, true)" alt="" />
+        </div>
         <div class="ql-container ql-snow" style="border-width: 0;">
           <div style="width: 100%" class="ql-editor" [innerHTML]="byPassHTML(question.question)"></div>
         </div>
 
-        <div class="text-center">
+        <div class="text-center" *ngIf="question.audio !== ''">
           <audio controls class="">
             <source [src]="sanitizerUrl(question.audio, true)">
             Your browser does not support the <code>audio</code> element.
