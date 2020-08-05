@@ -21,6 +21,13 @@ export class CoursesService {
         }));
   }
 
+  editCourse(id, values) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/course/edit/${id}`, values)
+        .pipe(map(response => {
+            return response;
+        }));
+  }
+
   newUnit(unit) {
     return this.http.post<any>(`${environment.apiUrl}/v1/unit`, unit)
     .pipe(map(response => {

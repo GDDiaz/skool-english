@@ -99,6 +99,11 @@
                 </div>
               </div>
             </section>
+
+            <div class="card-body text-center">
+              <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Edita</button>
+              <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-red btn-md btn-rounded">Eliminar</button>
+            </div>
           </mat-expansion-panel>
         </mat-accordion>
         <div class="card-body text-center">
@@ -144,7 +149,7 @@
                 <h6>Autor: {{ course.author }}</h6>
 
                 <div class="card-body text-center">
-                  <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Edita curso</button>
+                  <a [routerLink]="['/admin/courses/edit', course.id]" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Edita curso</a>
                   <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-red btn-md btn-rounded">Eliminar</button>
                 </div>
               </div>
