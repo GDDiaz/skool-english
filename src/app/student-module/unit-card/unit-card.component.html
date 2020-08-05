@@ -11,7 +11,7 @@
   </div>
   <div class="progreso">
     <div class="mb-3">{{ dataToCard.name }}</div>
-    <div>{{ progress }}% Completado</div>
+    <div>{{ progress | number: "1.0-0" }}% Completado</div>
     <div class="progress-bar">
       <div class="completed-bar" [ngStyle]="{ width: progress + '%' }"></div>
     </div>
@@ -44,7 +44,7 @@
         >
           <i
             class="fas fa-check"
-            *ngIf="item.status_by_user"
+            *ngIf="item.status_by_user && item.status_by_user !== 'visitado'"
             style="color: #d7444b;"
           ></i>
         </div>

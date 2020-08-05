@@ -56,7 +56,7 @@ export class SlideComponent implements OnInit {
     let json = {
       slide_id: this.dataSlides[this.actualSlide].id,
       status: "visitado",
-      course_id: 3,
+      course_id: this.dataSlides[this.actualSlide].course_id,
       unit_id: this.dataSlides[this.actualSlide].unit_id,
       response_user: null,
     };
@@ -76,7 +76,7 @@ export class SlideComponent implements OnInit {
     let json = {
       slide_id: this.dataSlides[this.actualSlide].id,
       status: "completado",
-      course_id: 3,
+      course_id: this.dataSlides[this.actualSlide].course_id,
       unit_id: this.dataSlides[this.actualSlide].unit_id,
       response_user: JSON.stringify(data.dataAnswer),
     };
