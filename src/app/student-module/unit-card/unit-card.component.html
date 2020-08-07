@@ -34,6 +34,9 @@
         <p *ngIf="item.type === 'content'">
           {{ item.content.objective_title }}
         </p>
+        <p *ngIf="item.type === 'pdf'">
+          {{ item.content.name }}
+        </p>
         <p *ngIf="item.type === 'no data'">{{ item.content.name }}</p>
       </div>
 

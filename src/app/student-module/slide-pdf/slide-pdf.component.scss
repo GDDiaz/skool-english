@@ -1,0 +1,33 @@
+.container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .content-type {
+    text-align: center;
+    background: #fff;
+    width: 100%;
+    padding: 24px 110px;
+    border-radius: 11px;
+  }
+  .buttons {
+    margin: 15px 0px;
+    width: 100%;
+    display: flex;
+    .controlButton {
+      margin: 0 auto;
+      color: #374174;
+      font-weight: bold;
+      border: 1px solid #374174;
+      border-radius: 10px;
+      padding: 10px 30px;
+    }
+  }
+}
+@media (max-width: 769px) {
+  .container-content {
+    .content-type {
+      padding: 24px 10px;
+    }
+  }
+}

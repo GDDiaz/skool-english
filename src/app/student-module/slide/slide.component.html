@@ -22,3 +22,9 @@
     (nextSlide)="nextSlide($event)"
   ></app-slide-video>
 </div>
+<div *ngIf="tipo === 'pdf'">
+  <app-slide-pdf
+    [dataSlide]="data"
+    (nextSlide)="nextSlide($event)"
+  ></app-slide-pdf>
+</div>

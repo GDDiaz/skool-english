@@ -1,0 +1,22 @@
+<div class="container-content">
+  <ng-container *ngIf="srcPdf !== ''">
+    <a class="ml-auto" [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
+    <div class="content-type">
+      <pdf-viewer
+        [src]="srcPdf"
+        [render-text]="true"
+        style="display: block;"
+      ></pdf-viewer>
+    </div>
+    <div class="buttons">
+      <button type="button" class="controlButton" (click)="nextStep()">
+        Continuar
+      </button>
+    </div>
+  </ng-container>
+</div>

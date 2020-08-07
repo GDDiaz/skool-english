@@ -66,11 +66,15 @@ export class UnitCardComponent implements OnInit {
   }
 
   click(tipo, posicion, status) {
-    if (status !== "completado") {
+    /* if (status !== "completado") {
       this._router.navigate([
         "/student/slide/" + this.unidades[posicion].unit_id + "/" + posicion,
       ]);
-    }
+    } */
+
+    this._router.navigate([
+      "/student/slide/" + this.unidades[posicion].unit_id + "/" + posicion,
+    ]);
   }
   calcProgress() {
     let completados = 0;
