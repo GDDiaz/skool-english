@@ -1,12 +1,45 @@
+<h3 class="card-title text-center">{{title}}</h3>
+<form [formGroup]="form">
+  <div class="form-group">
+    <label class="control-label" for="title">Título de la actividad</label>
+    <input name="unit_activity[name]" id="title" type="text" formControlName="name" class="form-control" required>
+  </div>
 
-    <h3 class="card-title text-center">{{title}}</h3>
-    <form [formGroup]="form">
-      <div class="form-group">
-        <label class="control-label" for="title">Nombre de la activiada</label>
-        <input name="activityForm[name]" id="title" type="text" formControlName="name" class="form-control" required>
-      </div>
+  <div formArrayName="questions">
+    <h5>Imagenes</h5>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let questionGroup of questions.controls; let i=index"
+        [ngClass]="{'bg-light' : i%2 == 0}">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h5 class="m-b-0 font-medium">{{'Imagen #'+ (i+1)}}</h5>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div [formGroupName]="i">
+          <div class="form-group" *ngIf="!hasImageFile(i)">
+            <label class="control-label" for="word_bank_title">Imagen</label>
+            <app-upload-file-widget [accept]="'image/*'" (formData)="setFormDataImage($event, i)"></app-upload-file-widget>
+          </div>
+          <div class="text-center" *ngIf="hasImageFile(i)">
+            <img [src]="sanitizerUrl(hasImageFile(i), true)">
+            <span class="float-right" (click)="deleteAudio(i, 'image')"><i class="fa fa-times"></i></span>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="title">Título de la imagen</label>
+            <input name="unit_activity[name]" id="title" type="text" formControlName="question" class="form-control" required>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <section class="float-right">
+      <button (click)="addQuestion()" mat-mini-fab bg-primary-blue aria-label="Example icon button with a menu icon">
+        <mat-icon>add</mat-icon>
+      </button>
+    </section>
+  </div>
 
-      <div class="text-center">
-        <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)" (click)="onSubmit()">Guardar</button>
-      </div>
-    </form>
+  <div class="text-center">
+    <button style="width: 70%" class="btn bg-primary-blue " type="submit" [disabled]="!(form.valid && !disableButton)"
+      (click)="onSubmit()">Guardar</button>
+  </div>
+</form>

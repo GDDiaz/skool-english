@@ -23,6 +23,7 @@
                   <mat-icon class="drag-icon" *ngIf="item.type === 'quiz'">fact_check</mat-icon>
                   <mat-icon class="drag-icon" *ngIf="item.type === 'content'">article</mat-icon>
                   <mat-icon class="drag-icon" *ngIf="item.type === 'activity'"> wb_incandescent</mat-icon>
+                  <i class="fas fa-grip-vertical drag-icon" *ngIf="item.type === 'dragDrop'"></i>
                 </div>
                 <ng-container *ngIf="item.type === 'video'">{{item.content.video_title}}
                   <span>
@@ -60,6 +61,15 @@
                     </mat-menu>
                   </span>
                 </ng-container>
+                <ng-container *ngIf="item.type === 'dragDrop'">{{ item.content.name }}
+                  <span >
+                    <button mat-button [matMenuTriggerFor]="menuDrag"><i class="fas fa-ellipsis-v"></i></button>
+                    <mat-menu #menuDrag="matMenu">
+                     <button mat-menu-item (click)="editSlide(item, unit.id)"><i class="far fa-edit"></i> Editar</button>
+                     <button mat-menu-item (click)="deleteSlide(item, unit.id, i)"><i class="far fa-trash-alt"></i> Eliminar</button>
+                    </mat-menu>
+                  </span>
+                </ng-container>
                 <ng-container *ngIf="item.type === 'pdf'">{{ item.content.name }}
                   <span >
                     <button mat-button [matMenuTriggerFor]="menuPdf"><i class="fas fa-ellipsis-v"></i></button>
@@ -90,6 +100,9 @@
                     <button (click)="newSlide(unit.id, 'activity')" matTooltip="Actividades" mat-icon-button color="primary" >
                       <mat-icon>wb_incandescent</mat-icon>
                     </button>
+                    <button (click)="newSlide(unit.id, 'dragDrop')" matTooltip="Actividades" mat-icon-button color="primary" >
+                      <i class="fas fa-grip-vertical"></i>
+                    </button>
                     <button (click)="newSlide(unit.id, 'pdf')" matTooltip="PDF" mat-icon-button color="primary" >
                       <i class="fas fa-file-pdf"></i>
                     </button>
@@ -101,8 +114,10 @@
             </section>
 
             <div class="card-body text-center">
-              <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Edita</button>
-              <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-red btn-md btn-rounded">Eliminar</button>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button (click)="editUnit(unit)" class="m-t-10 m-b-20 waves-effect waves-dark btn  btn-light btn-md btn-rounded">Edita</button>
+                <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  btn-light btn-md btn-rounded">Eliminar</button>
+              </div>
             </div>
           </mat-expansion-panel>
         </mat-accordion>
@@ -118,7 +133,7 @@
           <div class="card-body">
               <div class="">
                 <ng-container *ngIf="showUnitForm">
-                  <app-unit-form [position]="unitsArray.length" class="col-md-12" [courseId]="courseId" (unit)="createdUnit($event)"></app-unit-form>
+                  <app-unit-form [unitEdit]="currentUnit" [position]="unitsArray.length" class="col-md-12" [courseId]="courseId" (unit)="createdUnit($event)"></app-unit-form>
                 </ng-container>
 
                 <ng-container *ngIf="showVideoForm">
@@ -138,6 +153,9 @@
                 <ng-container *ngIf="showActivityForm">
                   <app-activity-choice-form [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-activity-choice-form>
                 </ng-container>
+                <ng-container *ngIf="showDragForm">
+                  <app-activity-form [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-activity-form>
+                </ng-container>
                 <ng-container *ngIf="showPdfForm">
                   <app-attach-form [position]="currentPositionSlide" [slide]="currentSlide" [courseId]="courseId" [unitId]="currentUnitId" (test)="addSlide($event)"></app-attach-form>
                 </ng-container>
@@ -149,8 +167,10 @@
                 <h6>Autor: {{ course.author }}</h6>
 
                 <div class="card-body text-center">
-                  <a [routerLink]="['/admin/courses/edit', course.id]" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Edita curso</a>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <a [routerLink]="['/admin/courses/edit', course.id]" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-blue btn-md btn-rounded">Edita curso</a>
                   <button (click)="newUnit()" class="m-t-10 m-b-20 waves-effect waves-dark btn  bg-primary-red btn-md btn-rounded">Eliminar</button>
+                  </div>
                 </div>
               </div>
 

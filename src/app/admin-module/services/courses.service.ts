@@ -35,6 +35,11 @@ export class CoursesService {
     }));
   }
 
+  editUnit(id, data) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/unit/edit/${id}`, data)
+    .pipe(map(response => response ));
+  }
+
   newSlide(slide) {
     return this.http.post<any>(`${environment.apiUrl}/v1/slide`, slide)
     .pipe(map(response => {
