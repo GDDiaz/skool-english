@@ -12,7 +12,7 @@ export class SlidePdfComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.srcPdf = environment.baseUrl + this.dataSlide.files.path;
+    this.srcPdf = "http://api.skool.co/public" + this.dataSlide.files.path;
     console.log(this.srcPdf);
   }
 

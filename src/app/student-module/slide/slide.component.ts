@@ -44,6 +44,8 @@ export class SlideComponent implements OnInit {
       },
       () => {
         this.visitado();
+        console.log(this.actualSlide);
+
         if (this.data === undefined) {
           console.log("undefined");
 
@@ -73,6 +75,8 @@ export class SlideComponent implements OnInit {
 
   ngOnInit(): void {}
   nextSlide(data) {
+    console.log(data);
+
     let json = {
       slide_id: this.dataSlides[this.actualSlide].id,
       status: "completado",
@@ -89,20 +93,26 @@ export class SlideComponent implements OnInit {
         console.log(error);
       }
     );
-    this.actualSlide = this.actualSlide + 1;
+    console.log(Object.keys(this.dataSlides).length);
+    if (this.actualSlide < Object.keys(this.dataSlides).length - 1) {
+      this.actualSlide = this.actualSlide + 1;
+    }
+    console.log(this.actualSlide);
     if (this.dataSlides[this.actualSlide].status_by_user === "completado") {
       this.actualSlide = this.actualSlide + 1;
     }
 
     if (
       data.action === 1 &&
-      this.actualSlide < Object.keys(this.dataSlides).length
+      this.actualSlide < Object.keys(this.dataSlides).length - 1
     ) {
       this.lugarArray = this.lugarArray;
       this.data = this.dataSlides[this.actualSlide].content;
       this.tipo = this.dataSlides[this.actualSlide].type;
       console.log(this.data);
     } else {
+      console.log("dasdasd");
+
       this._router.navigate(["/student"]);
     }
   }
