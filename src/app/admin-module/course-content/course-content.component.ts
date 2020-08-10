@@ -17,12 +17,14 @@ export class CourseContentComponent implements OnInit {
   courseId;
   currentUnitId;
   currentSlide = null;
+  currentUnit = null;
   showUnitForm = false;
   showPdfForm = false;
   showVideoForm = false;
   showQuizForm = false;
   showContentForm = false;
   showActivityForm = false;
+  showDragForm = false;
   showSlideComponent = false;
   showImage = true;
   course = null;
@@ -85,14 +87,36 @@ export class CourseContentComponent implements OnInit {
     return data;
   }
 
+  set unitsArray(units) {
+    const data = [];
+    units.forEach((unit) => {
+      if (unit.hasOwnProperty('position') && unit.position !== null) {
+        data[unit.position] = unit;
+      } else {
+        data.push(unit);
+      }
+    });
+  }
+
   newUnit() {
+    this.currentUnit = null;
     this.hiddenAllForms();
     this.showUnitForm = true;
   }
 
   createdUnit(unit) {
-    this.units.set(unit.id, unit);
-    this.showUnitForm = false;
+    if (this.units.has(unit.id)) {
+      this.currentUnit.name = unit.name;
+      this.currentUnit.type = unit.type;
+      this.units.set(unit.id, unit);
+      this.unitsArray = this.unitsArray;
+      this.hiddenAllForms();
+      this.showImage = true;
+      this.currentUnit = null;
+    } else {
+      this.units.set(unit.id, unit);
+      this.showUnitForm = false;
+    }
   }
 
   newSlide(unitId, type) {
@@ -117,6 +141,9 @@ export class CourseContentComponent implements OnInit {
       case 'activity':
         this.showActivityForm = true;
         break;
+      case 'dragDrop':
+        this.showDragForm = true;
+        break;  
       case 'unit':
         this.showUnitForm = true;
         break;
@@ -152,6 +179,7 @@ export class CourseContentComponent implements OnInit {
     this.showQuizForm = false;
     this.showContentForm = false;
     this.showActivityForm = false;
+    this.showDragForm = false;
     this.showSlideComponent = false;
     this.showPdfForm = false;
     this.showImage = false;
@@ -162,6 +190,12 @@ export class CourseContentComponent implements OnInit {
     this.hiddenAllForms();
     this.currentSlide = slide;
     this.showForm(slide.type);
+  }
+
+  editUnit(unit: any) {
+    this.hiddenAllForms();
+    this.currentUnit = unit;
+    this.showForm('unit');
   }
 
   deleteSlide(slide: any, unitId, index) {

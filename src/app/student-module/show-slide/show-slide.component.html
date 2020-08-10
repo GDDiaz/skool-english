@@ -147,3 +147,15 @@
     <li >{{ file.attach.name }}</li>
   </ol>
 </ng-container>
+
+
+<ng-container *ngIf="slide.type === 'dragDrop'">
+  <h3 class="card-title text-center">{{slide.content.name}}</h3>
+  
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+
+    <div class="imagen example-box"  *ngFor="let image of dragDropImages" cdkDrag>
+      <img class="img-thumbnail" *ngIf="image !== '' " [src]="sanitizerUrl(image, true)" alt="" />
+    </div>
+  </div>
+</ng-container>

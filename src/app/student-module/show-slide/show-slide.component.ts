@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
+import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-show-slide',
   templateUrl: './show-slide.component.html',
@@ -9,9 +10,15 @@ import { environment } from '../../../environments/environment';
 export class ShowSlideComponent implements OnInit {
 
   @Input() slide: any;
+  dragDropImages = [];
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    if (this.slide.type === 'dragDrop') {
+      for (const question of this.slide.content.questions ) {
+        this.dragDropImages.push(question.image);
+      }
+    }
   }
   byPassHTML(html: string) {
     return this.sanitizer.bypassSecurityTrustHtml(html);
@@ -38,6 +45,10 @@ export class ShowSlideComponent implements OnInit {
       url = `${environment.baseUrl + url}` ;
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.dragDropImages, event.previousIndex, event.currentIndex);
   }
 
 }
