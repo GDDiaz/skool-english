@@ -68,6 +68,15 @@ export class CoursesService {
     .pipe(map(response => response));
   }
 
+  deleteUnit(id) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/unit/delete/${id}`, null)
+    .pipe(map(response => response));
+  }
+  deleteCourse(id) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/course/delete/${id}`, null)
+    .pipe(map(response => response));
+  }
+
   getAllCourse(): Observable<Course[]> {
     return this.http.get<any>(`${environment.apiUrl}/v1/course`)
         .pipe(map(response => {

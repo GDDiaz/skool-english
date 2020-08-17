@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material';
 import { QuillModule } from 'ngx-quill'
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -24,7 +26,8 @@ import { QuillModule } from 'ngx-quill'
     BrowserAnimationsModule,
     ReactiveFormsModule,
     QuillModule.forRoot(),
-    MatDialogModule
+    MatDialogModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
