@@ -27,6 +27,7 @@ import { FormsModule } from "@angular/forms";
 import { AudioButtonComponent } from "./audio-button/audio-button.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { SharedUiModule } from "../shared-ui-module/shared-ui.module";
+import { DragNdropComponent } from './drag-ndrop/drag-ndrop.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SharedUiModule } from "../shared-ui-module/shared-ui.module";
     SlideActivityComponent,
     AudioButtonComponent,
     ProfileComponent,
+    DragNdropComponent,
   ],
   imports: [
     StudentRoutingModule,

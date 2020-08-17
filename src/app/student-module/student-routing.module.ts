@@ -4,6 +4,7 @@ import { AuthGuard } from "../helpers/auth.guard";
 import { TimelineComponent } from "./timeline/timeline.component";
 import { SlideComponent } from "./slide/slide.component";
 import { ProfileComponent } from "./profile/profile.component";
+import { DragNdropComponent } from "./drag-ndrop/drag-ndrop.component";
 
 const routes: Routes = [
   { path: "", component: TimelineComponent, canActivate: [AuthGuard] },
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: "profile",
     component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "dragNdrop",
+    component: DragNdropComponent,
     canActivate: [AuthGuard],
   },
   // otherwise redirect to home
