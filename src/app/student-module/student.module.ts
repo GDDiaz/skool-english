@@ -29,6 +29,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { SharedUiModule } from "../shared-ui-module/shared-ui.module";
 import { SlidePdfComponent } from "./slide-pdf/slide-pdf.component";
 import { PdfViewerModule } from "ng2-pdf-viewer";
+import { DragNdropComponent } from "./drag-ndrop/drag-ndrop.component";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PdfViewerModule } from "ng2-pdf-viewer";
     AudioButtonComponent,
     ProfileComponent,
     SlidePdfComponent,
+    DragNdropComponent,
   ],
   imports: [
     StudentRoutingModule,
