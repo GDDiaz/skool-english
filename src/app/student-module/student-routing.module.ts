@@ -18,11 +18,6 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
   },
-  {
-    path: "dragNdrop",
-    component: DragNdropComponent,
-    canActivate: [AuthGuard],
-  },
   // otherwise redirect to home
   { path: "**", redirectTo: "" },
 ];

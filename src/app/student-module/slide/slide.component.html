@@ -28,3 +28,9 @@
     (nextSlide)="nextSlide($event)"
   ></app-slide-pdf>
 </div>
+<div *ngIf="tipo === 'dragDrop'">
+  <app-drag-ndrop
+    [dataSlide]="data"
+    (nextSlide)="nextSlide($event)"
+  ></app-drag-ndrop>
+</div>

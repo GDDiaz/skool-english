@@ -1,42 +1,36 @@
-<div class="optionsContaier">
-  <div class="option">
-    <div class="img"></div>
-    <img src="assets/images/dress.png" alt="" />
-    <div class="blanks Good Bye dragZone phrase"></div>
-  </div>
-  <div class="option">
-    <div class="img"></div>
-    <img src="assets/images/dress.png" alt="" />
-    <div class="blanks Nice to meet you dragZone phrase"></div>
-  </div>
-  <div class="option">
-    <div class="img"></div>
-    <img src="assets/images/dress.png" alt="" />
-    <div class="blanks dragZone phrase"></div>
-  </div>
-  <div class="option">
-    <div class="img"></div>
-    <img src="assets/images/dress.png" alt="" />
-    <div class="blanks dragZone phrase"></div>
-  </div>
-  <div class="option">
-    <div class="img"></div>
-    <img src="assets/images/dress.png" alt="" />
-    <div class="blanks dragZone phrase"></div>
-  </div>
-  <div class="option">
-    <div class="img"></div>
-    <img src="assets/images/dress.png" alt="" />
-    <div class="blanks dragZone phrase Dress"></div>
-  </div>
-</div>
+<div class="container-content">
+  <ng-container>
+    <a class="ml-auto" [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
+    <div class="content-type">
+      <div class="optionsContaier">
+        <div class="option" *ngFor="let item of clasesImg">
+          <div class="img"></div>
+          <img src="assets/images/dress.png" alt="" />
+          <div class="blanks dragZone phrase {{ item }}"></div>
+        </div>
+      </div>
 
-<div class="error">
-  <p></p>
-</div>
+      <div class="error">
+        <p></p>
+      </div>
 
-<div class="phrasesContainer">
-  <span class="given btn btn-danger phrase" rel="1">Good Bye</span>
-  <span class="given btn btn-danger phrase" rel="2">Nice to meet you</span>
-  <span class="given btn btn-danger phrase" rel="3">Dress</span>
+      <div class="phrasesContainer">
+        <div *ngFor="let item of questions">
+          <span class="given btn btn-danger phrase" rel="1">{{
+            item.question
+          }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button type="button" class="controlButton" (click)="nextStep()">
+        Continuar
+      </button>
+    </div>
+  </ng-container>
 </div>

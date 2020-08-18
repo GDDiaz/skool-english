@@ -31,6 +31,7 @@
         <p *ngIf="item.type === 'video'">{{ item.content.video_title }}</p>
         <p *ngIf="item.type === 'quiz'">{{ item.content.name }}</p>
         <p *ngIf="item.type === 'activity'">{{ item.content.name }}</p>
+        <p *ngIf="item.type === 'dragDrop'">{{ item.content.name }}</p>
         <p *ngIf="item.type === 'content'">
           {{ item.content.objective_title }}
         </p>

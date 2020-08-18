@@ -71,6 +71,7 @@ export class UnitCardComponent implements OnInit {
         "/student/slide/" + this.unidades[posicion].unit_id + "/" + posicion,
       ]);
     } */
+    console.log(tipo);
 
     this._router.navigate([
       "/student/slide/" + this.unidades[posicion].unit_id + "/" + posicion,
