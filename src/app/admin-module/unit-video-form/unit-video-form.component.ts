@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-unit-video-form',
@@ -23,7 +24,7 @@ export class UnitVideoFormComponent implements OnInit {
     video_url: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private courseService: CoursesService) { }
+  constructor(private fb: FormBuilder, private courseService: CoursesService, private toastr: ToastrService) { }
 
   ngOnInit() {
     if (this.slide !== null) {
@@ -45,6 +46,7 @@ export class UnitVideoFormComponent implements OnInit {
       };
 
       this.courseService.newSlide(data).subscribe(r => {
+        this.toastr.success('Finalizado!', 'Se agrego un nuevo video!');
         this.resource.emit(r);
       });
     } else {
@@ -52,6 +54,7 @@ export class UnitVideoFormComponent implements OnInit {
         content: JSON.stringify(this.form.value)
       };
       this.courseService.editSlide(this.slide.id, data).subscribe(r => {
+        this.toastr.success('Finalizado!', 'Se editó correctamente!');
         this.resource.emit(r);
       });
     }

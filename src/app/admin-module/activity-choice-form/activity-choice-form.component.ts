@@ -17,11 +17,16 @@ export class ActivityChoiceFormComponent implements OnInit {
   @Input() slide;
   @Output() test: EventEmitter<any> = new EventEmitter<any>();
 
+  public typeQuestionSelected: any;
+  public typesQuestions = ['Imagen y selección', 'Audio y autocompletar', 'Audio y selección', 'Imagen y autocompletar'];
+
+
   public title = 'Nueva Actividad';
   public action = 'new';
   public disableButton = false;
   public form = this.fb.group({
     name: ['', Validators.required],
+    typeQuestion: [''],
     questions: this.fb.array([])
   });
   private formData: FormData[] = [];
@@ -44,7 +49,7 @@ export class ActivityChoiceFormComponent implements OnInit {
     for (const key in data.questions) {
       if (data.questions.hasOwnProperty(key)) {
         const question = data.questions[key];
-        this.addQuestion();
+        this.addQuestion(true);
         if (question.hasOwnProperty('options')) {
           for (const i in question.options) {
             if (question.options.hasOwnProperty(i)) {
@@ -61,13 +66,17 @@ export class ActivityChoiceFormComponent implements OnInit {
     return this.form.get('questions') as FormArray;
   }
 
-  addQuestion() {
+  addQuestion(skipValidation = false) {
+    if (this.typeQuestionSelected === undefined && !skipValidation) {
+      return;
+    }
     this.questions.push(this.newQuestionForm());
   }
 
   newQuestionForm() {
       return this.fb.group({
-        question: ['', Validators.required],
+        question: [''],
+        typeQuestion: [this.typeQuestionSelected],
         audio: [''],
         image: [''],
         answer: ['', Validators.required],
@@ -83,7 +92,15 @@ export class ActivityChoiceFormComponent implements OnInit {
   }
 
   addAnswerForm(i) {
-    this.getAnswerControl(i).push(this.newAnswerForm());
+    const questionControls = this.questions.controls[i] as FormArray;
+    const typeQuestion = questionControls['controls']['typeQuestion'];
+    
+    if (
+      this.getAnswerControl(i).length < 4   || 
+      typeQuestion === undefined
+    ) {
+      this.getAnswerControl(i).push(this.newAnswerForm());
+    } 
   }
 
   newAnswerForm() {
@@ -179,6 +196,15 @@ export class ActivityChoiceFormComponent implements OnInit {
     if (questionControls['controls']['image'] !== undefined && questionControls['controls']['image'] !== '') {
       // tslint:disable-next-line:no-string-literal
       return questionControls['controls']['image'].value;
+    }
+    return false;
+  }
+  showWidget(questionIndex, types: string[]) {
+    const questionControls = this.questions.controls[questionIndex] as FormArray;
+    // tslint:disable-next-line:no-string-literal
+    if (questionControls['controls']['typeQuestion'].value === null ||  types.includes(questionControls['controls']['typeQuestion'].value) ) {
+      // tslint:disable-next-line:no-string-literal
+      return questionControls['controls']['typeQuestion'].value ?? true;
     }
     return false;
   }

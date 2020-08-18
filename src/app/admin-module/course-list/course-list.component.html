@@ -18,14 +18,17 @@
 </div>
 <div class="row">
 
-  <div class="list-group col-md-12" *ngIf="courses !== undefined">
-    <a  *ngFor="let course of courses"  [routerLink]="['/admin/course/content', course.id]" class="list-group-item list-group-item-action flex-column align-items-start ">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{course.name}}</h5>
-        <small><i class="fa fa-clock"></i> {{ course.created_at }}</small>
+  <div class="col-md-12" *ngIf="courses !== undefined">
+    <div class="card-deck">
+      <div class="card" *ngFor="let course of courses">
+        <img class="card-img-top" src="assets/cursos.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><a [routerLink]="['/admin/course/content', course.id]">{{course.name}}</a></h5>
+          <p class="card-text">{{ course.author }}</p>
+          <p class="card-text"><small class="text-muted">{{ course.created_at }}</small></p>
+        </div>
       </div>
-      <p class="mb-1"><i class="fa fa-user"></i> {{ course.author }}</p>
-      <small>{{ course.slug }}</small>
-    </a>
+
+    </div>
   </div>
 </div>

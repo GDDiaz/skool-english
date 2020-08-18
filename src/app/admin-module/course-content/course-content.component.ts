@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from '../services/courses.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs/internal/Subject';
@@ -31,7 +31,12 @@ export class CourseContentComponent implements OnInit {
   units = new Map<string, any>();
   public position: Subject<any>;
   public positionUnit: Subject<any>;
-  constructor(private route: ActivatedRoute, private courseService: CoursesService, private sanitizer: DomSanitizer) {
+  constructor(
+    private route: ActivatedRoute,
+    private courseService: CoursesService,
+    private sanitizer: DomSanitizer,
+    private router: Router
+  ) {
     this.position = new Subject<any>();
     this.positionUnit = new Subject<any>();
    }
@@ -207,6 +212,25 @@ export class CourseContentComponent implements OnInit {
       this.hiddenAllForms();
       this.showImage = true;
     });
+  }
+
+  deleteUnit(unit, index) {
+    this.courseService.deleteUnit(unit.id).subscribe(r => {
+      this.units.delete(unit.id);
+      //  unit.slides.splice(index, 1);
+      this.hiddenAllForms();
+      this.showImage = true;
+    });
+  }
+
+  deleteCourse(id) {
+    this.courseService.deleteCourse(id).subscribe(
+      r => {
+        this.router.navigate(['/admin/courses']);
+      },
+      e => console.error(e)
+    );
+    
   }
 
   showSlide(slide: any) {

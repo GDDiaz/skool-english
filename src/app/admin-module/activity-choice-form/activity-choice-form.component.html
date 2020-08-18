@@ -5,6 +5,13 @@
     <input name="unit_activity[name]" id="title" type="text" formControlName="name" class="form-control" required>
   </div>
 
+  <div class="form-group">
+    <label for="type-question">Tipo de actividad</label>
+    <select  formControlName="typeQuestion" [(ngModel)]="typeQuestionSelected" class="form-control" id="type-question">
+      <option [value]="item" *ngFor="let item of typesQuestions">{{item}}</option>
+    </select>
+  </div>
+
   <div formArrayName="questions">
     <h5>Preguntas</h5>
     <mat-accordion>
@@ -16,22 +23,22 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div [formGroupName]="i">
-          <div class="form-group">
+          <div class="form-group" *ngIf="showWidget(i, ['Audio y autocompletar', 'Imagen y autocompletar'])">
             <quill-editor placeholder="Inserte el texto aquí" format="html" formControlName="question"></quill-editor>
           </div>
 
 
-          <div class="form-group" *ngIf="!hasAudioFile(i)">
+          <div class="form-group" *ngIf="!hasAudioFile(i) && showWidget(i, ['Audio y autocompletar', 'Audio y selección'])">
             <label class="control-label" for="word_bank_title">Audio MP3</label>
             <app-upload-file-widget [accept]="'audio/*'" (formData)="setFormData($event, i)"></app-upload-file-widget>
           </div>
 
-          <div class="form-group" *ngIf="!hasImageFile(i)">
+          <div class="form-group" *ngIf="!hasImageFile(i) && showWidget(i, ['Imagen y selección', 'Imagen y autocompletar'])">
             <label class="control-label" for="word_bank_title">Imagen</label>
             <app-upload-file-widget [accept]="'image/*'" (formData)="setFormDataImage($event, i)"></app-upload-file-widget>
           </div>
 
-          <div class="text-center" *ngIf="hasAudioFile(i)">
+          <div class="text-center" *ngIf="hasAudioFile(i) && showWidget(i, ['Audio y autocompletar', 'Audio y selección'])">
             <audio controls class="">
               <source [src]="sanitizerUrl(hasAudioFile(i), true)">
               Your browser does not support the <code>audio</code> element.
@@ -39,13 +46,18 @@
             <span class="float-right" (click)="deleteAudio(i)"><i class="fa fa-times"></i></span>
           </div>
 
-          <div class="text-center" *ngIf="hasImageFile(i)">
-            <img [src]="sanitizerUrl(hasAudioFile(i), true)">
+          <div class="text-center" *ngIf="hasImageFile(i) && showWidget(i, ['Imagen y selección', 'Imagen y autocompletar'])">
+            <img class="img-thumbnail ng-star-inserted" [src]="sanitizerUrl(hasImageFile(i), true)">
             <span class="float-right" (click)="deleteAudio(i, 'image')"><i class="fa fa-times"></i></span>
           </div>
 
           <!-- Unica respuesta start-->
-          <mat-radio-group formControlName="answer">
+          <div class="form-group" *ngIf="showWidget(i, ['Audio y autocompletar','Imagen y autocompletar'])">
+            <label class="control-label" for="answer">Respuesta esperada</label>
+            <input name="unit_activity[{{i}}][answer]" id="answer" type="text" formControlName="answer" class="form-control" required>
+          </div>
+
+          <mat-radio-group formControlName="answer" *ngIf="showWidget(i, ['Imagen y selección', 'Audio y selección'])">
             <div formArrayName="options">
               <h5>Respuestas</h5>
               <button class="float-right" (click)="addAnswerForm(i)" mat-mini-fab bg-primary-blue
