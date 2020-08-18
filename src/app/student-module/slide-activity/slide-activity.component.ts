@@ -48,12 +48,14 @@ export class SlideActivityComponent implements OnInit {
     console.log(this.page);
     console.log(this.questions.length);
 
-    if (this.page + 1 < this.questions.length) {
-      this.answersSelected[this.page] = id;
-      this.page = this.page + 1;
-    } else {
-      this.answersSelected[this.page] = id;
-      this.nextSlide.emit(1);
+    if (id === this.questions[this.page].answer) {
+      if (this.page + 1 < this.questions.length) {
+        this.answersSelected[this.page] = id;
+        this.page = this.page + 1;
+      } else {
+        this.answersSelected[this.page] = id;
+        this.nextSlide.emit(1);
+      }
     }
 
     console.log(this.answersSelected);

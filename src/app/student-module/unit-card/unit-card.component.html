@@ -21,7 +21,7 @@
     <div
       class="unit"
       *ngFor="let item of unidades; let i = index"
-      (click)="click(item.type, i, item.status_by_user)"
+      (click)="click(item.type, item.position, item.status_by_user)"
       [ngClass]="{ disable: item.status_by_user === 'completado' }"
     >
       <div class="lesson-number">
