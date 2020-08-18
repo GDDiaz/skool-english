@@ -97,4 +97,10 @@ export class StudentService {
       return this.byPassHTML(url);
     }
   }
+  getImage(id) {
+    const url = `http://api.skool.co/public${id}`;
+    console.log(url);
+
+    return this.http.get(url).pipe(map((data) => data));
+  }
 }

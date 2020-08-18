@@ -15,7 +15,7 @@ export class AudioButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.audio = new Audio();
-    this.audio.src = environment.baseUrl + this.urlAudio;
+    this.audio.src = "http://api.skool.co/public" + this.urlAudio;
     this.audio.load();
   }
   play() {

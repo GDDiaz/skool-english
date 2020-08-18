@@ -43,9 +43,9 @@
   .imagen {
     position: absolute;
     top: -70px;
-    left: 370px;
+    left: 42%;
     img {
-      width: 50%;
+      width: 180px;
     }
   }
   .step-play {
@@ -91,6 +91,10 @@
       }
     }
   }
+}
+.btn-primary {
+  background-color: #283890;
+  border-color: #283890;
 }
 
 @media (max-width: 769px) {
