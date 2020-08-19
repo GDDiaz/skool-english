@@ -19,9 +19,13 @@ export class AudioButtonComponent implements OnInit {
     this.audio.load();
   }
   play() {
-    this.bandPlay = true;
+    this.bandPlay = !this.bandPlay;
 
     this.audio.play();
+    let variable = this;
+    this.audio.onended = function () {
+      variable.bandPlay = false;
+    };
   }
   pause() {
     this.bandPlay = false;

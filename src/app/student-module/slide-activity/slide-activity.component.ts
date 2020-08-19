@@ -23,6 +23,9 @@ export class SlideActivityComponent implements OnInit {
   public incorrectAnswer: boolean;
   public secondsIncorrect: number;
   public timerIncorrect: any;
+  public correctAnswer: boolean;
+  public secondsCorrect: number;
+  public timerCorrect: any;
   public page: number;
   public active: boolean;
   public imgUrl: string;
@@ -32,6 +35,7 @@ export class SlideActivityComponent implements OnInit {
     this.answersSelected = [];
     this.active = false;
     this.incorrectAnswer = false;
+    this.correctAnswer = false;
   }
 
   ngOnInit(): void {
@@ -58,38 +62,9 @@ export class SlideActivityComponent implements OnInit {
     console.log(this.questions.length);
 
     if (id === this.questions[this.page].answer) {
-      if (this.page + 1 < this.questions.length) {
-        this.answersSelected[this.page] = id;
-        this.page = this.page + 1;
-        this.imgUrl = "/assets/images/imgload.png";
-        console.log(this.dataSlide.questions[this.page].image);
-
-        this.studentService
-          .getImage(this.dataSlide.questions[this.page].image)
-          .subscribe(
-            (response: any) => {
-              console.log("asdasdasdasd");
-
-              this.tempImg = response;
-            },
-            (error) => {
-              console.log(error);
-              this.imgUrl =
-                "http://api.skool.co/public" +
-                this.dataSlide.questions[this.page].image;
-            },
-            () => {
-              this.imgUrl =
-                "http://api.skool.co/public" +
-                this.dataSlide.questions[this.page].image;
-            }
-          );
-
-        console.log(this.imgUrl);
-      } else {
-        this.answersSelected[this.page] = id;
-        this.nextSlide.emit(1);
-      }
+      this.correctAnswer = true;
+      this.secondsCorrect = 2;
+      this.timerCorrect = setInterval(() => this.closeCorrect(id), 700);
     } else {
       this.incorrectAnswer = true;
       this.secondsIncorrect = 2;
@@ -105,6 +80,50 @@ export class SlideActivityComponent implements OnInit {
     if (this.secondsIncorrect <= 0) {
       this.incorrectAnswer = false;
       clearInterval(this.timerIncorrect);
+    }
+  }
+  closeCorrect(id) {
+    this.secondsCorrect--;
+
+    if (this.secondsCorrect <= 0) {
+      this.correctAnswer = false;
+      clearInterval(this.timerCorrect);
+    } else {
+      this.saveAnswer(id);
+    }
+  }
+  saveAnswer(id) {
+    if (this.page + 1 < this.questions.length) {
+      this.answersSelected[this.page] = id;
+      this.page = this.page + 1;
+      this.imgUrl = "/assets/images/imgload.png";
+      console.log(this.dataSlide.questions[this.page].image);
+
+      this.studentService
+        .getImage(this.dataSlide.questions[this.page].image)
+        .subscribe(
+          (response: any) => {
+            console.log("asdasdasdasd");
+
+            this.tempImg = response;
+          },
+          (error) => {
+            console.log(error);
+            this.imgUrl =
+              "http://api.skool.co/public" +
+              this.dataSlide.questions[this.page].image;
+          },
+          () => {
+            this.imgUrl =
+              "http://api.skool.co/public" +
+              this.dataSlide.questions[this.page].image;
+          }
+        );
+
+      console.log(this.imgUrl);
+    } else {
+      this.answersSelected[this.page] = id;
+      this.nextSlide.emit(1);
     }
   }
   completar() {

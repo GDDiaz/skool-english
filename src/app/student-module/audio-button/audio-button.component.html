@@ -1,3 +1,6 @@
-<div class="audio-button" (click)="play()">
+<div class="audio-button" (click)="play()" *ngIf="bandPlay === false">
+  <i class="fas fa-play"></i>
+</div>
+<div class="audio-button" (click)="pause()" *ngIf="bandPlay === true">
   <img src="{{ '/assets/icons/svg/sound.svg' }}" alt="" />
 </div>

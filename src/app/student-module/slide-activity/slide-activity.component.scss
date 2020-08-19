@@ -1,7 +1,13 @@
+.container-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 ::ng-deep .content-type {
   text-align: center;
   background: #fff;
-  width: 100%;
+  width: 80%;
   padding: 24px 110px;
   margin-bottom: 20px;
   position: relative;
@@ -24,7 +30,7 @@
       border-radius: 14px;
       .audio {
         position: absolute;
-        top: 4px;
+        top: 6px;
         left: -20px;
       }
     }
@@ -43,9 +49,10 @@
   .imagen {
     position: absolute;
     top: -70px;
-    left: 42%;
+    left: 40%;
     img {
       width: 180px;
+      border-radius: 10px;
     }
   }
   .step-play {
@@ -74,7 +81,7 @@
     .option {
       display: flex;
       justify-content: center;
-      width: 30%;
+      width: 38%;
 
       padding: 10px;
       margin: 9px;

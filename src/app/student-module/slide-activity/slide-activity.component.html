@@ -1,105 +1,132 @@
 <div *ngIf="questions.length <= 0">
   <h1>Esta actividad no tiene preguntas aun</h1>
 </div>
-<a class="ml-auto" [routerLink]="['/student']">
-  <img
-    src="assets/logo/SkooL Centro Educativo 2017-02.png"
-    class="rounded-circle"
-  />
-</a>
-
-<div class="content-type" *ngIf="questions.length > 0">
-  <div *ngIf="typeQuestion === 'Imagen y selección'">
-    <div class="imagen" *ngIf="imgUrl !== ''">
-      <img src="{{ imgUrl }}" alt="" />
-    </div>
-    <div [innerHTML]="questions[page]?.question" class="questions"></div>
-
-    <div class="options">
-      <div
-        *ngFor="let answer of questions[page]?.options; let i = index"
-        class="option"
-        (click)="selected(i)"
-      >
-        <div [innerHTML]="answer?.option"></div>
-      </div>
-    </div>
+<div class="container-content">
+  <div style="text-align: right; margin-bottom: 30px;" class="w-100">
+    <a [routerLink]="['/student']">
+      <img
+        src="assets/logo/SkooL Centro Educativo 2017-02.png"
+        class="rounded-circle"
+      />
+    </a>
   </div>
 
-  <div *ngIf="typeQuestion === 'Audio y autocompletar'">
-    <div class="audio-content">
-      <div class="audio-text">
-        <div class="audio">
-          <app-audio-button
-            [urlAudio]="questions[page]?.audio"
-          ></app-audio-button>
+  <div class="content-type" *ngIf="questions.length > 0">
+    <div *ngIf="typeQuestion === 'Imagen y selección'">
+      <div class="imagen" *ngIf="imgUrl !== ''">
+        <img src="{{ imgUrl }}" alt="" />
+      </div>
+      <div [innerHTML]="questions[page]?.question" class="questions"></div>
+
+      <div class="options">
+        <div
+          *ngFor="let answer of questions[page]?.options; let i = index"
+          class="option"
+          (click)="selected(i)"
+        >
+          <div [innerHTML]="answer?.option"></div>
         </div>
-        Test
       </div>
     </div>
-    <div [innerHTML]="questions[page]?.question" class="questions"></div>
-    <div>
-      <div class="form-group">
-        <input type="text" class="form-control" [(ngModel)]="autoComplete" />
-      </div>
-      <button type="button" (click)="completar()" class="btn btn-primary">
-        Complete
-      </button>
-    </div>
-  </div>
 
-  <div *ngIf="typeQuestion === 'Audio y selección'">
-    <div class="audio-content">
-      <div class="audio-text">
-        <div class="audio">
-          <app-audio-button
-            [urlAudio]="questions[page]?.audio"
-          ></app-audio-button>
+    <div *ngIf="typeQuestion === 'Audio y autocompletar'">
+      <div class="audio-content">
+        <div class="audio-text">
+          <div class="audio">
+            <app-audio-button
+              [urlAudio]="questions[page]?.audio"
+            ></app-audio-button>
+          </div>
+          Test
         </div>
-        Test
+      </div>
+      <div [innerHTML]="questions[page]?.question" class="questions"></div>
+      <div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="autoComplete"
+            placeholder="Escribe texto aqui"
+          />
+        </div>
+        <button type="button" (click)="completar()" class="btn btn-primary">
+          Complete
+        </button>
       </div>
     </div>
-    <div [innerHTML]="questions[page]?.question" class="questions"></div>
 
-    <div class="options">
-      <div
-        *ngFor="let answer of questions[page]?.options; let i = index"
-        class="option"
-        (click)="selected(i)"
-      >
-        <div [innerHTML]="answer?.option"></div>
+    <div *ngIf="typeQuestion === 'Audio y selección'">
+      <div class="audio-content">
+        <div class="audio-text">
+          <div class="audio">
+            <app-audio-button
+              [urlAudio]="questions[page]?.audio"
+            ></app-audio-button>
+          </div>
+          Test
+        </div>
+      </div>
+      <div [innerHTML]="questions[page]?.question" class="questions"></div>
+
+      <div class="options">
+        <div
+          *ngFor="let answer of questions[page]?.options; let i = index"
+          class="option"
+          (click)="selected(i)"
+        >
+          <div [innerHTML]="answer?.option"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div *ngIf="typeQuestion === 'Imagen y autocompletar'">
-    <div class="imagen">
-      <img src="{{ imgUrl }}" alt="" />
-    </div>
-    <div [innerHTML]="questions[page]?.question" class="questions"></div>
-    <div>
-      <div class="form-group">
-        <input type="text" class="form-control" [(ngModel)]="autoComplete" />
+    <div *ngIf="typeQuestion === 'Imagen y autocompletar'">
+      <div class="imagen">
+        <img src="{{ imgUrl }}" alt="" />
       </div>
-      <button type="button" (click)="completar()" class="btn btn-primary">
-        Complete
-      </button>
+      <div [innerHTML]="questions[page]?.question" class="questions"></div>
+      <div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="autoComplete"
+            placeholder="Escribe texto aqui"
+          />
+        </div>
+        <button type="button" (click)="completar()" class="btn btn-primary">
+          Complete
+        </button>
+      </div>
     </div>
-  </div>
 
-  <div *ngIf="incorrectAnswer" class="mt-4">
-    <span class="alert alert-danger p-3">
-      Try Again!!
-    </span>
-  </div>
-
-  <div class="step-play">
-    <div class="linea-pasos">
-      <div
-        class="completado"
-        [ngStyle]="{ width: ((page + 1) / questions.length) * 100 + '%' }"
-      ></div>
+    <div
+      *ngIf="incorrectAnswer"
+      class="mt-4"
+      style="color: red; font-size: 19px;"
+    >
+      <span class="p-3">
+        Try Again!!
+      </span>
     </div>
-    <div>{{ page + 1 }} / {{ questions.length }}</div>
+    <div
+      *ngIf="correctAnswer"
+      class="mt-4"
+      style="color: green; font-size: 19px;"
+    >
+      <span class="p-3">
+        Good Job!!!
+      </span>
+    </div>
+
+    <div class="step-play">
+      <div class="linea-pasos">
+        <div
+          class="completado"
+          [ngStyle]="{ width: ((page + 1) / questions.length) * 100 + '%' }"
+        ></div>
+      </div>
+      <div>{{ page + 1 }} / {{ questions.length }}</div>
+    </div>
   </div>
 </div>
