@@ -1,0 +1,16 @@
+<table class="table" *ngIf="messages.length > 0">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Estudiante</th>
+        <th scope="col">Fecha</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of messages">
+        <td>{{ message.from_user.name }}</td>
+        <td>{{ message.created_at }}</td>
+        <td><a [routerLink]="['/admin/messages/show/'+message.id]"><i class="fas fa-eye"></i></a></td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-center">
+   
+        <div class="col-md-8">
+            <div class="text-center">
+                <h3 color="accent-color text-center">Bienvenido {{currentUser.name}}</h3>
+            </div>
+            <h4>¡Lanza tu nuevo curso! <img [src]="'assets/images/dashboard-admin.png'"></h4>
+            
+            <div class="card dashboard-card">
+                <div class="card-body">
+                  <h5> <i class="fas fa-video"></i>  VÍDEO TUTORIAL</h5>
+                </div>
+              </div>
+              <div class="card dashboard-card">
+                <div class="card-body">
+                  <h5> <i class="fa fa-address-card"></i> <a [routerLink]="['/admin/courses/new']">CREAR CURSOS</a> </h5>
+                </div>
+              </div>
+              <div class="card dashboard-card">
+                <div class="card-body">
+                  <h5><i class="fas fa-envelope-open-text"></i><a [routerLink]="['/admin/messages']"> MENSAJES</a></h5>
+                </div>
+              </div>
+        </div>
+
+</div>

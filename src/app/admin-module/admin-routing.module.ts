@@ -7,33 +7,42 @@ import { CourseContentComponent } from './course-content/course-content.componen
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserShowComponent } from './user-show/user-show.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AdminGuardService } from '../helpers/admin.guard.service';
+import { MessagesListComponent } from './messages-list/messages-list.component';
+import { MessagesShowComponent } from './messages-show/messages-show.component';
 
 
 const routes: Routes = [
   {
+    path: '',
+    component: DashboardComponent,
+    canActivate: [AuthGuard, AdminGuardService]
+  },
+  {
     path: 'courses',
     component: CourseListComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard,AdminGuardService]
   },
   {
     path: 'courses/new',
     component: CourseFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard,AdminGuardService]
   },
   {
     path: 'courses/edit/:id',
     component: CourseFormComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminGuardService]
   },
   {
     path: 'course/content/:id',
     component: CourseContentComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard,AdminGuardService]
   },
   {
     path: 'students/new',
     component: UserFormComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard,AdminGuardService],
     data: {
       type: 0
     }
@@ -41,7 +50,7 @@ const routes: Routes = [
   {
     path: 'students/edit/:id',
     component: UserFormComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     data: {
       type: 0
     }
@@ -49,7 +58,7 @@ const routes: Routes = [
   {
     path: 'students/show/:id',
     component: UserShowComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     data: {
       type: 0
     }
@@ -57,7 +66,7 @@ const routes: Routes = [
   {
     path: 'students',
     component: UserListComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     data: {
       type: 0
     }
@@ -65,7 +74,7 @@ const routes: Routes = [
   {
     path: 'teachers',
     component: UserListComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     data: {
       type: 1
     }
@@ -73,7 +82,7 @@ const routes: Routes = [
   {
     path: 'teachers/new',
     component: UserFormComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     data: {
       type: 1
     }
@@ -81,12 +90,23 @@ const routes: Routes = [
   {
     path: 'teachers/edit/:id',
     component: UserFormComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, AdminGuardService],
     data: {
       type: 1
     }
   },
-  { path: '**', redirectTo: 'courses' }
+  {
+    path: 'messages',
+    component: MessagesListComponent,
+    canActivate: [AuthGuard, AdminGuardService]
+  },
+  {
+    path: 'messages/show/:id',
+    component: MessagesShowComponent,
+    canActivate: [AuthGuard, AdminGuardService],
+  },
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

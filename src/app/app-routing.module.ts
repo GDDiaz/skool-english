@@ -16,8 +16,8 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
     // otherwise redirect to student
-  { path: '', redirectTo: `student`, pathMatch: 'full' },
-  { path: '**', redirectTo: 'student' }
+  { path: '', redirectTo: `login`, pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({

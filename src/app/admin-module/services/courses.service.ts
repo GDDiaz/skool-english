@@ -222,4 +222,19 @@ export class CoursesService {
             return response;
         }));
   }
+
+  getMessages() {
+    return this.http.get<any>(`${environment.apiUrl}/v1/message`)
+        .pipe(map(response => {
+            return response;
+        }));
+  }
+
+  getMessagesById(id: number) {
+    return this.http.get<any>(`${environment.apiUrl}/v1/message/${id}`);
+  }
+
+  newMessages(data) {
+    return this.http.post<any>(`${environment.apiUrl}/v1/message`, data);
+  }
 }

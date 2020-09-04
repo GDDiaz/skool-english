@@ -23,7 +23,12 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
   ) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/student']);
+      if (this.authenticationService.currentUserValue.user.type === 1 ) {
+        this.router.navigate(['/admin/']);
+      } else {
+        this.router.navigate(['/student']);
+      }
+      
   }
   }
 
@@ -55,7 +60,9 @@ onSubmit() {
           (data: User2) => {
             if ( this.returnUrl === '/') {
               if (data.user.type === 1 ) {
-                this.returnUrl = '/admin/courses';
+                this.returnUrl = '/admin/';
+              } else {
+                this.returnUrl = '/student/';
               }
             }
             this.router.navigate([this.returnUrl]);

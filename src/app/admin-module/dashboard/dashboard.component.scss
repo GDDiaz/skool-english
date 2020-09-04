@@ -1,0 +1,19 @@
+.dashboard-card {
+    -webkit-box-shadow: 10px 10px 31px -3px rgba(122,160,204,1);
+    -moz-box-shadow: 10px 10px 31px -3px rgba(122,160,204,1);
+    box-shadow: 10px 10px 31px -3px rgba(122,160,204,1);
+    margin-bottom: 32px;
+    min-height: 100px;
+    border: 1px solid #b3c4db;
+}
+
+h4, h5, i, span {
+    color: #034390;
+}
+i {
+    padding-right: 25px;
+}
+.card-body {
+    padding-top: 38px;
+    padding-left: 20px;
+}
