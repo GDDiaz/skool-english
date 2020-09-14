@@ -99,7 +99,7 @@ export class UserShowComponent implements OnInit {
 
   sanitizerUrl(url, addApiUrl) {
     if (addApiUrl) {
-      url = `${environment.baseUrl + url}` ;
+      url = `${environment.baseUrl}/${url}` ;
     }
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }

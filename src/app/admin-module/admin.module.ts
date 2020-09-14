@@ -32,6 +32,9 @@ import { UserFormComponent } from "./user-form/user-form.component";
 import { UserListComponent } from "./user-list/user-list.component";
 import { UserShowComponent } from "./user-show/user-show.component";
 import { AttachFormComponent } from "./attach-form/attach-form.component";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MessagesListComponent } from './messages-list/messages-list.component';
+import { MessagesShowComponent } from './messages-show/messages-show.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { AttachFormComponent } from "./attach-form/attach-form.component";
     UserListComponent,
     UserShowComponent,
     AttachFormComponent,
+    DashboardComponent,
+    MessagesListComponent,
+    MessagesShowComponent,
   ],
   imports: [
     CommonModule,

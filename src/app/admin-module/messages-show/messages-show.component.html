@@ -1,0 +1,84 @@
+<div class=" col-md-12 bg-light-part b-l" *ngIf="message">
+    <div class="card-body">
+        <div class="btn-group m-b-10 m-r-10" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-secondary font-18"><i class="fas fa-arrow-left"></i></button>
+           
+        </div>
+      
+    </div>
+    <div class="card-body p-t-0">
+        <div class="card b-all shadow-none">
+            <div class="card-body">
+                <h3 class="card-title m-b-0">Lista de mensajes</h3>
+            </div>
+            <div>
+                <hr class="m-t-0">
+            </div>
+            <div class="card-body">
+                <div class="d-flex m-b-40">
+                    <div>
+                        <img *ngIf="message.from_user.photo !== null" [src]="sanitizerUrl(message.from_user.photo, true)" class="circular--square">
+                        <img *ngIf="message.from_user.photo === null" src="assets/user.png" alt="user" width="40" class="circular--square">
+                    </div>
+                    <div class="p-l-10">
+                        <h4 class="m-b-0">{{ message.from_user.name}}</h4>
+                        <small class="text-muted">{{ message.from_user.email}}</small>
+                    </div>
+                </div>
+                <p>{{message.messages}}</p>
+            </div>
+            <ng-container *ngFor="let item of message.children">
+
+                <div>
+                    <hr class="m-t-0">
+                </div>
+                <div class="card-body">
+                    <div class="d-flex m-b-40" [ngClass]="{'flex-row-reverse': item.from_user_id !== message.from_user_id}">
+                        <ng-container *ngIf="item.from_user_id === message.from_user_id">
+                            <div>
+                                <img *ngIf="message.from_user.photo !== null" [src]="sanitizerUrl(message.from_user.photo, true)" class="circular--square">
+                                <img *ngIf="message.from_user.photo === null" src="assets/user.png" alt="user" width="40" class="circular--square">
+                            </div>
+                            <div class="p-l-10">
+                                <h4 class="m-b-0">{{ message.from_user.name}}</h4>
+                                <small class="text-muted">{{ message.from_user.email}}</small>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngIf="item.from_user_id !== message.from_user_id">
+
+                            <div class="p-l-10">
+                                <h4 class="m-b-0">{{ currentUser.name}}</h4>
+                                <small class="text-muted">{{ currentUser.email}}</small>
+                            </div>
+                            <div>
+                                <img *ngIf="currentUser.photo !== null" [src]="sanitizerUrl(currentUser.photo, true)" class="circular--square">
+                                <img *ngIf="currentUser.photo === null" src="assets/user.png" alt="user" width="40" class="circular--square">
+                            </div>
+                        </ng-container>
+                        
+                    </div>
+                    <p>{{item.messages}}</p>
+                </div>
+
+            </ng-container>
+
+            <div>
+                <hr class="m-t-0">
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <h5> Responder </h5>
+                    <textarea [(ngModel)]="newMessages" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button type="button" mat-raised-button color="primary" [disabled]="disableForm" (click)="sendMessages()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Enviar mensaje
+                </button>
+            </div>
+
+           
+            
+            
+        </div>
+    </div>
+</div>

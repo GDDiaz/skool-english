@@ -125,4 +125,8 @@ export class AuthenticationService {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem('currentUser');
   }
+
+  isAdminUser() {
+    return this.http.get<any>(`${environment.apiUrl}/v1/user/is/admin`, );
+  }
 }
