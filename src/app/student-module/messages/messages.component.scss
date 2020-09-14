@@ -25,7 +25,7 @@
       .emisor {
         margin-left: auto;
         text-align: right;
-        width: 384px;
+        width: 48%;
         label {
           font-weight: bold;
           margin-right: 22px;
@@ -42,10 +42,11 @@
       .receptor {
         margin-right: auto;
         text-align: left;
-        width: 384px;
+        width: 48%;
         .message {
           background: #f7f7fa;
           border-radius: 6px;
+          padding: 12px 87px 20px 22px;
           p {
             margin: 0px;
           }
@@ -54,9 +55,9 @@
     }
     .send-messages {
       position: absolute;
-      width: 100%;
+      width: 95%;
       bottom: 0;
-      left: 0;
+      left: 16px;
 
       .sendContainer {
         position: relative;
