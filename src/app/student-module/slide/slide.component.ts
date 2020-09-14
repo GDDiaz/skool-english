@@ -22,6 +22,8 @@ export class SlideComponent implements OnInit {
     this._route.paramMap.subscribe((params) => {
       this.unidadId = params.get("idUnidad");
       this.lugarArray = params.get("lugarArray");
+      this.studentService.unidadId = this.unidadId;
+      this.studentService.slideId = this.lugarArray;
     });
 
     this.studentService.getUnitById(this.unidadId).subscribe(
@@ -96,10 +98,14 @@ export class SlideComponent implements OnInit {
     console.log(Object.keys(this.dataSlides).length);
     if (this.actualSlide < Object.keys(this.dataSlides).length - 1) {
       this.actualSlide = this.actualSlide + 1;
+      this.studentService.slideId = this.actualSlide;
     }
     console.log(this.actualSlide);
+    console.log(this.dataSlides);
+
     if (this.dataSlides[this.actualSlide].status_by_user === "completado") {
       this.actualSlide = this.actualSlide + 1;
+      this.studentService.slideId = this.actualSlide;
     }
 
     if (
@@ -110,6 +116,8 @@ export class SlideComponent implements OnInit {
       this.data = this.dataSlides[this.actualSlide].content;
       this.tipo = this.dataSlides[this.actualSlide].type;
       console.log(this.data);
+      this.studentService.unidadId = this.unidadId;
+      this.studentService.slideId = this.actualSlide;
     } else {
       console.log("dasdasd");
 

@@ -1,0 +1,38 @@
+<div class="container-content">
+  <a class="ml-auto" [routerLink]="['/student']">
+    <img
+      src="assets/logo/SkooL Centro Educativo 2017-02.png"
+      class="rounded-circle"
+    />
+  </a>
+  <div class="title"><h1>Chat</h1></div>
+  <div class="content-type">
+    <div class="scroll-message">
+      <div *ngFor="let item of arrayMessages" class="mb-3">
+        <div
+          [ngClass]="
+            item.from_user_name !== user.user.name ? 'receptor' : 'emisor'
+          "
+        >
+          <label for="">{{ item.from_user_name }}</label>
+          <div class="message">
+            <p>{{ item.messages }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="send-messages">
+      <input
+        type="text"
+        [(ngModel)]="message"
+        placeholder="Escribe tu mensaje"
+      />
+    </div>
+  </div>
+  <div><input type="file" multiple [(ngModel)]="files" />Subir archivo</div>
+  <div class="buttons">
+    <button type="button" class="controlButton" (click)="enviar()">
+      Enviar
+    </button>
+  </div>
+</div>

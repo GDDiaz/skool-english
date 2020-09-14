@@ -1,0 +1,87 @@
+.container-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #38393b;
+  .title {
+    h1 {
+      color: #283890;
+    }
+  }
+  .content-type {
+    text-align: center;
+    background: #fff;
+    width: 100%;
+    padding: 24px 10px;
+    border-radius: 11px;
+    height: auto;
+    position: relative;
+    .scroll-message {
+      overflow: auto;
+      height: calc(100vh - 350px);
+      width: 100%;
+      padding: 24px 20px;
+      .emisor {
+        margin-left: auto;
+        text-align: right;
+        width: 384px;
+        label {
+          font-weight: bold;
+          margin-right: 22px;
+        }
+        .message {
+          background: #d6fbc8;
+          border-radius: 6px;
+          padding: 12px 22px 20px 87px;
+          p {
+            margin: 0px;
+          }
+        }
+      }
+      .receptor {
+        margin-right: auto;
+        text-align: left;
+        width: 384px;
+        .message {
+          background: #f7f7fa;
+          border-radius: 6px;
+          p {
+            margin: 0px;
+          }
+        }
+      }
+    }
+    .send-messages {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      input {
+        width: 100%;
+        border: 0.6000000238418579px solid #6585b2;
+        border-radius: 26px;
+      }
+    }
+  }
+  .buttons {
+    margin: 15px 0px;
+    width: 100%;
+    display: flex;
+    .controlButton {
+      margin: 0 auto;
+      color: #374174;
+      font-weight: bold;
+      border: 1px solid #374174;
+      border-radius: 10px;
+      padding: 10px 30px;
+    }
+  }
+}
+@media (max-width: 769px) {
+  .container-content {
+    .content-type {
+      padding: 24px 10px;
+    }
+  }
+}

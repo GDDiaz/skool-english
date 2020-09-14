@@ -5,6 +5,7 @@ import { TimelineComponent } from "./timeline/timeline.component";
 import { SlideComponent } from "./slide/slide.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { DragNdropComponent } from "./drag-ndrop/drag-ndrop.component";
+import { MessagesComponent } from "./messages/messages.component";
 
 const routes: Routes = [
   { path: "", component: TimelineComponent, canActivate: [AuthGuard] },
@@ -16,6 +17,11 @@ const routes: Routes = [
   {
     path: "profile",
     component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "messages",
+    component: MessagesComponent,
     canActivate: [AuthGuard],
   },
   // otherwise redirect to home

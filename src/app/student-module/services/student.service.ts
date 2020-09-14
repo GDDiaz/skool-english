@@ -10,6 +10,8 @@ import { DomSanitizer } from "@angular/platform-browser";
 })
 export class StudentService {
   public dataLeccion: any;
+  public unidadId: any;
+  public slideId: any;
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
 
   getAllCourse(): Observable<any> {
@@ -102,5 +104,28 @@ export class StudentService {
     console.log(url);
 
     return this.http.get(url).pipe(map((data) => data));
+  }
+  sendMessages(json): Observable<any> {
+    const url = `${environment.apiUrl}/v1/message`;
+    const body = json;
+    return this.http
+      .post(url, body, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        }),
+      })
+      .pipe(map((data) => data));
+  }
+  getMessages(id): Observable<any> {
+    const url = `${environment.apiUrl}/v1/message/course/${id}`;
+    return this.http
+      .get(url, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        }),
+      })
+      .pipe(map((data) => data));
   }
 }
