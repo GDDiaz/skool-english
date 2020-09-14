@@ -128,4 +128,13 @@ export class StudentService {
       })
       .pipe(map((data) => data));
   }
+  saveFile(file): Observable<any> {
+    console.log(file[0]);
+
+    const url = `${environment.apiUrl}/v1/upload`;
+    let body = new FormData();
+    body.append("file[0]", file[0]);
+
+    return this.http.post(url, body).pipe(map((data) => data));
+  }
 }

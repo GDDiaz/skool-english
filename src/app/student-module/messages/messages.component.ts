@@ -13,6 +13,7 @@ export class MessagesComponent implements OnInit {
   public name;
   public fileName;
   public arrayMessages: Array<any>;
+  public myFile: any;
   constructor(private studentService: StudentService) {
     this.arrayMessages = [];
     this.user = JSON.parse(localStorage.getItem("currentUser"));
@@ -33,12 +34,53 @@ export class MessagesComponent implements OnInit {
     console.log(this.name);
   }
   enviar() {
-    /*  console.log(this.files[0]); */
-    /* let json = {
+    console.log(this.myFile);
+
+    if (this.myFile !== undefined && this.myFile !== "") {
+      console.log("Entra en el IF");
+
+      this.studentService.saveFile(this.myFile).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          this.enviarMensaje(this.myFile[0].name);
+
+          if (this.message !== "") {
+            this.enviarMensaje(this.message);
+          }
+        }
+      );
+    } else {
+      console.log("Entra en el ELSE");
+      if (this.message !== "") {
+        this.enviarMensaje(this.message);
+      }
+    }
+  }
+
+  attach() {
+    document.getElementById("subirFile").click();
+  }
+
+  onFileChange(event) {
+    var fileList = event.target.files;
+    console.log(fileList);
+    this.myFile = fileList;
+
+    this.fileName = event.target.files[0].name;
+  }
+  enviarMensaje(mensaje) {
+    console.log(mensaje);
+
+    let json = {
       slide_id: this.studentService.slideId,
       unit_id: this.studentService.unidadId,
       course_id: 2,
-      messages: this.message,
+      messages: mensaje,
       to_user_id: 1,
       parent_id: this.user.user.id,
     };
@@ -48,15 +90,13 @@ export class MessagesComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+      },
+      () => {
+        this.arrayMessages.push({
+          from_user_name: this.user.user.name,
+          messages: mensaje,
+        });
       }
-    ); */
-  }
-
-  attach() {
-    document.getElementById("subirFile").click();
-  }
-
-  onFileChange(event) {
-    this.fileName = event.target.files[0].name;
+    );
   }
 }
