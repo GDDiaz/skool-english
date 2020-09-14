@@ -22,14 +22,33 @@
       </div>
     </div>
     <div class="send-messages">
-      <input
-        type="text"
-        [(ngModel)]="message"
-        placeholder="Escribe tu mensaje"
-      />
+      <div class="sendContainer">
+        <input
+          type="text"
+          [(ngModel)]="message"
+          placeholder="Escribe tu mensaje"
+        />
+        <img
+          src="assets/images/clip.png"
+          class="rounded-circle"
+          (click)="attach()"
+        />
+      </div>
     </div>
   </div>
-  <div><input type="file" multiple [(ngModel)]="files" />Subir archivo</div>
+  <div style="visibility: hidden">
+    <input
+      #file
+      id="subirFile"
+      type="file"
+      (change)="onFileChange($event)"
+      multiple
+      [(ngModel)]="files"
+    />Subir archivo
+  </div>
+
+  <p>{{ fileName }}</p>
+
   <div class="buttons">
     <button type="button" class="controlButton" (click)="enviar()">
       Enviar

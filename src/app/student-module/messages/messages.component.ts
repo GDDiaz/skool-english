@@ -11,6 +11,7 @@ export class MessagesComponent implements OnInit {
   public files: any;
   public user;
   public name;
+  public fileName;
   public arrayMessages: Array<any>;
   constructor(private studentService: StudentService) {
     this.arrayMessages = [];
@@ -49,5 +50,13 @@ export class MessagesComponent implements OnInit {
         console.log(error);
       }
     ); */
+  }
+
+  attach() {
+    document.getElementById("subirFile").click();
+  }
+
+  onFileChange(event) {
+    this.fileName = event.target.files[0].name;
   }
 }

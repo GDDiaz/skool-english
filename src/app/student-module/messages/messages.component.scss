@@ -57,10 +57,25 @@
       width: 100%;
       bottom: 0;
       left: 0;
-      input {
-        width: 100%;
-        border: 0.6000000238418579px solid #6585b2;
-        border-radius: 26px;
+
+      .sendContainer {
+        position: relative;
+        input {
+          width: 100%;
+          border: 0.6000000238418579px solid #6585b2;
+          border-radius: 26px;
+          background-color: #f7f7fa;
+          height: 52px;
+          padding-left: 54px;
+        }
+
+        img {
+          position: absolute;
+          top: 10px;
+          left: 16px;
+          width: 28px;
+          cursor: pointer;
+        }
       }
     }
   }
