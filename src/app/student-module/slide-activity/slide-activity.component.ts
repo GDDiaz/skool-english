@@ -39,6 +39,8 @@ export class SlideActivityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.dataSlide);
+
     this.page = 0;
     this.nameActivity = this.dataSlide.name;
     this.questions = this.dataSlide.questions;
@@ -53,13 +55,13 @@ export class SlideActivityComponent implements OnInit {
     test = document.getElementsByTagName("img");
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("Hay cambios");
-
+    console.log(this.dataSlide);
     this.answersSelected = [];
     this.active = false;
     this.page = 0;
     this.nameActivity = this.dataSlide.name;
     this.questions = this.dataSlide.questions;
+    this.typeQuestion = this.dataSlide.typeQuestion;
     if (this.dataSlide.questions.length > 0) {
       this.imgUrl =
         "http://api.skool.co/public" +
@@ -143,6 +145,8 @@ export class SlideActivityComponent implements OnInit {
     }
   }
   completar() {
+    console.log(this.questions[this.page].answer);
+
     if (
       this.questions[this.page].answer.toLowerCase() ===
       this.autoComplete.toLowerCase()
