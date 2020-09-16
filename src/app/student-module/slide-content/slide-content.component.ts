@@ -70,7 +70,7 @@ export class SlideContentComponent implements OnInit {
 
     this.audio = new Audio();
     this.audio.src =
-      environment.baseUrl + this.wordsBank[this.pageWordBank].audio;
+      environment.baseUrl + "public" + this.wordsBank[this.pageWordBank].audio;
     this.audio.load();
   }
   previusStep() {

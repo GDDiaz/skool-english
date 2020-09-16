@@ -43,18 +43,28 @@ export class SlideActivityComponent implements OnInit {
     this.nameActivity = this.dataSlide.name;
     this.questions = this.dataSlide.questions;
     this.typeQuestion = this.dataSlide.typeQuestion;
-    this.imgUrl =
-      "http://api.skool.co/public" + this.dataSlide.questions[this.page].image;
+    if (this.dataSlide.questions.length > 0) {
+      this.imgUrl =
+        "http://api.skool.co/public" +
+        this.dataSlide.questions[this.page].image;
+    }
 
     let test;
     test = document.getElementsByTagName("img");
   }
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("Hay cambios");
+
     this.answersSelected = [];
     this.active = false;
     this.page = 0;
     this.nameActivity = this.dataSlide.name;
     this.questions = this.dataSlide.questions;
+    if (this.dataSlide.questions.length > 0) {
+      this.imgUrl =
+        "http://api.skool.co/public" +
+        this.dataSlide.questions[this.page].image;
+    }
   }
 
   selected(id) {
@@ -64,7 +74,7 @@ export class SlideActivityComponent implements OnInit {
     if (id === this.questions[this.page].answer) {
       this.correctAnswer = true;
       this.secondsCorrect = 2;
-      this.timerCorrect = setInterval(() => this.closeCorrect(id), 700);
+      this.timerCorrect = setInterval(() => this.closeCorrect(id), 1000);
     } else {
       this.incorrectAnswer = true;
       this.secondsIncorrect = 2;
@@ -122,8 +132,14 @@ export class SlideActivityComponent implements OnInit {
 
       console.log(this.imgUrl);
     } else {
+      console.log("Entro al else");
+
       this.answersSelected[this.page] = id;
-      this.nextSlide.emit(1);
+      let data = {
+        action: 1,
+        dataAnswer: null,
+      };
+      this.nextSlide.emit(data);
     }
   }
   completar() {
@@ -137,7 +153,11 @@ export class SlideActivityComponent implements OnInit {
           "http://api.skool.co/public" +
           this.dataSlide.questions[this.page].image;
       } else {
-        this.nextSlide.emit(1);
+        let data = {
+          action: 1,
+          dataAnswer: null,
+        };
+        this.nextSlide.emit(data);
       }
     } else {
       this.incorrectAnswer = true;

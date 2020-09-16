@@ -19,6 +19,7 @@ export class SlideComponent implements OnInit {
     private studentService: StudentService,
     private _router: Router
   ) {
+    this.dataSlides = [];
     this._route.paramMap.subscribe((params) => {
       this.unidadId = params.get("idUnidad");
       this.lugarArray = params.get("lugarArray");
@@ -28,14 +29,26 @@ export class SlideComponent implements OnInit {
 
     this.studentService.getUnitById(this.unidadId).subscribe(
       (response) => {
-        console.log(response);
+        console.log(this.dataSlides);
+        let jsonTemporal = response.slides;
+        this.dataSlides = [];
+        for (let key in jsonTemporal) {
+          this.dataSlides.push(jsonTemporal[key]);
+        }
+        console.log(this.dataSlides);
 
-        this.dataSlides = response.slides;
+        this.dataSlides.sort(function (a, b) {
+          if (a.position > b.position) {
+            return 1;
+          }
+          if (a.position < b.position) {
+            return -1;
+          }
+          return 0;
+        });
 
         this.data = this.dataSlides[parseInt(this.lugarArray)].content;
-        console.log(this.data);
-
-        this.tipo = response.slides[parseInt(this.lugarArray)].type;
+        this.tipo = this.dataSlides[parseInt(this.lugarArray)].type;
         this.actualSlide = parseInt(this.lugarArray);
       },
       (error) => {
@@ -45,6 +58,7 @@ export class SlideComponent implements OnInit {
         }
       },
       () => {
+        console.log(this.dataSlides.length);
         this.visitado();
         console.log(this.actualSlide);
 
@@ -79,6 +93,8 @@ export class SlideComponent implements OnInit {
   nextSlide(data) {
     console.log(data);
 
+    console.log(this.actualSlide);
+
     let json = {
       slide_id: this.dataSlides[this.actualSlide].id,
       status: "completado",
@@ -112,6 +128,8 @@ export class SlideComponent implements OnInit {
       data.action === 1 &&
       this.actualSlide < Object.keys(this.dataSlides).length - 1
     ) {
+      console.log("Entro al if");
+
       this.lugarArray = this.lugarArray;
       this.data = this.dataSlides[this.actualSlide].content;
       this.tipo = this.dataSlides[this.actualSlide].type;
